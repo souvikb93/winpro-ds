@@ -1,0 +1,2218 @@
+{
+  "$description": "Every component in @euvino/ds, generated from source. Figma names the matching library set.",
+  "package": "@euvino/ds",
+  "components": {
+    "Icon": {
+      "file": "src/ds/icon.tsx",
+      "description": "Draws one icon from the system's Iconoir set. It takes the surrounding text colour. Import icons through this, never from an icon package.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Brand & Icons (Iconoir)",
+      "category": "Foundations",
+      "example": "<Icon name=\"trash\" size=\"sm\" />",
+      "props": {
+        "name": {
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 30 more ... | \"close\"",
+          "required": true,
+          "description": "Which icon to draw, in Iconoir naming: `trash`, `check`, `warning-triangle`, `close`."
+        },
+        "size": {
+          "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | undefined",
+          "required": false,
+          "default": "md",
+          "description": "Size token: `xs` 12, `sm` 16, `md` 20, `lg` 24."
+        },
+        "label": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Accessible name. Leave empty when the icon is decoration next to text; it is then hidden from screen readers."
+        },
+        "className": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Extra class on the svg. The colour comes from the surrounding text colour."
+        }
+      }
+    },
+    "Stack": {
+      "file": "src/ds/layout.tsx",
+      "description": "Lays out a row or column with a space token between children. Use it instead of hand-written flex and margins. It is the code form of auto layout in Figma.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Auto layout",
+      "category": "Foundations",
+      "example": "<Stack direction=\"horizontal\" gap=\"2\" justify=\"end\">...</Stack>",
+      "props": {
+        "direction": {
+          "type": "\"vertical\" | \"horizontal\" | undefined",
+          "required": false,
+          "default": "vertical",
+          "description": "`vertical` for a column (default), `horizontal` for a row."
+        },
+        "gap": {
+          "type": "SpaceToken | undefined",
+          "required": false,
+          "default": "4",
+          "description": "Space token between children, from `spacing/*`: form fields `4`, button rows `2`, page sections `8`."
+        },
+        "padding": {
+          "type": "SpaceToken | undefined",
+          "required": false,
+          "description": "Padding from the same space tokens."
+        },
+        "align": {
+          "type": "\"start\" | \"center\" | \"end\" | \"stretch\" | \"baseline\" | undefined",
+          "required": false,
+          "description": "Cross-axis alignment."
+        },
+        "justify": {
+          "type": "\"start\" | \"center\" | \"end\" | \"between\" | undefined",
+          "required": false,
+          "description": "Main-axis distribution. `between` pushes children to both ends."
+        },
+        "wrap": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Wrap children onto new lines when they do not fit."
+        },
+        "as": {
+          "type": "ElementType<any, keyof IntrinsicElements> | undefined",
+          "required": false,
+          "default": "div",
+          "description": "Which element to render, such as `section`, `form` or `ul`."
+        }
+      }
+    },
+    "Text": {
+      "file": "src/ds/layout.tsx",
+      "description": "Any text set in a library text style and colour token. Use it for headings, paragraphs and captions instead of raw font sizes.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Text styles",
+      "category": "Foundations",
+      "example": "<Text variant=\"h3\">Title</Text>",
+      "props": {
+        "variant": {
+          "type": "TextStyle | undefined",
+          "required": false,
+          "default": "body",
+          "description": "Text style from the library. `h1` to `h6` are Roboto Condensed Bold; everything else is Roboto."
+        },
+        "tone": {
+          "type": "TextTone | undefined",
+          "required": false,
+          "description": "Colour token. Defaults to `primary` for headings and `body` for reading text."
+        },
+        "as": {
+          "type": "ElementType<any, keyof IntrinsicElements> | undefined",
+          "required": false,
+          "description": "Element to render when it should differ from the style's default, such as an `h2` styled as `h4`."
+        }
+      }
+    },
+    "VisuallyHidden": {
+      "file": "src/ds/layout.tsx",
+      "description": "Text for screen readers only, such as a table caption or a live status line.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": null,
+      "category": "Foundations",
+      "example": null,
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "Text only screen readers should announce."
+        }
+      }
+    },
+    "Divider": {
+      "file": "src/ds/layout.tsx",
+      "description": "Separates groups of content. Prefer spacing first; add a line only when spacing is not enough.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Divider",
+      "category": "Content",
+      "example": "<Divider label=\"or\" />",
+      "props": {
+        "orientation": {
+          "type": "\"vertical\" | \"horizontal\" | undefined",
+          "required": false,
+          "default": "horizontal",
+          "description": "Line direction."
+        },
+        "label": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Optional centred label, such as \"or\"."
+        }
+      }
+    },
+    "LinkButton": {
+      "file": "src/ds/button.tsx",
+      "description": "A text link that navigates. Use Button when it runs an action.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Link Button",
+      "category": "Actions and navigation",
+      "example": "<LinkButton href=\"/help\">Read the guide</LinkButton>",
+      "props": {
+        "variant": {
+          "type": "\"primary\" | \"secondary\" | undefined",
+          "required": false,
+          "default": "clear",
+          "description": "`primary` uses text/link, `secondary` uses text/body."
+        }
+      }
+    },
+    "SegmentedControl": {
+      "file": "src/ds/button.tsx",
+      "description": "Switches the display of the same content in place, such as List and Grid. Not for page navigation (TopNav).",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Segmented Control",
+      "category": "Actions and navigation",
+      "example": "<SegmentedControl label=\"View\" value={v} onChange={setV} options={[{value:'list',label:'List'},{value:'grid',label:'Grid'}]} />",
+      "props": {
+        "options": {
+          "type": "SegmentOption[]",
+          "required": true,
+          "description": "Between 2 and 4 options."
+        },
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "The selected value. One segment is always selected."
+        },
+        "onChange": {
+          "type": "(value: string) => void",
+          "required": true,
+          "description": "Called with the new value."
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the group, such as \"View\"."
+        },
+        "className": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Extra class."
+        }
+      }
+    },
+    "Chip": {
+      "file": "src/ds/button.tsx",
+      "description": "An interactive pill for filters and tags. Use Badge for something that only shows a status.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Chips",
+      "category": "Actions and navigation",
+      "example": "<Chip selected={on} onClick={toggle}>Germany</Chip>",
+      "props": {
+        "selected": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Selected filter state, announced with `aria-pressed`."
+        },
+        "icon": {
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 31 more ... | undefined",
+          "required": false,
+          "description": "Icon before the text."
+        },
+        "onRemove": {
+          "type": "(() => void) | undefined",
+          "required": false,
+          "description": "When set, shows a remove button with this handler. Needs `removeLabel`."
+        },
+        "removeLabel": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Remove",
+          "description": "Accessible name of the remove button, such as \"Remove Germany\"."
+        }
+      }
+    },
+    "Button": {
+      "file": "src/ds/button.tsx",
+      "description": "Runs an action. Start the label with a verb and name the result: \"Create request\", not \"OK\". Default type is `button`, so set `type=\"submit\"` in forms.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Button",
+      "category": "Actions and navigation",
+      "example": "<Button variant=\"outline\" onClick={save}>Save draft</Button>",
+      "props": {
+        "variant": {
+          "type": "\"filled\" | \"outline\" | \"clear\" | \"cta\" | \"danger\" | \"danger-outline\" | undefined",
+          "required": false,
+          "default": "clear",
+          "description": "Emphasis. `filled` = the main action of a view. `outline` = a real alternative. `clear` = the least emphasis: a way out such as Cancel.\n`cta` = orange marketing or commercial call to action, at most one per view; never for a normal form save.\n`danger` = the final irreversible action inside a confirmation. `danger-outline` = the entry point that opens that confirmation."
+        },
+        "size": {
+          "type": "\"tiny\" | \"small\" | \"medium\" | \"large\" | \"giant\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "Height: `tiny` 24, `small` 32, `medium` 40 (default), `large` 48, `giant` 56."
+        },
+        "iconLeft": {
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 31 more ... | undefined",
+          "required": false,
+          "description": "Icon before the label. Buttons are text-only by default; add an icon only when it adds meaning."
+        },
+        "iconRight": {
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 31 more ... | undefined",
+          "required": false,
+          "description": "Icon after the label."
+        },
+        "loading": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Shows a Loader, sets `aria-busy` and blocks clicks while keeping the label and width."
+        },
+        "fullWidth": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Stretches to the container width."
+        }
+      }
+    },
+    "IconButton": {
+      "file": "src/ds/button.tsx",
+      "description": "A Button that shows only an icon (Content = Only Icons in Figma). The label is required because nothing else names it.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Button, Content=Only Icons",
+      "category": "Actions and navigation",
+      "example": "<IconButton icon=\"trash\" label=\"Remove file\" />",
+      "props": {
+        "icon": {
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 30 more ... | \"close\"",
+          "required": true,
+          "description": "The icon to show."
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Required accessible name, such as \"Remove file\"."
+        },
+        "variant": {
+          "type": "\"filled\" | \"outline\" | \"clear\" | \"cta\" | \"danger\" | \"danger-outline\" | undefined",
+          "required": false,
+          "default": "clear",
+          "description": "Same emphasis as Button. Defaults to `clear`."
+        },
+        "size": {
+          "type": "\"tiny\" | \"small\" | \"medium\" | \"large\" | \"giant\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "Square size, same scale as Button."
+        }
+      }
+    },
+    "Dropdown": {
+      "file": "src/ds/form.tsx",
+      "description": "Choose one value from a list. It opens below the field and supports the arrow keys. To run commands use Menu; for two to four visible choices use Radio or SegmentedControl.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Dropdown",
+      "category": "Inputs",
+      "example": "<Dropdown label=\"Role\" value={v} onChange={setV} options={[{value:'admin',label:'Admin'}]} />",
+      "props": {
+        "options": {
+          "type": "DropdownOption[]",
+          "required": true,
+          "description": "Options, one row each."
+        },
+        "value": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Selected value."
+        },
+        "onChange": {
+          "type": "((value: string) => void) | undefined",
+          "required": false,
+          "description": "Called with the picked value."
+        },
+        "label": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Visible label."
+        },
+        "placeholder": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Select",
+          "description": "Text shown when nothing is selected."
+        },
+        "help": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Help text."
+        },
+        "error": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Error message."
+        },
+        "disabled": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Blocks interaction."
+        },
+        "required": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Marks the field as required."
+        },
+        "id": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Explicit id for the trigger."
+        },
+        "className": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Extra class."
+        }
+      }
+    },
+    "RadioGroup": {
+      "file": "src/ds/form.tsx",
+      "description": "A labelled set of Radio options. Use it for two to five visible choices.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Radio/Radio + Text",
+      "category": "Inputs",
+      "example": "<RadioGroup label=\"Plan\" name=\"plan\" value={v} onChange={setV} options={[{value:'a',label:'Basic'}]} />",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Group label, shown as the legend."
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Shared input name."
+        },
+        "options": {
+          "type": "{ value: string; label: ReactNode; description?: string | undefined; disabled?: boolean | undefined; }[]",
+          "required": true,
+          "description": "Options to show."
+        },
+        "value": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Selected value."
+        },
+        "onChange": {
+          "type": "((value: string) => void) | undefined",
+          "required": false,
+          "description": "Called with the picked value."
+        },
+        "error": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Error message."
+        },
+        "horizontal": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Lay out in a row."
+        }
+      }
+    },
+    "Stepper": {
+      "file": "src/ds/form.tsx",
+      "description": "Change a small number with plus and minus buttons, such as a quantity.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Stepper",
+      "category": "Inputs",
+      "example": "<Stepper label=\"Quantity\" value={n} onChange={setN} min={1} />",
+      "props": {
+        "value": {
+          "type": "number",
+          "required": true,
+          "description": "Current number."
+        },
+        "onChange": {
+          "type": "(value: number) => void",
+          "required": true,
+          "description": "Called with the new number."
+        },
+        "min": {
+          "type": "number | undefined",
+          "required": false,
+          "description": "Lowest value."
+        },
+        "max": {
+          "type": "number | undefined",
+          "required": false,
+          "description": "Highest value."
+        },
+        "step": {
+          "type": "number | undefined",
+          "required": false,
+          "default": 1,
+          "description": "Change per press."
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible name, such as \"Quantity\"."
+        },
+        "labels": {
+          "type": "{ increase?: string | undefined; decrease?: string | undefined; } | undefined",
+          "required": false,
+          "description": "Accessible names of the buttons in the page's language."
+        },
+        "variant": {
+          "type": "\"filled\" | \"outline\" | undefined",
+          "required": false,
+          "default": "outline",
+          "description": "`filled` or `outline`."
+        }
+      }
+    },
+    "Slider": {
+      "file": "src/ds/form.tsx",
+      "description": "Pick a value on a range. Use Input when an exact number is required.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Slider",
+      "category": "Inputs",
+      "example": null,
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Visible label."
+        },
+        "showValue": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Show the current value next to the label."
+        }
+      }
+    },
+    "FileDropzone": {
+      "file": "src/ds/form.tsx",
+      "description": "Drag-and-drop area over a real file input. List chosen files with FileItem.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "File Upload/Dropzone",
+      "category": "Inputs",
+      "example": null,
+      "props": {
+        "onFiles": {
+          "type": "(files: File[]) => void",
+          "required": true,
+          "description": "Called with the chosen or dropped files."
+        },
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Main line, such as \"Drop a file here or click to browse\"."
+        },
+        "description": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Accepted types and the size limit, in words."
+        },
+        "accept": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Native accept filter, such as \".csv,.xlsx\"."
+        },
+        "multiple": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Allow several files."
+        },
+        "disabled": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Blocks interaction."
+        },
+        "error": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Error message."
+        }
+      }
+    },
+    "FileItem": {
+      "file": "src/ds/form.tsx",
+      "description": "One uploaded file with its progress, result and a remove action.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "File Upload/File Item",
+      "category": "Inputs",
+      "example": null,
+      "props": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "File name."
+        },
+        "meta": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "One line of meta: size or what went wrong."
+        },
+        "state": {
+          "type": "\"error\" | \"uploading\" | \"complete\" | undefined",
+          "required": false,
+          "default": "complete",
+          "description": "Upload state."
+        },
+        "progress": {
+          "type": "number | undefined",
+          "required": false,
+          "description": "Upload progress, 0 to 100, while uploading."
+        },
+        "onRemove": {
+          "type": "(() => void) | undefined",
+          "required": false,
+          "description": "Shows a remove button."
+        },
+        "removeLabel": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Remove file",
+          "description": "Accessible name of the remove button."
+        }
+      }
+    },
+    "TagInput": {
+      "file": "src/ds/form.tsx",
+      "description": "Enter several values as removable tags. Enter or comma adds, Backspace removes the last one.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Tag Input",
+      "category": "Inputs",
+      "example": null,
+      "props": {
+        "value": {
+          "type": "string[]",
+          "required": true,
+          "description": "Current tags."
+        },
+        "onChange": {
+          "type": "(value: string[]) => void",
+          "required": true,
+          "description": "Called with the new list."
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Visible label."
+        },
+        "placeholder": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Placeholder for the text field."
+        },
+        "help": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Help text."
+        },
+        "error": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Error message."
+        },
+        "disabled": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Blocks interaction."
+        }
+      }
+    },
+    "Calendar": {
+      "file": "src/ds/form.tsx",
+      "description": "Month grid for picking one day. Use DatePicker for the field-plus-calendar pattern.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Calendar",
+      "category": "Inputs",
+      "example": null,
+      "props": {
+        "value": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Selected day as ISO `YYYY-MM-DD`."
+        },
+        "onChange": {
+          "type": "((iso: string) => void) | undefined",
+          "required": false,
+          "description": "Called with the picked ISO day."
+        },
+        "defaultMonth": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "First month to show, as ISO. Defaults to the selected day or today."
+        },
+        "min": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Earliest day that can be picked, as ISO."
+        },
+        "max": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Latest day that can be picked, as ISO."
+        },
+        "locale": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "en",
+          "description": "BCP 47 locale for month and weekday names."
+        }
+      }
+    },
+    "DatePicker": {
+      "file": "src/ds/form.tsx",
+      "description": "A field that opens a Calendar. Use it for dates near today; use Input for known dates such as birthdays.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Date Picker",
+      "category": "Inputs",
+      "example": null,
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Visible label."
+        },
+        "placeholder": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Select date",
+          "description": "Text when empty."
+        },
+        "help": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Help text."
+        },
+        "error": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Error message."
+        },
+        "disabled": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Blocks interaction."
+        },
+        "max": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Latest day that can be picked, as ISO."
+        },
+        "min": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Earliest day that can be picked, as ISO."
+        },
+        "value": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Selected day as ISO `YYYY-MM-DD`."
+        },
+        "onChange": {
+          "type": "((iso: string) => void) | undefined",
+          "required": false,
+          "description": "Called with the picked ISO day."
+        },
+        "locale": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "en",
+          "description": "BCP 47 locale for month and weekday names."
+        }
+      }
+    },
+    "Input": {
+      "file": "src/ds/form.tsx",
+      "description": "Single-line text entry. `type=\"password\"` adds a built-in show or hide button, so never build one yourself. For choosing from a list use Dropdown.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Input",
+      "category": "Inputs",
+      "example": "<Input label=\"Email\" type=\"email\" value={v} onChange={(e) => setV(e.target.value)} error={err} />",
+      "props": {
+        "label": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Visible label. Required unless you pass `aria-label`."
+        },
+        "hideLabel": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Keeps the label for screen readers but hides it visually. Use sparingly, such as a search in a toolbar."
+        },
+        "help": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Help text below the field."
+        },
+        "error": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Error message. Sets the error state and `aria-invalid`. Say what is wrong and how to fix it."
+        },
+        "success": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Success message below the field."
+        },
+        "size": {
+          "type": "\"medium\" | \"large\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "Height: `medium` 40 (default), `large` 48."
+        },
+        "iconLeft": {
+          "type": "\"help\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | ... 31 more ... | undefined",
+          "required": false,
+          "description": "Icon inside the field on the left."
+        },
+        "onClear": {
+          "type": "(() => void) | undefined",
+          "required": false,
+          "description": "Shows a clear button while there is text. Called when it is pressed."
+        },
+        "labels": {
+          "type": "{ clear?: string | undefined; showPassword?: string | undefined; hidePassword?: string | undefined; } | undefined",
+          "required": false,
+          "description": "Accessible names of the built-in buttons. Pass them in the page's language."
+        }
+      }
+    },
+    "Textarea": {
+      "file": "src/ds/form.tsx",
+      "description": "Multi-line text entry for comments and descriptions. Use Input for single-line values.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Textarea",
+      "category": "Inputs",
+      "example": "<Textarea label=\"Comment\" maxLength={200} value={v} onChange={(e) => setV(e.target.value)} />",
+      "props": {
+        "label": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Visible label."
+        },
+        "help": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Help text."
+        },
+        "error": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Error message. Sets the error state."
+        },
+        "maxLength": {
+          "type": "number | undefined",
+          "required": false,
+          "description": "Shows a character counter against this limit."
+        }
+      }
+    },
+    "Checkbox": {
+      "file": "src/ds/form.tsx",
+      "description": "Pick several options that need saving. For one choice of several use Radio. For a setting that applies at once use Toggle.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Checkbox/Checkbox + Text",
+      "category": "Inputs",
+      "example": "<Checkbox label=\"Include archived\" checked={on} onChange={(e) => setOn(e.target.checked)} />",
+      "props": {
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Visible label. Pass `aria-label` instead only inside a table row."
+        },
+        "description": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Secondary line under the label."
+        },
+        "indeterminate": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Shows a dash for a partly selected group."
+        },
+        "size": {
+          "type": "\"medium\" | \"small\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "`small` 16 or `medium` 24."
+        },
+        "error": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Error message below."
+        }
+      }
+    },
+    "Radio": {
+      "file": "src/ds/form.tsx",
+      "description": "One option of a set where exactly one is chosen. Group them in RadioGroup.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Radio/Radio + Text",
+      "category": "Inputs",
+      "example": null,
+      "props": {
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Visible label."
+        },
+        "description": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Secondary line under the label."
+        }
+      }
+    },
+    "Toggle": {
+      "file": "src/ds/form.tsx",
+      "description": "A switch for a setting that takes effect immediately. If the change needs saving, use Checkbox.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Toggle/Toggle + Text",
+      "category": "Inputs",
+      "example": "<Toggle label=\"Email updates\" checked={on} onChange={setOn} />",
+      "props": {
+        "checked": {
+          "type": "boolean",
+          "required": true,
+          "description": "On or off."
+        },
+        "onChange": {
+          "type": "(checked: boolean) => void",
+          "required": true,
+          "description": "Called with the new state. Apply the setting straight away; a Toggle never waits for a Save button."
+        },
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Visible label. Required unless you pass `aria-label`."
+        },
+        "description": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Secondary line under the label."
+        },
+        "textSide": {
+          "type": "\"left\" | \"right\" | undefined",
+          "required": false,
+          "default": "right",
+          "description": "Which side the label sits on."
+        }
+      }
+    },
+    "Loader": {
+      "file": "src/ds/feedback.tsx",
+      "description": "Indeterminate loading indicator. Use Skeleton when the layout is known and ProgressBar when the duration is known.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Loader",
+      "category": "Feedback and overlays",
+      "example": null,
+      "props": {
+        "size": {
+          "type": "\"tiny\" | \"small\" | \"medium\" | \"large\" | \"giant\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "`tiny` 16, `small` 20, `medium` 24, `large` 32, `giant` 48."
+        },
+        "label": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Loading",
+          "description": "Announced to screen readers. Pass an empty string only when the parent already announces loading, such as a busy Button."
+        }
+      }
+    },
+    "Skeleton": {
+      "file": "src/ds/feedback.tsx",
+      "description": "Placeholder while content loads. Match the layout that will appear. Hidden from screen readers; announce loading with `aria-busy` on the region.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Skeleton",
+      "category": "Feedback and overlays",
+      "example": null,
+      "props": {
+        "type": {
+          "type": "\"text\" | \"row\" | \"card\" | undefined",
+          "required": false,
+          "default": "text",
+          "description": "`text` lines, a `row` with a thumbnail, or a `card` block."
+        },
+        "count": {
+          "type": "number | undefined",
+          "required": false,
+          "default": 1,
+          "description": "How many to repeat."
+        }
+      }
+    },
+    "ProgressBar": {
+      "file": "src/ds/feedback.tsx",
+      "description": "Progress when the duration or amount is known.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Progress Bar",
+      "category": "Feedback and overlays",
+      "example": null,
+      "props": {
+        "value": {
+          "type": "number",
+          "required": true,
+          "description": "0 to 100."
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible name, and the visible label when `showLabel` is on."
+        },
+        "showLabel": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Show the label above the bar."
+        },
+        "showValue": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Show the percent value."
+        },
+        "disabled": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Greys it out."
+        }
+      }
+    },
+    "Alert": {
+      "file": "src/ds/feedback.tsx",
+      "description": "A message that stays on the page until resolved. `error` and `warning` announce themselves. Use Toast for a passing confirmation.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Alert",
+      "category": "Feedback and overlays",
+      "example": "<Alert status=\"error\" title=\"Could not save\">Check your connection and try again.</Alert>",
+      "props": {
+        "status": {
+          "type": "Status | undefined",
+          "required": false,
+          "default": "default",
+          "description": "Meaning. Always paired with its icon, so colour is not the only signal."
+        },
+        "variant": {
+          "type": "\"outline\" | \"filled\" | undefined",
+          "required": false,
+          "default": "outline",
+          "description": "`outline` (default) or `filled` tint."
+        },
+        "title": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Short bold line."
+        },
+        "actions": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Actions, such as a Button."
+        },
+        "onDismiss": {
+          "type": "(() => void) | undefined",
+          "required": false,
+          "description": "Shows a close button."
+        },
+        "dismissLabel": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Dismiss",
+          "description": "Accessible name of the close button."
+        }
+      }
+    },
+    "Badge": {
+      "file": "src/ds/feedback.tsx",
+      "description": "Shows a status, count or category. It is not interactive; use Chip for something people click.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Badge",
+      "category": "Content",
+      "example": "<Badge status=\"success\" icon=\"check\">Connected</Badge>",
+      "props": {
+        "status": {
+          "type": "Status | undefined",
+          "required": false,
+          "default": "default",
+          "description": "Meaning."
+        },
+        "variant": {
+          "type": "\"outline\" | \"filled\" | \"subtle\" | undefined",
+          "required": false,
+          "default": "subtle",
+          "description": "`subtle` tint (default), `filled` or `outline`."
+        },
+        "size": {
+          "type": "\"tiny\" | \"small\" | \"medium\" | undefined",
+          "required": false,
+          "default": "small",
+          "description": "`tiny`, `small` or `medium`."
+        },
+        "icon": {
+          "type": "\"info\" | \"search\" | \"group\" | \"link\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | ... 30 more ... | undefined",
+          "required": false,
+          "description": "Icon before the text. Pair status with text or an icon, never colour alone."
+        }
+      }
+    },
+    "ToastProvider": {
+      "file": "src/ds/feedback.tsx",
+      "description": "Wrap the app or screen once. Then call `useToast()` anywhere inside. It renders the announcing region for you.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Toast",
+      "category": "Feedback and overlays",
+      "example": "<ToastProvider><App /></ToastProvider>",
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "Your app or screen."
+        },
+        "dismissLabel": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Dismiss",
+          "description": "Accessible name of each close button."
+        }
+      }
+    },
+    "Modal": {
+      "file": "src/ds/feedback.tsx",
+      "description": "A focused task above the page, with a free content area such as a short form. For a yes-or-no confirmation use ConfirmDialog.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Modal",
+      "category": "Feedback and overlays",
+      "example": null,
+      "props": {
+        "open": {
+          "type": "boolean",
+          "required": true,
+          "description": "Controls visibility. Render it always and flip this. Focus is trapped and returns to the opener on close."
+        },
+        "onClose": {
+          "type": "() => void",
+          "required": true,
+          "description": "Called on Escape, the close button or a backdrop press."
+        },
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Heading."
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Line under the heading."
+        },
+        "footer": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Footer actions, rightmost is the main one."
+        },
+        "size": {
+          "type": "\"small\" | \"medium\" | \"large\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "Width: `small` 400, `medium` 560, `large` 720."
+        },
+        "closeLabel": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Close",
+          "description": "Accessible name of the close button."
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Free content area."
+        }
+      }
+    },
+    "ConfirmDialog": {
+      "file": "src/ds/feedback.tsx",
+      "description": "The Pop-Up in Figma: a short confirmation before a consequential action. Use it for every delete or anything that cannot be undone. Focus starts on the safe choice.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Pop-Up",
+      "category": "Feedback and overlays",
+      "example": "<ConfirmDialog open={open} tone=\"danger\" title=\"Delete this file?\" confirmLabel=\"Delete file\" onCancel={close} onConfirm={remove}>This cannot be undone.</ConfirmDialog>",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "required": true,
+          "description": "Controls visibility."
+        },
+        "onCancel": {
+          "type": "() => void",
+          "required": true,
+          "description": "Called when the person backs out: Cancel, Escape or the backdrop."
+        },
+        "onConfirm": {
+          "type": "() => void",
+          "required": true,
+          "description": "Called when the person confirms."
+        },
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "The question, naming the thing: \"Delete this account?\"."
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "The consequence in plain words. Say what cannot be undone."
+        },
+        "confirmLabel": {
+          "type": "string",
+          "required": true,
+          "description": "Confirm label naming the action: \"Delete account\", never \"OK\" or \"Yes\"."
+        },
+        "cancelLabel": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Cancel",
+          "description": "Back-out label."
+        },
+        "tone": {
+          "type": "\"default\" | \"danger\" | undefined",
+          "required": false,
+          "default": "default",
+          "description": "`danger` for anything irreversible: red confirm, and focus starts on Cancel. `default` for a normal confirmation."
+        },
+        "busy": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Shows progress on the confirm button while the action runs."
+        }
+      }
+    },
+    "Drawer": {
+      "file": "src/ds/feedback.tsx",
+      "description": "Side panel for details or edits while keeping the page in view.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Drawer",
+      "category": "Feedback and overlays",
+      "example": null,
+      "props": {
+        "open": {
+          "type": "boolean",
+          "required": true,
+          "description": "Controls visibility."
+        },
+        "onClose": {
+          "type": "() => void",
+          "required": true,
+          "description": "Called on Escape, close or backdrop."
+        },
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Heading."
+        },
+        "position": {
+          "type": "\"right\" | \"left\" | undefined",
+          "required": false,
+          "default": "right",
+          "description": "Side it slides from."
+        },
+        "footer": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Footer actions."
+        },
+        "closeLabel": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Close",
+          "description": "Accessible name of the close button."
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content."
+        }
+      }
+    },
+    "Tooltip": {
+      "file": "src/ds/feedback.tsx",
+      "description": "Short hint on hover or focus. It never holds the only copy of important text. For richer content use Popover.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Tooltip",
+      "category": "Feedback and overlays",
+      "example": null,
+      "props": {
+        "content": {
+          "type": "string",
+          "required": true,
+          "description": "Short hint with no actions."
+        },
+        "children": {
+          "type": "ReactElement<unknown, string | JSXElementConstructor<any>>",
+          "required": true,
+          "description": "Exactly one focusable element, such as an IconButton."
+        },
+        "position": {
+          "type": "\"right\" | \"left\" | \"top\" | \"bottom\" | undefined",
+          "required": false,
+          "default": "top",
+          "description": "Side it opens on."
+        }
+      }
+    },
+    "Popover": {
+      "file": "src/ds/feedback.tsx",
+      "description": "Small panel attached to a control, with richer content than a Tooltip. Escape and an outside press close it.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Popover",
+      "category": "Feedback and overlays",
+      "example": null,
+      "props": {
+        "trigger": {
+          "type": "ReactElement<unknown, string | JSXElementConstructor<any>>",
+          "required": true,
+          "description": "Element that opens it, usually a Button."
+        },
+        "title": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Heading."
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content."
+        },
+        "open": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Controlled open state. Omit to let it manage itself."
+        },
+        "onOpenChange": {
+          "type": "((open: boolean) => void) | undefined",
+          "required": false,
+          "description": "Called when the state changes."
+        }
+      }
+    },
+    "Menu": {
+      "file": "src/ds/feedback.tsx",
+      "description": "Runs a command from a list, such as a row's actions. Arrow keys and Escape work. To choose a value use Dropdown.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Menu",
+      "category": "Actions and navigation",
+      "example": null,
+      "props": {
+        "trigger": {
+          "type": "ReactElement<unknown, string | JSXElementConstructor<any>>",
+          "required": true,
+          "description": "Element that opens it, usually an IconButton."
+        },
+        "items": {
+          "type": "MenuItemDef[]",
+          "required": true,
+          "description": "Commands in order."
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the list."
+        }
+      }
+    },
+    "TopNav": {
+      "file": "src/ds/navigation.tsx",
+      "description": "Links between views within a section, with a navy underline on the current one. This is also what other libraries call Tabs.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Top Nav",
+      "category": "Actions and navigation",
+      "example": null,
+      "props": {
+        "items": {
+          "type": "TopNavItem[]",
+          "required": true,
+          "description": "Between 3 and 7 links."
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the navigation."
+        }
+      }
+    },
+    "SideNav": {
+      "file": "src/ds/navigation.tsx",
+      "description": "Left navigation between app sections, 240 wide or a 72 rail when collapsed.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Side Nav",
+      "category": "Actions and navigation",
+      "example": null,
+      "props": {
+        "items": {
+          "type": "SideNavItem[]",
+          "required": true,
+          "description": "Items in order."
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible name."
+        },
+        "collapsed": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Icon-only rail, 72 wide."
+        },
+        "footer": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Footer slot, such as a help card."
+        }
+      }
+    },
+    "Breadcrumbs": {
+      "file": "src/ds/navigation.tsx",
+      "description": "Shows where a page sits and links back up the trail.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Breadcrumbs",
+      "category": "Actions and navigation",
+      "example": null,
+      "props": {
+        "items": {
+          "type": "{ label: string; href?: string | undefined; }[]",
+          "required": true,
+          "description": "Trail from the root to the current page. The last item is the current page."
+        },
+        "label": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Breadcrumb",
+          "description": "Accessible name."
+        }
+      }
+    },
+    "Pagination": {
+      "file": "src/ds/navigation.tsx",
+      "description": "Moves through a long list page by page. It collapses long ranges with an ellipsis. Place it below the Table, never inside.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Pagination/Pagination",
+      "category": "Actions and navigation",
+      "example": "<Pagination page={p} pageCount={12} onChange={setP} />",
+      "props": {
+        "page": {
+          "type": "number",
+          "required": true,
+          "description": "Current page, starting at 1."
+        },
+        "pageCount": {
+          "type": "number",
+          "required": true,
+          "description": "Total number of pages."
+        },
+        "onChange": {
+          "type": "(page: number) => void",
+          "required": true,
+          "description": "Called with the new page."
+        },
+        "labels": {
+          "type": "{ nav?: string | undefined; previous?: string | undefined; next?: string | undefined; page?: string | undefined; } | undefined",
+          "required": false,
+          "description": "Accessible names in the page's language."
+        }
+      }
+    },
+    "Steps": {
+      "file": "src/ds/navigation.tsx",
+      "description": "Shows progress through a multi-step process and marks the current step with `aria-current`. It shows progress only; the Back and Next buttons are yours.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Steps",
+      "category": "Actions and navigation",
+      "example": "<Steps current={1} steps={[{title:'Company'},{title:'Team'},{title:'Done'}]} />",
+      "props": {
+        "steps": {
+          "type": "StepDef[]",
+          "required": true,
+          "description": "Steps in order."
+        },
+        "current": {
+          "type": "number",
+          "required": true,
+          "description": "Index of the current step, starting at 0. Earlier steps show as complete."
+        },
+        "orientation": {
+          "type": "\"horizontal\" | \"vertical\" | undefined",
+          "required": false,
+          "default": "horizontal",
+          "description": "Direction."
+        },
+        "errorStep": {
+          "type": "number | undefined",
+          "required": false,
+          "description": "Index of a step that has an error."
+        },
+        "label": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Progress",
+          "description": "Accessible name."
+        }
+      }
+    },
+    "BrandLogo": {
+      "file": "src/ds/navigation.tsx",
+      "description": "The product wordmark.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Brand Logo",
+      "category": "Screen parts",
+      "example": null,
+      "props": {
+        "brand": {
+          "type": "\"EuvinoPRO\" | \"WIN\" | undefined",
+          "required": false,
+          "default": "EuvinoPRO",
+          "description": "Which product mark."
+        },
+        "color": {
+          "type": "\"default\" | \"inverse\" | undefined",
+          "required": false,
+          "default": "default",
+          "description": "`default` on light surfaces, `inverse` on dark."
+        },
+        "size": {
+          "type": "\"small\" | \"medium\" | \"large\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "Scale."
+        }
+      }
+    },
+    "Header": {
+      "file": "src/ds/navigation.tsx",
+      "description": "App header bar. Renders a `header` landmark.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Header",
+      "category": "Screen parts",
+      "example": null,
+      "props": {
+        "brand": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Left slot. Defaults to BrandLogo."
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Middle slot, usually TopNav or a search Input."
+        },
+        "actions": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Right slot: actions and UserMenu."
+        },
+        "size": {
+          "type": "\"small\" | \"medium\" | \"large\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "Height: `small` 56, `medium` 64, `large` 72."
+        }
+      }
+    },
+    "PageHeader": {
+      "file": "src/ds/navigation.tsx",
+      "description": "Page title, subtitle and primary action. Use one per page, at the top of the content.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Page Header",
+      "category": "Screen parts",
+      "example": "<PageHeader title=\"Requests\" subtitle=\"All open requests\" actions={<Button>Create request</Button>} />",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Page title, the one H1."
+        },
+        "subtitle": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Line under the title."
+        },
+        "breadcrumbs": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Breadcrumbs slot above the title."
+        },
+        "actions": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Primary action Button slot, on the right."
+        }
+      }
+    },
+    "Footer": {
+      "file": "src/ds/navigation.tsx",
+      "description": "Page footer with legal text and links.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Footer",
+      "category": "Screen parts",
+      "example": null,
+      "props": {
+        "legal": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "Legal text."
+        },
+        "links": {
+          "type": "{ label: string; href: string; }[] | undefined",
+          "required": false,
+          "description": "Links on the right."
+        }
+      }
+    },
+    "UserMenu": {
+      "file": "src/ds/navigation.tsx",
+      "description": "Profile trigger for the Header. Wrap it in Menu to add the account commands.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "User Menu",
+      "category": "Actions and navigation",
+      "example": null,
+      "props": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Person's name."
+        },
+        "subtitle": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Second line, such as a company."
+        },
+        "src": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Picture URL. Initials show without one."
+        },
+        "compact": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Avatar only. Name stays available to screen readers."
+        }
+      }
+    },
+    "Avatar": {
+      "file": "src/ds/display.tsx",
+      "description": "A person as picture or initials.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Avatar",
+      "category": "Content",
+      "example": null,
+      "props": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Person's name. Gives the initials and the accessible name."
+        },
+        "src": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Picture URL."
+        },
+        "size": {
+          "type": "\"tiny\" | \"small\" | \"medium\" | \"large\" | \"giant\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "`tiny` 24, `small` 32, `medium` 40, `large` 48, `giant` 64."
+        },
+        "status": {
+          "type": "\"online\" | \"offline\" | \"busy\" | undefined",
+          "required": false,
+          "description": "Status dot. Pair it with text if the status matters."
+        }
+      }
+    },
+    "AvatarGroup": {
+      "file": "src/ds/display.tsx",
+      "description": "Several people in a small space. Show at most 4.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Avatar Group",
+      "category": "Content",
+      "example": null,
+      "props": {
+        "people": {
+          "type": "{ name: string; src?: string | undefined; }[]",
+          "required": true,
+          "description": "People to show; the first `max` are drawn and the rest collapse into a count."
+        },
+        "max": {
+          "type": "number | undefined",
+          "required": false,
+          "default": 4,
+          "description": "Most avatars to draw."
+        },
+        "size": {
+          "type": "\"tiny\" | \"small\" | \"medium\" | \"large\" | \"giant\" | undefined",
+          "required": false,
+          "default": "small",
+          "description": "Size of each."
+        }
+      }
+    },
+    "ListItem": {
+      "file": "src/ds/display.tsx",
+      "description": "One row of a List.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "List/List Item Leading, List Item Trailing",
+      "category": "Content",
+      "example": "<List><ListItem title=\"Email\" description=\"Weekly\" trailing={<Toggle aria-label=\"Email\" checked={on} onChange={setOn} />} /></List>",
+      "props": {
+        "title": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "Main text."
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Second line."
+        },
+        "leading": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Left slot: Icon, Avatar or ProductThumbnail."
+        },
+        "trailing": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Right slot: text, Badge, Toggle, Button."
+        }
+      }
+    },
+    "List": {
+      "file": "src/ds/display.tsx",
+      "description": "Rows of related items, such as settings, devices or files. For sortable columns of data use Table.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "List/List Item Leading, List Item Trailing",
+      "category": "Content",
+      "example": null,
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "ListItem rows."
+        },
+        "divided": {
+          "type": "boolean | undefined",
+          "required": false,
+          "default": true,
+          "description": "Hairline between rows."
+        }
+      }
+    },
+    "ProductThumbnail": {
+      "file": "src/ds/display.tsx",
+      "description": "Product image tile for tables and lists.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Product Thumbnail",
+      "category": "Content",
+      "example": null,
+      "props": {
+        "src": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Product photo URL. Without one an icon placeholder shows."
+        },
+        "alt": {
+          "type": "string",
+          "required": true,
+          "description": "Product name for the image."
+        },
+        "size": {
+          "type": "\"small\" | \"medium\" | \"large\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "`small` 40, `medium` 48, `large` 64."
+        },
+        "icon": {
+          "type": "\"search\" | \"group\" | \"link\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | ... 31 more ... | undefined",
+          "required": false,
+          "default": "box",
+          "description": "Placeholder icon."
+        }
+      }
+    },
+    "EmptyState": {
+      "file": "src/ds/display.tsx",
+      "description": "Shown when there is nothing to display. Say why and offer the next action.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Empty State",
+      "category": "Content",
+      "example": "<EmptyState title=\"No devices yet\" description=\"Link a device to sign in faster.\" action={<Button>Link device</Button>} />",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Why it is empty, as a heading."
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "What to do next."
+        },
+        "icon": {
+          "type": "\"search\" | \"group\" | \"link\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | ... 31 more ... | undefined",
+          "required": false,
+          "default": "box",
+          "description": "Icon."
+        },
+        "action": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Next action, usually a Button."
+        },
+        "size": {
+          "type": "\"small\" | \"medium\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "`medium` for a page or section, `small` inside a card."
+        }
+      }
+    },
+    "TimelineItem": {
+      "file": "src/ds/display.tsx",
+      "description": "One event in a Timeline.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "_Timeline Item",
+      "category": "Content",
+      "example": null,
+      "props": {
+        "title": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "Event title."
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Detail line."
+        },
+        "time": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "When it happened."
+        },
+        "status": {
+          "type": "Status | undefined",
+          "required": false,
+          "default": "default",
+          "description": "Marker colour."
+        }
+      }
+    },
+    "Timeline": {
+      "file": "src/ds/display.tsx",
+      "description": "Chronological list of events, such as request history or an activity log.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Timeline",
+      "category": "Content",
+      "example": null,
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "TimelineItem children, newest first."
+        },
+        "label": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Accessible name."
+        }
+      }
+    },
+    "AccordionItem": {
+      "file": "src/ds/display.tsx",
+      "description": "One expandable row of an Accordion.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "_Accordion Item",
+      "category": "Content",
+      "example": null,
+      "props": {
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Row title."
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "Hidden content."
+        },
+        "defaultOpen": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Starts open."
+        },
+        "disabled": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Blocks interaction."
+        }
+      }
+    },
+    "Accordion": {
+      "file": "src/ds/display.tsx",
+      "description": "Stacked expandable sections, when people need only some of the content.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Accordion",
+      "category": "Content",
+      "example": null,
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "AccordionItem children."
+        }
+      }
+    },
+    "Card": {
+      "file": "src/ds/display.tsx",
+      "description": "The one surface for grouped content: white, radius/xl, soft shadow. The Figma Card/* layouts are all this with different content. Do not stack cards inside cards.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Card/* layouts",
+      "category": "Content",
+      "example": "<Card title=\"Team\" description=\"Who can edit\" footer={<Button>Invite</Button>}>...</Card>",
+      "props": {
+        "title": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Heading."
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Line under the heading."
+        },
+        "headerAction": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Top-right slot, such as a Menu or Badge."
+        },
+        "footer": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Bottom slot, usually Buttons."
+        },
+        "image": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Image URL shown on top."
+        },
+        "imageAlt": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "",
+          "description": "Alt text for the image."
+        },
+        "padding": {
+          "type": "\"medium\" | \"large\" | undefined",
+          "required": false,
+          "default": "large",
+          "description": "Inner space: `medium` 16 or `large` 24."
+        },
+        "as": {
+          "type": "ElementType<any, keyof IntrinsicElements> | undefined",
+          "required": false,
+          "default": "section",
+          "description": "Element to render."
+        }
+      }
+    },
+    "Table": {
+      "file": "src/ds/display.tsx",
+      "description": "Table only: toolbars, filters and Pagination sit around it. Header checkbox selects all. Selected rows get the accent tint.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Table/Table, Table/Table Cell",
+      "category": "Content",
+      "example": "<Table caption=\"Members\" rows={rows} rowKey={(r) => r.id} columns={[{key:'name',header:'Name',render:(r) => r.name}]} />",
+      "props": {
+        "columns": {
+          "type": "TableColumn<T>[]",
+          "required": true,
+          "description": "Column definitions."
+        },
+        "rows": {
+          "type": "T[]",
+          "required": true,
+          "description": "Rows."
+        },
+        "rowKey": {
+          "type": "(row: T) => string",
+          "required": true,
+          "description": "Unique key for a row."
+        },
+        "caption": {
+          "type": "string",
+          "required": true,
+          "description": "Required table name for screen readers; hidden visually."
+        },
+        "selected": {
+          "type": "string[] | undefined",
+          "required": false,
+          "description": "Selected row keys. Turning it on adds a checkbox column."
+        },
+        "onSelectedChange": {
+          "type": "((keys: string[]) => void) | undefined",
+          "required": false,
+          "description": "Called with the new selection."
+        },
+        "loading": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Shows skeleton rows and `aria-busy`."
+        },
+        "empty": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Rendered in place of the rows when there are none, usually EmptyState."
+        },
+        "labels": {
+          "type": "{ selectAll?: string | undefined; selectRow?: ((row: T) => string) | undefined; } | undefined",
+          "required": false,
+          "description": "Names for the selection checkboxes."
+        }
+      }
+    },
+    "BarChart": {
+      "file": "src/ds/charts.tsx",
+      "description": "Compare values across categories. Colours come from chart/1 to chart/6.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Charts/Bar Chart",
+      "category": "Charts",
+      "example": null,
+      "props": {
+        "data": {
+          "type": "ChartDatum[]",
+          "required": true,
+          "description": "One bar per item."
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible summary of what the chart shows."
+        },
+        "legend": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Show the legend."
+        }
+      }
+    },
+    "LineChart": {
+      "file": "src/ds/charts.tsx",
+      "description": "A trend over time.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Charts/Line Chart",
+      "category": "Charts",
+      "example": null,
+      "props": {
+        "data": {
+          "type": "ChartDatum[]",
+          "required": true,
+          "description": "Points in order."
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible summary."
+        }
+      }
+    },
+    "DonutChart": {
+      "file": "src/ds/charts.tsx",
+      "description": "Parts of a whole, 2 to 6 segments.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Charts/Donut Chart",
+      "category": "Charts",
+      "example": null,
+      "props": {
+        "data": {
+          "type": "ChartDatum[]",
+          "required": true,
+          "description": "Segments, up to 6."
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible summary."
+        },
+        "center": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Text in the middle."
+        },
+        "legend": {
+          "type": "boolean | undefined",
+          "required": false,
+          "default": true,
+          "description": "Show the legend."
+        }
+      }
+    },
+    "Gauge": {
+      "file": "src/ds/charts.tsx",
+      "description": "One score against a full range, drawn as a half circle.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Charts/Gauge",
+      "category": "Charts",
+      "example": null,
+      "props": {
+        "value": {
+          "type": "number",
+          "required": true,
+          "description": "0 to 100."
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Label and accessible name."
+        }
+      }
+    },
+    "ProgressList": {
+      "file": "src/ds/charts.tsx",
+      "description": "Labelled progress bars in a list.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Charts/Progress List",
+      "category": "Charts",
+      "example": null,
+      "props": {
+        "items": {
+          "type": "ChartDatum[]",
+          "required": true,
+          "description": "Rows, with value 0 to 100."
+        }
+      }
+    },
+    "Stat": {
+      "file": "src/ds/charts.tsx",
+      "description": "One KPI: label, value and change.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Charts/Stat",
+      "category": "Charts",
+      "example": null,
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "What is measured."
+        },
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "The number, formatted."
+        },
+        "delta": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Change, formatted, such as \"+4.2%\"."
+        },
+        "trend": {
+          "type": "\"up\" | \"down\" | \"none\" | undefined",
+          "required": false,
+          "default": "none",
+          "description": "Direction of the change. It is shown with an arrow, not colour alone."
+        }
+      }
+    },
+    "DataCard": {
+      "file": "src/ds/charts.tsx",
+      "description": "Card for any chart, with an optional row of Stat.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Data Card/Chart",
+      "category": "Charts",
+      "example": null,
+      "props": {
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Card title."
+        },
+        "description": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Line under the title."
+        },
+        "headerAction": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Top-right control: Menu or SegmentedControl."
+        },
+        "stats": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Row of Stat."
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "The chart."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,103 @@
+# EuvinoPRO design system
+
+> React components and tokens from the EuvinoPRO Figma library. Import from `@euvino/ds`. Every value is a `var(--eu-*)` token.
+
+Read first: [Rules for agents](AGENTS.md). Ask: `npm run ds -- list | describe <Name> | token <words> | check <file>`.
+
+## Foundations
+
+- `Icon` (Beta, v0.1): Draws one icon from the system's Iconoir set. It takes the surrounding text colour. Import icons through this, never from an icon package.
+- `Stack` (Beta, v0.1): Lays out a row or column with a space token between children. Use it instead of hand-written flex and margins. It is the code form of auto layout in Figma.
+- `Text` (Beta, v0.1): Any text set in a library text style and colour token. Use it for headings, paragraphs and captions instead of raw font sizes.
+- `VisuallyHidden` (Beta, v0.1): Text for screen readers only, such as a table caption or a live status line.
+
+## Content
+
+- `Divider` (Beta, v0.1): Separates groups of content. Prefer spacing first; add a line only when spacing is not enough.
+- `Badge` (Beta, v0.1): Shows a status, count or category. It is not interactive; use Chip for something people click.
+- `Avatar` (Beta, v0.1): A person as picture or initials.
+- `AvatarGroup` (Beta, v0.1): Several people in a small space. Show at most 4.
+- `ListItem` (Beta, v0.1): One row of a List.
+- `List` (Beta, v0.1): Rows of related items, such as settings, devices or files. For sortable columns of data use Table.
+- `ProductThumbnail` (Beta, v0.1): Product image tile for tables and lists.
+- `EmptyState` (Beta, v0.1): Shown when there is nothing to display. Say why and offer the next action.
+- `TimelineItem` (Beta, v0.1): One event in a Timeline.
+- `Timeline` (Beta, v0.1): Chronological list of events, such as request history or an activity log.
+- `AccordionItem` (Beta, v0.1): One expandable row of an Accordion.
+- `Accordion` (Beta, v0.1): Stacked expandable sections, when people need only some of the content.
+- `Card` (Beta, v0.1): The one surface for grouped content: white, radius/xl, soft shadow. The Figma Card/* layouts are all this with different content. Do not stack cards inside cards.
+- `Table` (Beta, v0.1): Table only: toolbars, filters and Pagination sit around it. Header checkbox selects all. Selected rows get the accent tint.
+
+## Actions and navigation
+
+- `LinkButton` (Beta, v0.1): A text link that navigates. Use Button when it runs an action.
+- `SegmentedControl` (Beta, v0.1): Switches the display of the same content in place, such as List and Grid. Not for page navigation (TopNav).
+- `Chip` (Beta, v0.1): An interactive pill for filters and tags. Use Badge for something that only shows a status.
+- `Button` (Beta, v0.1): Runs an action. Start the label with a verb and name the result: "Create request", not "OK". Default type is `button`, so set `type="submit"` in forms.
+- `IconButton` (Beta, v0.1): A Button that shows only an icon (Content = Only Icons in Figma). The label is required because nothing else names it.
+- `Menu` (Beta, v0.1): Runs a command from a list, such as a row's actions. Arrow keys and Escape work. To choose a value use Dropdown.
+- `TopNav` (Beta, v0.1): Links between views within a section, with a navy underline on the current one. This is also what other libraries call Tabs.
+- `SideNav` (Beta, v0.1): Left navigation between app sections, 240 wide or a 72 rail when collapsed.
+- `Breadcrumbs` (Beta, v0.1): Shows where a page sits and links back up the trail.
+- `Pagination` (Beta, v0.1): Moves through a long list page by page. It collapses long ranges with an ellipsis. Place it below the Table, never inside.
+- `Steps` (Beta, v0.1): Shows progress through a multi-step process and marks the current step with `aria-current`. It shows progress only; the Back and Next buttons are yours.
+- `UserMenu` (Beta, v0.1): Profile trigger for the Header. Wrap it in Menu to add the account commands.
+
+## Inputs
+
+- `Dropdown` (Beta, v0.1): Choose one value from a list. It opens below the field and supports the arrow keys. To run commands use Menu; for two to four visible choices use Radio or SegmentedControl.
+- `RadioGroup` (Beta, v0.1): A labelled set of Radio options. Use it for two to five visible choices.
+- `Stepper` (Beta, v0.1): Change a small number with plus and minus buttons, such as a quantity.
+- `Slider` (Beta, v0.1): Pick a value on a range. Use Input when an exact number is required.
+- `FileDropzone` (Beta, v0.1): Drag-and-drop area over a real file input. List chosen files with FileItem.
+- `FileItem` (Beta, v0.1): One uploaded file with its progress, result and a remove action.
+- `TagInput` (Beta, v0.1): Enter several values as removable tags. Enter or comma adds, Backspace removes the last one.
+- `Calendar` (Beta, v0.1): Month grid for picking one day. Use DatePicker for the field-plus-calendar pattern.
+- `DatePicker` (Beta, v0.1): A field that opens a Calendar. Use it for dates near today; use Input for known dates such as birthdays.
+- `Input` (Beta, v0.1): Single-line text entry. `type="password"` adds a built-in show or hide button, so never build one yourself. For choosing from a list use Dropdown.
+- `Textarea` (Beta, v0.1): Multi-line text entry for comments and descriptions. Use Input for single-line values.
+- `Checkbox` (Beta, v0.1): Pick several options that need saving. For one choice of several use Radio. For a setting that applies at once use Toggle.
+- `Radio` (Beta, v0.1): One option of a set where exactly one is chosen. Group them in RadioGroup.
+- `Toggle` (Beta, v0.1): A switch for a setting that takes effect immediately. If the change needs saving, use Checkbox.
+
+## Feedback and overlays
+
+- `Loader` (Beta, v0.1): Indeterminate loading indicator. Use Skeleton when the layout is known and ProgressBar when the duration is known.
+- `Skeleton` (Beta, v0.1): Placeholder while content loads. Match the layout that will appear. Hidden from screen readers; announce loading with `aria-busy` on the region.
+- `ProgressBar` (Beta, v0.1): Progress when the duration or amount is known.
+- `Alert` (Beta, v0.1): A message that stays on the page until resolved. `error` and `warning` announce themselves. Use Toast for a passing confirmation.
+- `ToastProvider` (Beta, v0.1): Wrap the app or screen once. Then call `useToast()` anywhere inside. It renders the announcing region for you.
+- `Modal` (Beta, v0.1): A focused task above the page, with a free content area such as a short form. For a yes-or-no confirmation use ConfirmDialog.
+- `ConfirmDialog` (Beta, v0.1): The Pop-Up in Figma: a short confirmation before a consequential action. Use it for every delete or anything that cannot be undone. Focus starts on the safe choice.
+- `Drawer` (Beta, v0.1): Side panel for details or edits while keeping the page in view.
+- `Tooltip` (Beta, v0.1): Short hint on hover or focus. It never holds the only copy of important text. For richer content use Popover.
+- `Popover` (Beta, v0.1): Small panel attached to a control, with richer content than a Tooltip. Escape and an outside press close it.
+
+## Screen parts
+
+- `BrandLogo` (Beta, v0.1): The product wordmark.
+- `Header` (Beta, v0.1): App header bar. Renders a `header` landmark.
+- `PageHeader` (Beta, v0.1): Page title, subtitle and primary action. Use one per page, at the top of the content.
+- `Footer` (Beta, v0.1): Page footer with legal text and links.
+
+## Charts
+
+- `BarChart` (Beta, v0.1): Compare values across categories. Colours come from chart/1 to chart/6.
+- `LineChart` (Beta, v0.1): A trend over time.
+- `DonutChart` (Beta, v0.1): Parts of a whole, 2 to 6 segments.
+- `Gauge` (Beta, v0.1): One score against a full range, drawn as a half circle.
+- `ProgressList` (Beta, v0.1): Labelled progress bars in a list.
+- `Stat` (Beta, v0.1): One KPI: label, value and change.
+- `DataCard` (Beta, v0.1): Card for any chart, with an optional row of Stat.
+
+## Guides
+
+- [Tokens](docs/foundations/tokens.md)
+- [Layout](docs/foundations/layout.md)
+- [Accessibility](docs/foundations/accessibility.md)
+- [Destructive confirmation](docs/recipes/destructive-confirmation.md)
+- [Forms](docs/recipes/forms.md)
+- [Settings](docs/recipes/settings.md)
+- [Async states](docs/recipes/async-states.md)
+- [Names from other libraries](docs/names.md)
+- [Figma to code](docs/figma.md)

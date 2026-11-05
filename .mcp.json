@@ -1,0 +1,1 @@
+{ "mcpServers": { "euvinopro-ds": { "command": "node", "args": ["scripts/ds-mcp.mjs"] } } }
