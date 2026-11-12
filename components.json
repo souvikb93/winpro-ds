@@ -251,7 +251,7 @@
           "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"primary-2\" | \"danger\" | \"danger-secondary\" | \"danger-tertiary\" | undefined",
           "required": false,
           "default": "tertiary",
-          "description": "Emphasis. `primary` = the main action of a view. `secondary` = a real alternative. `tertiary` = the least emphasis: a way out such as Cancel.\n`primary-2` = deprecated: Hydra has no orange call to action, so it renders as `primary`. Use `primary`.\n`danger` = the final irreversible action inside a confirmation. `danger-secondary` = the entry point that opens that confirmation."
+          "description": "Emphasis. `primary` = the main action of a view. `secondary` = a real alternative, and Cancel next to a primary action. `tertiary` = the least emphasis: text actions such as \"Add phone number\" or Import.\n`primary-2` = deprecated: Hydra has no orange call to action, so it renders as `primary`. Use `primary`.\n`danger` = the final irreversible action inside a confirmation. `danger-secondary` = the entry point that opens that confirmation."
         },
         "size": {
           "type": "\"tiny\" | \"small\" | \"medium\" | \"large\" | \"giant\" | undefined",
@@ -2208,6 +2208,12 @@
           "default": "section",
           "description": "Element to render."
         },
+        "headingLevel": {
+          "type": "2 | 3 | 4 | undefined",
+          "required": false,
+          "default": 2,
+          "description": "Heading level of `title`. Use 3 inside a Modal or under another h2. Defaults to 2."
+        },
         "collapsible": {
           "type": "boolean | undefined",
           "required": false,
@@ -2704,6 +2710,50 @@
           "type": "boolean | undefined",
           "required": false,
           "description": "Disables both parts."
+        }
+      }
+    },
+    "FieldAction": {
+      "file": "src/ds/field-action.tsx",
+      "description": "Inline action that belongs to the field above it, such as adding another phone number.\nNot a button style: no padding or background, icon on the field's left edge, underline on hover.\nPlace it directly under the field in a `Stack gap=\"2\"` (8, same as label to input). For standalone actions use Button.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Field Action",
+      "category": "Actions and navigation",
+      "example": "<FieldAction onClick={addPhone}>Telefonnummer hinzufügen</FieldAction>",
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "What it adds or does, verb last in German UIs: \"Telefonnummer hinzufügen\"."
+        },
+        "icon": {
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 56 more ... | undefined",
+          "required": false,
+          "default": "plus",
+          "description": "Leading icon. Defaults to `plus`."
+        }
+      }
+    },
+    "CloseButton": {
+      "file": "src/ds/field-action.tsx",
+      "description": "Closes a dialog, drawer, toast or alert. Regular icon weight, rounded-square hover, focus ring only when focused.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Close Button",
+      "category": "Actions and navigation",
+      "example": "<CloseButton label=\"Schließen\" onClick={close} />",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible name in the page's language, such as \"Schließen\"."
+        },
+        "size": {
+          "type": "\"medium\" | \"small\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "`medium` for dialogs and drawers (32 area, 20 icon), `small` for toasts and alerts (24 area, 16 icon)."
         }
       }
     }

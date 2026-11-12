@@ -63,7 +63,7 @@ Figma: Button
 
 | Prop | Type | Default | Meaning |
 |---|---|---|---|
-| `variant` | "primary" \| "secondary" \| "tertiary" \| "primary-2" \| "danger" \| "danger-secondary" \| "danger-tertiary" \| undefined | tertiary | Emphasis. `primary` = the main action of a view. `secondary` = a real alternative. `tertiary` = the least emphasis: a way out such as Cancel. `primary-2` = deprecated: Hydra has no orange call to action, so it renders as `primary`. Use `primary`. `danger` = the final irreversible action inside a confirmation. `danger-secondary` = the entry point that opens that confirmation. |
+| `variant` | "primary" \| "secondary" \| "tertiary" \| "primary-2" \| "danger" \| "danger-secondary" \| "danger-tertiary" \| undefined | tertiary | Emphasis. `primary` = the main action of a view. `secondary` = a real alternative, and Cancel next to a primary action. `tertiary` = the least emphasis: text actions such as "Add phone number" or Import. `primary-2` = deprecated: Hydra has no orange call to action, so it renders as `primary`. Use `primary`. `danger` = the final irreversible action inside a confirmation. `danger-secondary` = the entry point that opens that confirmation. |
 | `size` | "tiny" \| "small" \| "medium" \| "large" \| "giant" \| undefined | medium | Height: `tiny` 24, `small` 32, `medium` 40 (default), `large` 48, `giant` 56. |
 | `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 56 more ... \| undefined |  | Which icon to show. Buttons are text-only by default; add an icon only when it adds meaning. Pick the side with `iconPosition`. |
 | `iconPosition` | "left" \| "right" \| undefined | left | Which side of the label the `icon` goes on. Defaults to `left`. |
@@ -232,3 +232,35 @@ Figma: Button Select
 | `size` | "small" \| "medium" \| "large" \| undefined | medium | Height, same scale as Button: `small` 28, `medium` 38 (default), `large` 44. |
 | `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 56 more ... \| undefined |  | Icon before the label, such as `plus` for create actions. |
 | `disabled` | boolean \| undefined |  | Disables both parts. |
+
+## FieldAction
+
+Inline action that belongs to the field above it, such as adding another phone number.
+Not a button style: no padding or background, icon on the field's left edge, underline on hover.
+Place it directly under the field in a `Stack gap="2"` (8, same as label to input). For standalone actions use Button.
+
+Figma: Field Action
+
+```tsx
+<FieldAction onClick={addPhone}>Telefonnummer hinzufügen</FieldAction>
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `children` (required) | ReactNode |  | What it adds or does, verb last in German UIs: "Telefonnummer hinzufügen". |
+| `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 56 more ... \| undefined | plus | Leading icon. Defaults to `plus`. |
+
+## CloseButton
+
+Closes a dialog, drawer, toast or alert. Regular icon weight, rounded-square hover, focus ring only when focused.
+
+Figma: Close Button
+
+```tsx
+<CloseButton label="Schließen" onClick={close} />
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `label` (required) | string |  | Accessible name in the page's language, such as "Schließen". |
+| `size` | "medium" \| "small" \| undefined | medium | `medium` for dialogs and drawers (32 area, 20 icon), `small` for toasts and alerts (24 area, 16 icon). |

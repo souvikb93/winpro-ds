@@ -57,7 +57,7 @@ Everything comes from that one import. CSS loads with it. Never import a UI, ico
 ## Button emphasis
 
 - `filled` is the main action of a view. Use one per view.
-- `outline` is a real alternative. `clear` is the way out, such as Cancel.
+- `outline` (secondary) is a real alternative and is also used for Cancel in dialogs and forms. `clear` (tertiary) is for low-emphasis text actions such as "Add phone number" or Import.
 - `cta` is orange, for commercial calls to action only, at most one per view. A settings save is `filled`, never `cta`.
 - `danger-outline` opens a confirmation. `danger` is the final irreversible action inside it. Never use them for reversible actions.
 - Order in a row: least emphasis on the left, main action on the right.

@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import * as React from 'react';
 import { afterEach } from 'vitest';
-import { Button, Input, Toggle, ToastProvider, useToast, Pagination, Table, Dropdown, Checkbox, Alert, Steps, SideNav, Breadcrumbs, Icon, GlobalSearch, Menu, IconButton, LabelPicker, InlineEdit, Card, KeyValueList, ActivityItem, Timeline, TopNav, FilterTabs, PageHeader, SplitButton } from '../src/ds/index';
+import { Button, Input, Toggle, ToastProvider, useToast, Pagination, Table, Dropdown, Checkbox, Alert, Steps, SideNav, Breadcrumbs, Icon, GlobalSearch, Menu, IconButton, LabelPicker, InlineEdit, Card, KeyValueList, ActivityItem, Timeline, TopNav, FilterTabs, PageHeader, SplitButton, FieldAction, CloseButton } from '../src/ds/index';
 
 afterEach(cleanup);
 
@@ -208,5 +208,13 @@ describe('@euvino/ds', () => {
     fireEvent.click(screen.getByRole('menuitem', { name: 'Import' }));
     expect(imp).toHaveBeenCalled();
     expect(screen.getByRole('group')).toBeTruthy();
+  });
+  it('FieldAction is a plain button that runs its action; CloseButton has a name', () => {
+    const add = vi.fn(); const close = vi.fn();
+    render(<><FieldAction onClick={add}>Add phone number</FieldAction><CloseButton label="Close" onClick={close} /></>);
+    fireEvent.click(screen.getByRole('button', { name: 'Add phone number' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Close' }));
+    expect(add).toHaveBeenCalled(); expect(close).toHaveBeenCalled();
+    expect(screen.getByRole('button', { name: 'Add phone number' }).getAttribute('type')).toBe('button');
   });
 });

@@ -53,6 +53,10 @@ Use SegmentedControl for 2 to 4 equal options, Chip for several filters at once,
 - `UserMenu` (Beta, v0.1): Profile trigger for the Header. Wrap it in Menu to add the account commands.
 - `SplitButton` (Beta, v0.1): Main action plus a menu of related actions, split by a divider (Hydra "Button Select").
 Use it when one action is the usual choice and a few others belong to it, such as "Kontakt" with "Import".
+- `FieldAction` (Beta, v0.1): Inline action that belongs to the field above it, such as adding another phone number.
+Not a button style: no padding or background, icon on the field's left edge, underline on hover.
+Place it directly under the field in a `Stack gap="2"` (8, same as label to input). For standalone actions use Button.
+- `CloseButton` (Beta, v0.1): Closes a dialog, drawer, toast or alert. Regular icon weight, rounded-square hover, focus ring only when focused.
 
 ## Inputs
 

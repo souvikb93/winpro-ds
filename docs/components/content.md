@@ -207,6 +207,7 @@ Figma: Card/* layouts
 | `imageAlt` | string \| undefined |  | Alt text for the image. |
 | `padding` | "medium" \| "large" \| undefined | large | Inner space: `medium` 16 or `large` 24. |
 | `as` | ElementType<any, keyof IntrinsicElements> \| undefined | section | Element to render. |
+| `headingLevel` | 2 \| 3 \| 4 \| undefined | 2 | Heading level of `title`. Use 3 inside a Modal or under another h2. Defaults to 2. |
 | `collapsible` | boolean \| undefined |  | Adds a chevron that shows and hides the content. Needs a `title`. |
 | `defaultOpen` | boolean \| undefined | true | With `collapsible`: starts open. Defaults to true. |
 | `toggleLabel` | string \| undefined |  | With `collapsible`: accessible name of the chevron, such as "Show or hide Details". Defaults to the title. |

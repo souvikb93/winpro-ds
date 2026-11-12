@@ -324,5 +324,15 @@
     "figma": "Button Select",
     "category": "Actions and navigation",
     "example": "<SplitButton icon=\"plus\" onClick={add} menuLabel=\"More ways to add\" items={[{ label: 'Import', icon: 'upload', onSelect: openImport }]}>Contact</SplitButton>"
+  },
+  "FieldAction": {
+    "figma": "Field Action",
+    "category": "Actions and navigation",
+    "example": "<FieldAction onClick={addPhone}>Telefonnummer hinzufügen</FieldAction>"
+  },
+  "CloseButton": {
+    "figma": "Close Button",
+    "category": "Actions and navigation",
+    "example": "<CloseButton label=\"Schließen\" onClick={close} />"
   }
 }
