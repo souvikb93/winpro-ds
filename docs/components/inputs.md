@@ -65,7 +65,7 @@ Figma: Stepper
 | `step` | number \| undefined | 1 | Change per press. |
 | `label` (required) | string |  | Accessible name, such as "Quantity". |
 | `labels` | { increase?: string \| undefined; decrease?: string \| undefined; } \| undefined |  | Accessible names of the buttons in the page's language. |
-| `variant` | "filled" \| "outline" \| undefined | outline | `filled` or `outline`. |
+| `variant` | "outline" \| "filled" \| undefined | outline | `filled` or `outline`. |
 
 ## Slider
 
@@ -159,6 +159,27 @@ Figma: Date Picker
 | `onChange` | ((iso: string) => void) \| undefined |  | Called with the picked ISO day. |
 | `locale` | string \| undefined | en | BCP 47 locale for month and weekday names. |
 
+## SearchField
+
+Search box with a suggestion list (combobox). Type to see matches, arrow keys to move, Enter to open one, Escape to close. Width is size/field-lg.
+
+Figma: Input (Style=Filled) + Menu
+
+```tsx
+<SearchField label="Search contacts" value={q} onChange={setQ} results={results} onSelect={open} />
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `label` (required) | string |  | Accessible name. Hidden visually, like a header search. |
+| `value` (required) | string |  | Current text. |
+| `onChange` (required) | (value: string) => void |  | Called with the new text. Filter `results` from it. |
+| `results` (required) | SearchResult[] |  | Suggestions for the current text, already filtered. |
+| `onSelect` (required) | (result: SearchResult) => void |  | Called when a suggestion is chosen with click or Enter. |
+| `placeholder` | string \| undefined |  | Placeholder text. |
+| `emptyText` | string \| undefined | No matches | Shown in the list when the text matches nothing. |
+| `labels` | { clear?: string \| undefined; count?: ((n: number) => string) \| undefined; } \| undefined |  | Names of the built-in parts. Pass them in the page's language. `count` announces the number of suggestions. |
+
 ## Input
 
 Single-line text entry. `type="password"` adds a built-in show or hide button, so never build one yourself. For choosing from a list use Dropdown.
@@ -176,8 +197,9 @@ Figma: Input
 | `help` | ReactNode |  | Help text below the field. |
 | `error` | string \| undefined |  | Error message. Sets the error state and `aria-invalid`. Say what is wrong and how to fix it. |
 | `success` | string \| undefined |  | Success message below the field. |
-| `size` | "medium" \| "large" \| undefined | medium | Height: `medium` 40 (default), `large` 48. |
-| `iconLeft` | "help" \| "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| ... 31 more ... \| undefined |  | Icon inside the field on the left. |
+| `size` | "medium" \| "large" \| undefined | medium | Height: `medium` 40 (default), `large` 48. The `filled` variant is always 38. |
+| `variant` | "outline" \| "filled" \| undefined | outline | `outline` white field with a border (default). `filled` tinted field for a header search (Figma Input Style=Filled). |
+| `iconLeft` | "list" \| "label" \| "help" \| "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| ... 56 more ... \| undefined |  | Icon inside the field on the left. |
 | `onClear` | (() => void) \| undefined |  | Shows a clear button while there is text. Called when it is pressed. |
 | `labels` | { clear?: string \| undefined; showPassword?: string \| undefined; hidePassword?: string \| undefined; } \| undefined |  | Accessible names of the built-in buttons. Pass them in the page's language. |
 
@@ -244,3 +266,31 @@ Figma: Toggle/Toggle + Text
 | `label` | ReactNode |  | Visible label. Required unless you pass `aria-label`. |
 | `description` | string \| undefined |  | Secondary line under the label. |
 | `textSide` | "left" \| "right" \| undefined | right | Which side the label sits on. |
+
+## GlobalSearch
+
+App-wide search: a header field that opens a large panel over a dimmed page, with categories on the left and
+hits on the right. Matches are highlighted. Arrow keys move through hits, Enter opens one, Escape closes.
+For a simple field with a short suggestion list use SearchField.
+
+Figma: Input (Style=Filled) + search panel (not in Figma yet)
+
+```tsx
+<GlobalSearch label="Search" value={q} onChange={setQ} categories={cats} category={cat} onCategoryChange={setCat} results={hits} onSelect={open} heading="All results" />
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `label` (required) | string |  | Accessible name of the search field. |
+| `value` (required) | string |  | Current text. |
+| `onChange` (required) | (value: string) => void |  | Called with the new text. |
+| `categories` (required) | GlobalSearchCategory[] |  | Categories in the left column. The first is usually "All". |
+| `category` (required) | string |  | Selected category id. |
+| `onCategoryChange` (required) | (id: string) => void |  | Called when a category is chosen. |
+| `results` (required) | GlobalSearchHit[] |  | Hits for the current text and category, already filtered. |
+| `onSelect` (required) | (hit: GlobalSearchHit) => void |  | Called when a hit is opened with click or Enter. The panel closes. |
+| `heading` (required) | string |  | Heading above the hits, such as "All results". |
+| `placeholder` | string \| undefined |  | Placeholder of the field. |
+| `emptyText` | string \| undefined | No matches | Shown when the text matches nothing. |
+| `footer` | ReactNode |  | Bottom of the category column, such as a help link. |
+| `labels` | { clear?: string \| undefined; categories?: string \| undefined; count?: ((n: number) => string) \| undefined; } \| undefined |  | Names of the built-in parts. Pass them in the page's language. |

@@ -10,7 +10,7 @@ function DeleteAccount() {
   const [open, setOpen] = useState(false);
   return (
     <Card title="Delete account" description="Removes your account and all its data." footer={
-      <Button variant="danger-outline" onClick={() => setOpen(true)}>Delete account</Button>
+      <Button variant="danger-secondary" onClick={() => setOpen(true)}>Delete account</Button>
     }>
       <ConfirmDialog
         open={open}

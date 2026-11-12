@@ -23,24 +23,33 @@ Read first: [Rules for agents](AGENTS.md). Ask: `npm run ds -- list | describe <
 - `EmptyState` (Beta, v0.1): Shown when there is nothing to display. Say why and offer the next action.
 - `TimelineItem` (Beta, v0.1): One event in a Timeline.
 - `Timeline` (Beta, v0.1): Chronological list of events, such as request history or an activity log.
+- `ActivityItem` (Beta, v0.1): A rich event in a Timeline, such as an email or a call, shown as a card next to an icon marker. Figma: Email Activity Item.
 - `AccordionItem` (Beta, v0.1): One expandable row of an Accordion.
 - `Accordion` (Beta, v0.1): Stacked expandable sections, when people need only some of the content.
 - `Card` (Beta, v0.1): The one surface for grouped content: white, radius/xl, soft shadow. The Figma Card/* layouts are all this with different content. Do not stack cards inside cards.
-- `Table` (Beta, v0.1): Table only: toolbars, filters and Pagination sit around it. Header checkbox selects all. Selected rows get the accent tint.
+- `KeyValueList` (Beta, v0.1): Label and value pairs, such as the details of a record. Figma: Key Value Pair.
+- `Table` (Beta, v0.1): Table only: toolbars, filters and Pagination sit around it. Rows tint on hover. Header checkbox selects all. Selected rows get the accent tint.
+- `LabelPicker` (Beta, v0.1): Shows a label as a Badge and lets people change it in place, such as in a table cell. A pencil appears on hover and focus.
+The popover has a search, the labels as badges (the current one checked) and an add button for a new label.
+Arrow keys move, Enter picks, Escape closes. It is positioned against the window, so table scrolling never cuts it off.
+- `InlineEdit` (Beta, v0.1): A value that people change in place, such as a table cell or a detail field. A pencil appears on hover and focus.
+Text: Enter or leaving the field saves, Escape cancels. Date: picking a day saves, Escape cancels.
 
 ## Actions and navigation
 
 - `LinkButton` (Beta, v0.1): A text link that navigates. Use Button when it runs an action.
-- `SegmentedControl` (Beta, v0.1): Switches the display of the same content in place, such as List and Grid. Not for page navigation (TopNav).
+- `SegmentedControl` (Beta, v0.1): Switches the display of the same content in place, such as List and Grid. Not for page navigation (TopNav). Segments share the width equally, sized to the longest label.
 - `Chip` (Beta, v0.1): An interactive pill for filters and tags. Use Badge for something that only shows a status.
 - `Button` (Beta, v0.1): Runs an action. Start the label with a verb and name the result: "Create request", not "OK". Default type is `button`, so set `type="submit"` in forms.
 - `IconButton` (Beta, v0.1): A Button that shows only an icon (Content = Only Icons in Figma). The label is required because nothing else names it.
 - `Menu` (Beta, v0.1): Runs a command from a list, such as a row's actions. Arrow keys and Escape work. To choose a value use Dropdown.
 - `TopNav` (Beta, v0.1): Links between views within a section, with a navy underline on the current one. This is also what other libraries call Tabs.
-- `SideNav` (Beta, v0.1): Left navigation between app sections, 240 wide or a 72 rail when collapsed.
+- `SideNav` (Beta, v0.1): Left navigation between app sections, 240 wide or a 72 rail when collapsed. A collapsed rail can be `expandable`; with `overflow` it never runs out of room.
 - `Breadcrumbs` (Beta, v0.1): Shows where a page sits and links back up the trail.
 - `Pagination` (Beta, v0.1): Moves through a long list page by page. It collapses long ranges with an ellipsis. Place it below the Table, never inside.
 - `Steps` (Beta, v0.1): Shows progress through a multi-step process and marks the current step with `aria-current`. It shows progress only; the Back and Next buttons are yours.
+- `FilterTabs` (Beta, v0.1): Filter tabs (pill tabs): one choice from many filters for the list below, such as a history feed.
+Use SegmentedControl for 2 to 4 equal options, Chip for several filters at once, TopNav for views.
 - `UserMenu` (Beta, v0.1): Profile trigger for the Header. Wrap it in Menu to add the account commands.
 
 ## Inputs
@@ -54,11 +63,15 @@ Read first: [Rules for agents](AGENTS.md). Ask: `npm run ds -- list | describe <
 - `TagInput` (Beta, v0.1): Enter several values as removable tags. Enter or comma adds, Backspace removes the last one.
 - `Calendar` (Beta, v0.1): Month grid for picking one day. Use DatePicker for the field-plus-calendar pattern.
 - `DatePicker` (Beta, v0.1): A field that opens a Calendar. Use it for dates near today; use Input for known dates such as birthdays.
+- `SearchField` (Beta, v0.1): Search box with a suggestion list (combobox). Type to see matches, arrow keys to move, Enter to open one, Escape to close. Width is size/field-lg.
 - `Input` (Beta, v0.1): Single-line text entry. `type="password"` adds a built-in show or hide button, so never build one yourself. For choosing from a list use Dropdown.
 - `Textarea` (Beta, v0.1): Multi-line text entry for comments and descriptions. Use Input for single-line values.
 - `Checkbox` (Beta, v0.1): Pick several options that need saving. For one choice of several use Radio. For a setting that applies at once use Toggle.
 - `Radio` (Beta, v0.1): One option of a set where exactly one is chosen. Group them in RadioGroup.
 - `Toggle` (Beta, v0.1): A switch for a setting that takes effect immediately. If the change needs saving, use Checkbox.
+- `GlobalSearch` (Beta, v0.1): App-wide search: a header field that opens a large panel over a dimmed page, with categories on the left and
+hits on the right. Matches are highlighted. Arrow keys move through hits, Enter opens one, Escape closes.
+For a simple field with a short suggestion list use SearchField.
 
 ## Feedback and overlays
 

@@ -1,0 +1,1206 @@
+{
+ "$description": "Hydra-era variables from the Figma file EuvinoPRO Design System (eoPfuJuIddL9imDtGiK2oX) whose code names are new. Read-only export, refreshed 2026-11-10.",
+ "vars": [
+  {
+   "n": "background/static/soft",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-static-soft",
+   "v": "#f2f6fb",
+   "from": "blue-gray/10",
+   "d": "Screen background."
+  },
+  {
+   "n": "background/static/base",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-static-base",
+   "v": "#ffffff",
+   "from": "white",
+   "d": "Cards, inputs and dialogs."
+  },
+  {
+   "n": "background/static/inverse",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-static-inverse",
+   "v": "#000929",
+   "from": "blue-gray/100",
+   "d": "Dark surfaces."
+  },
+  {
+   "n": "foreground/static/base",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-foreground-static-base",
+   "v": "#000929",
+   "from": "blue-gray/100",
+   "d": "Headings and primary text."
+  },
+  {
+   "n": "foreground/static/body",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-foreground-static-body",
+   "v": "#4d5369",
+   "from": "blue-gray/70",
+   "d": "Reading text."
+  },
+  {
+   "n": "foreground/static/neutral",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-foreground-static-neutral",
+   "v": "#6c7389",
+   "from": "blue-gray/60",
+   "d": "Secondary text and meta lines."
+  },
+  {
+   "n": "foreground/disabled",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-foreground-disabled",
+   "v": "#b1b9cc",
+   "from": "blue-gray/40",
+   "d": "Disabled text only. Too light for normal text."
+  },
+  {
+   "n": "foreground/static/invert",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-foreground-static-invert",
+   "v": "#ffffff",
+   "from": "white",
+   "d": "Text on dark or coloured fills."
+  },
+  {
+   "n": "foreground/interactive/default",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-foreground-interactive-default",
+   "v": "#5844ff",
+   "from": "purple/100",
+   "d": "Links and interactive text."
+  },
+  {
+   "n": "foreground/interactive/hover",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-foreground-interactive-hover",
+   "v": "#3018c5",
+   "from": "purple/dark",
+   "d": "Hover of interactive text."
+  },
+  {
+   "n": "border/static/subtle",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-border-static-subtle",
+   "v": "#e4eaf3",
+   "from": "blue-gray/20",
+   "d": "Card hairlines."
+  },
+  {
+   "n": "border/static/soft",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-border-static-soft",
+   "v": "#b1b9cc",
+   "from": "blue-gray/40",
+   "d": "Dividers."
+  },
+  {
+   "n": "border/primary/focus",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-border-primary-focus",
+   "v": "#3018c5",
+   "from": "purple/dark",
+   "d": "Focus rings. 10.18:1 on white."
+  },
+  {
+   "n": "background/primary/default",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-primary-default",
+   "v": "#5844ff",
+   "from": "purple/100",
+   "d": "Main action and interface accent."
+  },
+  {
+   "n": "background/primary/hover",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-primary-hover",
+   "v": "#3018c5",
+   "from": "purple/dark",
+   "d": "Hover of the main action."
+  },
+  {
+   "n": "spacing/3xs",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-spacing-3xs",
+   "v": 4,
+   "from": null,
+   "d": "Space between and inside elements, on a 4px base."
+  },
+  {
+   "n": "spacing/2xs",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-spacing-2xs",
+   "v": 8,
+   "from": null,
+   "d": "Space between and inside elements, on a 4px base."
+  },
+  {
+   "n": "spacing/xs",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-spacing-xs",
+   "v": 12,
+   "from": null,
+   "d": "Space between and inside elements, on a 4px base."
+  },
+  {
+   "n": "spacing/s",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-spacing-s",
+   "v": 16,
+   "from": null,
+   "d": "Space between and inside elements, on a 4px base."
+  },
+  {
+   "n": "spacing/m",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-spacing-m",
+   "v": 24,
+   "from": null,
+   "d": "Space between and inside elements, on a 4px base."
+  },
+  {
+   "n": "spacing/l",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-spacing-l",
+   "v": 32,
+   "from": null,
+   "d": "Space between and inside elements, on a 4px base."
+  },
+  {
+   "n": "spacing/xl",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-spacing-xl",
+   "v": 40,
+   "from": null,
+   "d": "Space between and inside elements, on a 4px base."
+  },
+  {
+   "n": "spacing/2xl",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-spacing-2xl",
+   "v": 48,
+   "from": null,
+   "d": "Space between and inside elements, on a 4px base."
+  },
+  {
+   "n": "spacing/4xl",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-spacing-4xl",
+   "v": 64,
+   "from": null,
+   "d": "Space between and inside elements, on a 4px base."
+  },
+  {
+   "n": "spacing/5xl",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-spacing-5xl",
+   "v": 80,
+   "from": null,
+   "d": "Space between and inside elements, on a 4px base."
+  },
+  {
+   "n": "radius/xs",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-radius-xs",
+   "v": 4,
+   "from": null,
+   "d": "Small parts: menu rows, checkboxes."
+  },
+  {
+   "n": "background/accent/subtle",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-accent-subtle",
+   "v": "#eeecff",
+   "from": "purple/10",
+   "d": "Selected and hover tint."
+  },
+  {
+   "n": "background/static/muted",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-static-muted",
+   "v": "#f7f9fd",
+   "from": "blue-gray/surface",
+   "d": "Quiet areas inside a surface."
+  },
+  {
+   "n": "background/disabled",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-disabled",
+   "v": "#e4eaf3",
+   "from": "blue-gray/20",
+   "d": "Disabled fills."
+  },
+  {
+   "n": "foreground/icon/default",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-foreground-icon-default",
+   "v": "#000929",
+   "from": "blue-gray/100",
+   "d": "Default icons."
+  },
+  {
+   "n": "foreground/icon/muted",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-foreground-icon-muted",
+   "v": "#6c7389",
+   "from": "blue-gray/60",
+   "d": "Secondary icons."
+  },
+  {
+   "n": "foreground/icon/inverse",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-foreground-icon-inverse",
+   "v": "#ffffff",
+   "from": "white",
+   "d": "Icons on dark or coloured fills."
+  },
+  {
+   "n": "background/accent/strong",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-accent-strong",
+   "v": "#d3d5ff",
+   "from": "purple/40",
+   "d": "Pressed tint."
+  },
+  {
+   "n": "spacing/4xs",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-spacing-4xs",
+   "v": 2,
+   "from": null,
+   "d": "Space between and inside elements, on a 4px base."
+  },
+  {
+   "n": "size/icon-xxs",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-size-icon-xxs",
+   "v": 12,
+   "from": null,
+   "d": "Hydra 2XS icon."
+  },
+  {
+   "n": "spacing/6xl",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-spacing-6xl",
+   "v": 96,
+   "from": null,
+   "d": "Space between and inside elements, on a 4px base."
+  },
+  {
+   "n": "status/text/success",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-status-text-success",
+   "v": "#007a4d",
+   "from": "green/darker",
+   "d": "Status text and icons."
+  },
+  {
+   "n": "status/text/warning",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-status-text-warning",
+   "v": "#a06a00",
+   "from": "yellow/dark",
+   "d": "Status text and icons."
+  },
+  {
+   "n": "status/text/error",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-status-text-error",
+   "v": "#c82b2b",
+   "from": "red/dark",
+   "d": "Status text and icons."
+  },
+  {
+   "n": "status/text/info",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-status-text-info",
+   "v": "#0072c5",
+   "from": "blue/dark",
+   "d": "Status text and icons."
+  },
+  {
+   "n": "border/static/neutral",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-border-static-neutral",
+   "v": "#6c7389",
+   "from": "blue-gray/60",
+   "d": "Inputs, checkboxes and radios. 4.72:1 on white."
+  },
+  {
+   "n": "background/danger/default",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-danger-default",
+   "v": "#c82b2b",
+   "from": "red/dark",
+   "d": "Final irreversible action. White label."
+  },
+  {
+   "n": "background/danger/hover",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-danger-hover",
+   "v": "#a32020",
+   "from": "red/darker",
+   "d": "Hover of danger."
+  },
+  {
+   "n": "blue-gray/100",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-blue-gray-100",
+   "v": "#000929",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "blue-gray/80",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-blue-gray-80",
+   "v": "#32384a",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "blue-gray/70",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-blue-gray-70",
+   "v": "#4d5369",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "blue-gray/60",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-blue-gray-60",
+   "v": "#6c7389",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "blue-gray/10",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-blue-gray-10",
+   "v": "#f2f6fb",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "blue-gray/surface",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-blue-gray-surface",
+   "v": "#f7f9fd",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "purple/80",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-purple-80",
+   "v": "#7a7fff",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "purple/60",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-purple-60",
+   "v": "#b1b4ff",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "purple/40",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-purple-40",
+   "v": "#d3d5ff",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "purple/20",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-purple-20",
+   "v": "#eaeaff",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "purple/10",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-purple-10",
+   "v": "#eeecff",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "purple/5",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-purple-5",
+   "v": "#f9f8ff",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "red/light",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-red-light",
+   "v": "#ffe8e9",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "red/medium",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-red-medium",
+   "v": "#f9d2d2",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "red/base",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-red-base",
+   "v": "#ff4e4e",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "red/dark",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-red-dark",
+   "v": "#c82b2b",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "red/darker",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-red-darker",
+   "v": "#a32020",
+   "from": null,
+   "d": "Not in Hydra. Hover and pressed of the danger button."
+  },
+  {
+   "n": "green/light",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-green-light",
+   "v": "#e1faf5",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "green/medium",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-green-medium",
+   "v": "#8eedd5",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "green/base",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-green-base",
+   "v": "#00d487",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "green/dark",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-green-dark",
+   "v": "#00945e",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "green/darker",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-green-darker",
+   "v": "#007a4d",
+   "from": null,
+   "d": "Not in Hydra. Darker green so success text passes 4.5:1."
+  },
+  {
+   "n": "blue/light",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-blue-light",
+   "v": "#f0fafc",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "blue/medium",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-blue-medium",
+   "v": "#b0dbeb",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "blue/base",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-blue-base",
+   "v": "#0094ff",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "yellow/light",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-yellow-light",
+   "v": "#fffded",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "yellow/medium",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-yellow-medium",
+   "v": "#ffe47a",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "yellow/base",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-yellow-base",
+   "v": "#ffcd1b",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "yellow/dark",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-yellow-dark",
+   "v": "#a06a00",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "decoration/turquoise",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-decoration-turquoise",
+   "v": "#00e7e7",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "decoration/warm-gray-10",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-decoration-warm-gray-10",
+   "v": "#fafafa",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "decoration/warm-gray-50",
+   "c": "Primitives",
+   "t": "COLOR",
+   "css": "--eu-prim-decoration-warm-gray-50",
+   "v": "#f2f1ed",
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "background/primary/pressed",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-primary-pressed",
+   "v": "#7a7fff",
+   "from": "purple/80",
+   "d": "Pressed main action."
+  },
+  {
+   "n": "background/static/neutral",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-static-neutral",
+   "v": "#b1b9cc",
+   "from": "blue-gray/40",
+   "d": "Toggle track when off."
+  },
+  {
+   "n": "background/danger/pressed",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-danger-pressed",
+   "v": "#a32020",
+   "from": "red/darker",
+   "d": "Pressed danger action."
+  },
+  {
+   "n": "radius/none",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-radius-none",
+   "v": 0,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "radius/md",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-radius-md",
+   "v": 16,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "spacing/none",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-spacing-none",
+   "v": 0,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "spacing/3xl",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-spacing-3xl",
+   "v": 56,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "size/button-sm",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-size-button-sm",
+   "v": 28,
+   "from": null,
+   "d": "Hydra Tiny button height."
+  },
+  {
+   "n": "size/button-md",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-size-button-md",
+   "v": 38,
+   "from": null,
+   "d": "Hydra Small button height."
+  },
+  {
+   "n": "size/button-lg",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-size-button-lg",
+   "v": 44,
+   "from": null,
+   "d": "Hydra Medium button height."
+  },
+  {
+   "n": "size/control-xl",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-size-control-xl",
+   "v": 56,
+   "from": null,
+   "d": "Largest square control and brand tile."
+  },
+  {
+   "n": "background/static/inverse-hover",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-static-inverse-hover",
+   "v": "#32384a",
+   "from": "blue-gray/80",
+   "d": "Hover on dark surfaces."
+  },
+  {
+   "n": "border/static/ondark",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-border-static-ondark",
+   "v": "#32384a",
+   "from": "blue-gray/80",
+   "d": "Dividers on dark surfaces."
+  },
+  {
+   "n": "size/icon-xl",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-size-icon-xl",
+   "v": 40,
+   "from": null,
+   "d": "Hydra XL icon."
+  },
+  {
+   "n": "size/icon-xxl",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-size-icon-xxl",
+   "v": 64,
+   "from": null,
+   "d": "Hydra 4XL icon."
+  },
+  {
+   "n": "size/control-2xl",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-size-control-2xl",
+   "v": 64,
+   "from": null,
+   "d": "Tile for XL icons."
+  },
+  {
+   "n": "size/control-3xl",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-size-control-3xl",
+   "v": 88,
+   "from": null,
+   "d": "Tile for XXL icons."
+  },
+  {
+   "n": "size/sidebar-collapsed-lg",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-size-sidebar-collapsed-lg",
+   "v": 80,
+   "from": null,
+   "d": "Icon rail with XL icons."
+  },
+  {
+   "n": "size/sidebar-collapsed-xl",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-size-sidebar-collapsed-xl",
+   "v": 104,
+   "from": null,
+   "d": "Icon rail with XXL icons."
+  },
+  {
+   "n": "foreground/link/default",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-foreground-link-default",
+   "v": "#0072c5",
+   "from": "blue/dark",
+   "d": "Text links such as email addresses and phone numbers in tables and lists."
+  },
+  {
+   "n": "foreground/link/hover",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-foreground-link-hover",
+   "v": "#000929",
+   "from": "blue-gray/100",
+   "d": "Text link on hover."
+  },
+  {
+   "n": "size/field-lg",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-size-field-lg",
+   "v": 400,
+   "from": null,
+   "d": "Width of a header search field."
+  },
+  {
+   "n": "background/highlight",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-highlight",
+   "v": "#ffe47a",
+   "from": "yellow/medium",
+   "d": "Marks the matched text in search results."
+  },
+  {
+   "n": "blur/backdrop",
+   "c": "Dimension",
+   "t": "FLOAT",
+   "css": "--eu-blur-backdrop",
+   "v": 4,
+   "from": null,
+   "d": "Background blur behind overlays: modal, drawer, expanded side nav, search panel."
+  },
+  {
+   "n": "icon/stroke-weight",
+   "c": "Icon Weight",
+   "t": "NUMBER",
+   "css": "--eu-icon-stroke-weight",
+   "v": 1.5,
+   "modes": {
+    "Regular": 1.5,
+    "Selected": 2
+   },
+   "from": null,
+   "d": "Icon line thickness. Regular 1.5, Selected 2."
+  },
+  {
+   "n": "border/static/strong",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-border-static-strong",
+   "v": "#1a223e",
+   "from": "blue-gray/90",
+   "d": "Stroke of a focused or open field (input, search, label picker). No ring, only the stroke darkens."
+  },
+  {
+   "n": "motion/duration-fast",
+   "c": "Behaviour",
+   "t": "DURATION",
+   "css": "--eu-motion-duration-fast",
+   "v": 120,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "motion/duration-medium",
+   "c": "Behaviour",
+   "t": "DURATION",
+   "css": "--eu-motion-duration-medium",
+   "v": 160,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "motion/duration-slow",
+   "c": "Behaviour",
+   "t": "DURATION",
+   "css": "--eu-motion-duration-slow",
+   "v": 200,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "motion/duration-spin",
+   "c": "Behaviour",
+   "t": "DURATION",
+   "css": "--eu-motion-duration-spin",
+   "v": 800,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "motion/duration-pulse",
+   "c": "Behaviour",
+   "t": "DURATION",
+   "css": "--eu-motion-duration-pulse",
+   "v": 1400,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "opacity/pulse",
+   "c": "Behaviour",
+   "t": "OPACITY",
+   "css": "--eu-opacity-pulse",
+   "v": 50,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "layer/behind",
+   "c": "Behaviour",
+   "t": "NUMBER",
+   "css": "--eu-layer-behind",
+   "v": -1,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "layer/raised",
+   "c": "Behaviour",
+   "t": "NUMBER",
+   "css": "--eu-layer-raised",
+   "v": 20,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "layer/tooltip",
+   "c": "Behaviour",
+   "t": "NUMBER",
+   "css": "--eu-layer-tooltip",
+   "v": 30,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "layer/overlay",
+   "c": "Behaviour",
+   "t": "NUMBER",
+   "css": "--eu-layer-overlay",
+   "v": 40,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "layer/nav-open",
+   "c": "Behaviour",
+   "t": "NUMBER",
+   "css": "--eu-layer-nav-open",
+   "v": 45,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "layer/nav-panel",
+   "c": "Behaviour",
+   "t": "NUMBER",
+   "css": "--eu-layer-nav-panel",
+   "v": 50,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "layer/toast",
+   "c": "Behaviour",
+   "t": "NUMBER",
+   "css": "--eu-layer-toast",
+   "v": 60,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "layer/popover",
+   "c": "Behaviour",
+   "t": "NUMBER",
+   "css": "--eu-layer-popover",
+   "v": 70,
+   "from": null,
+   "d": ""
+  },
+  {
+   "n": "background/primary/focus",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-primary-focus",
+   "v": "#3018c5",
+   "from": "purple/dark",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "background/primary/disabled",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-primary-disabled",
+   "v": "#b1b9cc",
+   "from": "blue-gray/40",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "background/secondary/default",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-secondary-default",
+   "v": "#ffffff",
+   "from": "white",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "background/secondary/hover",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-secondary-hover",
+   "v": "#e4eaf3",
+   "from": "blue-gray/20",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "background/secondary/focus",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-secondary-focus",
+   "v": "#e4eaf3",
+   "from": "blue-gray/20",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "background/secondary/pressed",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-secondary-pressed",
+   "v": "#b1b9cc",
+   "from": "blue-gray/40",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "background/secondary/disabled",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-background-secondary-disabled",
+   "v": "#e4eaf3",
+   "from": "blue-gray/20",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "border/primary/default",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-border-primary-default",
+   "v": "#5844ff",
+   "from": "purple/100",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "border/primary/hover",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-border-primary-hover",
+   "v": "#3018c5",
+   "from": "purple/dark",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "border/primary/pressed",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-border-primary-pressed",
+   "v": "#7a7fff",
+   "from": "purple/80",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "border/primary/disabled",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-border-primary-disabled",
+   "v": "#b1b9cc",
+   "from": "blue-gray/40",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "border/secondary/default",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-border-secondary-default",
+   "v": "#5844ff",
+   "from": "purple/100",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "border/secondary/hover",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-border-secondary-hover",
+   "v": "#3018c5",
+   "from": "purple/dark",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "border/secondary/pressed",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-border-secondary-pressed",
+   "v": "#5844ff",
+   "from": "purple/100",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "border/secondary/disabled",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-border-secondary-disabled",
+   "v": "#6c7389",
+   "from": "blue-gray/60",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "foreground/interactive/focus",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-foreground-interactive-focus",
+   "v": "#3018c5",
+   "from": "purple/dark",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "foreground/interactive/pressed",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-foreground-interactive-pressed",
+   "v": "#3018c5",
+   "from": "purple/dark",
+   "d": "Button state, matches Hydra."
+  },
+  {
+   "n": "foreground/interactive/disabled",
+   "c": "Color",
+   "t": "COLOR",
+   "css": "--eu-foreground-interactive-disabled",
+   "v": "#6c7389",
+   "from": "blue-gray/60",
+   "d": "Button state, matches Hydra."
+  }
+ ]
+}

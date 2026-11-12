@@ -14,11 +14,11 @@ Figma: Link Button
 
 | Prop | Type | Default | Meaning |
 |---|---|---|---|
-| `variant` | "primary" \| "secondary" \| undefined | clear | `primary` uses text/link, `secondary` uses text/body. |
+| `variant` | "primary" \| "secondary" \| "link" \| "plain" \| undefined | tertiary | `primary` uses text/link, `secondary` uses text/body. `link` is an inline text link in foreground/link (emails, phone numbers): it keeps the surrounding text style. `plain` keeps the surrounding colour and style and underlines on hover, for names that open a record. |
 
 ## SegmentedControl
 
-Switches the display of the same content in place, such as List and Grid. Not for page navigation (TopNav).
+Switches the display of the same content in place, such as List and Grid. Not for page navigation (TopNav). Segments share the width equally, sized to the longest label.
 
 Figma: Segmented Control
 
@@ -47,7 +47,7 @@ Figma: Chips
 | Prop | Type | Default | Meaning |
 |---|---|---|---|
 | `selected` | boolean \| undefined |  | Selected filter state, announced with `aria-pressed`. |
-| `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 31 more ... \| undefined |  | Icon before the text. |
+| `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 56 more ... \| undefined |  | Icon before the text. |
 | `onRemove` | (() => void) \| undefined |  | When set, shows a remove button with this handler. Needs `removeLabel`. |
 | `removeLabel` | string \| undefined | Remove | Accessible name of the remove button, such as "Remove Germany". |
 
@@ -58,15 +58,15 @@ Runs an action. Start the label with a verb and name the result: "Create request
 Figma: Button
 
 ```tsx
-<Button variant="outline" onClick={save}>Save draft</Button>
+<Button variant="secondary" onClick={save}>Save draft</Button>
 ```
 
 | Prop | Type | Default | Meaning |
 |---|---|---|---|
-| `variant` | "filled" \| "outline" \| "clear" \| "cta" \| "danger" \| "danger-outline" \| undefined | clear | Emphasis. `filled` = the main action of a view. `outline` = a real alternative. `clear` = the least emphasis: a way out such as Cancel. `cta` = orange marketing or commercial call to action, at most one per view; never for a normal form save. `danger` = the final irreversible action inside a confirmation. `danger-outline` = the entry point that opens that confirmation. |
+| `variant` | "primary" \| "secondary" \| "tertiary" \| "primary-2" \| "danger" \| "danger-secondary" \| undefined | tertiary | Emphasis. `primary` = the main action of a view. `secondary` = a real alternative. `tertiary` = the least emphasis: a way out such as Cancel. `primary-2` = the orange marketing or commercial call to action, at most one per view; never for a normal form save. `danger` = the final irreversible action inside a confirmation. `danger-secondary` = the entry point that opens that confirmation. |
 | `size` | "tiny" \| "small" \| "medium" \| "large" \| "giant" \| undefined | medium | Height: `tiny` 24, `small` 32, `medium` 40 (default), `large` 48, `giant` 56. |
-| `iconLeft` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 31 more ... \| undefined |  | Icon before the label. Buttons are text-only by default; add an icon only when it adds meaning. |
-| `iconRight` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 31 more ... \| undefined |  | Icon after the label. |
+| `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 56 more ... \| undefined |  | Which icon to show. Buttons are text-only by default; add an icon only when it adds meaning. Pick the side with `iconPosition`. |
+| `iconPosition` | "left" \| "right" \| undefined | left | Which side of the label the `icon` goes on. Defaults to `left`. |
 | `loading` | boolean \| undefined |  | Shows a Loader, sets `aria-busy` and blocks clicks while keeping the label and width. |
 | `fullWidth` | boolean \| undefined |  | Stretches to the container width. |
 
@@ -82,10 +82,11 @@ Figma: Button, Content=Only Icons
 
 | Prop | Type | Default | Meaning |
 |---|---|---|---|
-| `icon` (required) | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 30 more ... \| "close" |  | The icon to show. |
+| `icon` (required) | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 55 more ... \| "map-pin" |  | The icon to show. |
 | `label` (required) | string |  | Required accessible name, such as "Remove file". |
-| `variant` | "filled" \| "outline" \| "clear" \| "cta" \| "danger" \| "danger-outline" \| undefined | clear | Same emphasis as Button. Defaults to `clear`. |
+| `variant` | "primary" \| "secondary" \| "tertiary" \| "primary-2" \| "danger" \| "danger-secondary" \| undefined | tertiary | Same emphasis as Button. Defaults to `tertiary`. |
 | `size` | "tiny" \| "small" \| "medium" \| "large" \| "giant" \| undefined | medium | Square size, same scale as Button. |
+| `indicator` | boolean \| undefined |  | Small dot in the corner: something behind this button is on, such as an active filter or sort. Say so in `label` too. |
 
 ## Menu
 
@@ -112,15 +113,23 @@ Figma: Top Nav
 
 ## SideNav
 
-Left navigation between app sections, 240 wide or a 72 rail when collapsed.
+Left navigation between app sections, 240 wide or a 72 rail when collapsed. A collapsed rail can be `expandable`; with `overflow` it never runs out of room.
 
 Figma: Side Nav
 
 | Prop | Type | Default | Meaning |
 |---|---|---|---|
-| `items` (required) | SideNavItem[] |  | Items in order. |
+| `items` (required) | SideNavItem[] |  | Items in order of priority: the first ones stay visible longest. |
 | `label` (required) | string |  | Accessible name. |
-| `collapsed` | boolean \| undefined |  | Icon-only rail, 72 wide. |
+| `collapsed` | boolean \| undefined |  | Icon-only rail, 72 wide. Each icon shows its name in a tooltip. |
+| `theme` | "light" \| "dark" \| undefined | light | Surface. `light` is white (default). `dark` is the navy rail from Figma's Side Nav Theme=Dark. |
+| `logo` | boolean \| undefined |  | Shows the bottle mark in a tile with a divider above the items (Figma Side Nav Logo). The row is as tall as the small Header. |
+| `logoLabel` | string \| undefined |  | Product name next to the mark while the nav is expanded. |
+| `sticky` | boolean \| undefined |  | Stays in view at full window height while the page scrolls. The nav itself never scrolls. |
+| `expandable` | boolean \| undefined |  | With `collapsed`: a toggle at the bottom (and the `[` key) slides the nav out over the page to show names and counts. A modal-style layer dims and blurs the page; choosing an item, clicking the layer or Escape folds it back. The page does not move. |
+| `overflow` | boolean \| undefined |  | Adds a More (⋯) button as the last item. Items that do not fit the height move into its menu from the end of the list, and come back when there is room. The selected item always stays visible. Use with `sticky`. |
+| `moreItems` | SideNavItem[] \| undefined |  | Items that always sit in the More menu, after any that moved there. |
+| `labels` | { expand?: string \| undefined; collapse?: string \| undefined; more?: string \| undefined; } \| undefined |  | Names of the built-in parts. Pass them in the page's language. |
 | `footer` | ReactNode |  | Footer slot, such as a help card. |
 
 ## Breadcrumbs
@@ -169,6 +178,25 @@ Figma: Steps
 | `errorStep` | number \| undefined |  | Index of a step that has an error. |
 | `label` | string \| undefined | Progress | Accessible name. |
 
+## FilterTabs
+
+Filter tabs (pill tabs): one choice from many filters for the list below, such as a history feed.
+Use SegmentedControl for 2 to 4 equal options, Chip for several filters at once, TopNav for views.
+
+Figma: Filter Tabs (not in Figma yet)
+
+```tsx
+<FilterTabs label="Filter history" value={f} onChange={setF} items={[{ id: 'all', label: 'All' }, { id: 'notes', label: 'Notes', count: 5 }]} />
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `items` (required) | FilterTabItem[] |  | Filters in order. The first is usually "All". |
+| `value` (required) | string |  | Selected id. |
+| `onChange` (required) | (id: string) => void |  | Called with the chosen id. |
+| `label` (required) | string |  | Accessible name of the group, such as "Filter history". |
+| `variant` | "pill" \| "chip" \| undefined | pill | `pill` soft pill on the selected tab (default). `chip` each tab looks like a Chip. Both stay on one line and scroll sideways when narrow. |
+
 ## UserMenu
 
 Profile trigger for the Header. Wrap it in Menu to add the account commands.
@@ -180,4 +208,5 @@ Figma: User Menu
 | `name` (required) | string |  | Person's name. |
 | `subtitle` | string \| undefined |  | Second line, such as a company. |
 | `src` | string \| undefined |  | Picture URL. Initials show without one. |
-| `compact` | boolean \| undefined |  | Avatar only. Name stays available to screen readers. |
+| `compact` | boolean \| undefined |  | Avatar and chevron only. Name stays available to screen readers. |
+| `size` | "medium" \| "large" \| undefined | medium | `medium` 32 avatar (default) or `large` 48 avatar (Figma User Menu Size=Large). |

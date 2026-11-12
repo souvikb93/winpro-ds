@@ -12,7 +12,7 @@
       "example": "<Icon name=\"trash\" size=\"sm\" />",
       "props": {
         "name": {
-          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 30 more ... | \"close\"",
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 55 more ... | \"map-pin\"",
           "required": true,
           "description": "Which icon to draw, in Iconoir naming: `trash`, `check`, `warning-triangle`, `close`."
         },
@@ -158,16 +158,16 @@
       "example": "<LinkButton href=\"/help\">Read the guide</LinkButton>",
       "props": {
         "variant": {
-          "type": "\"primary\" | \"secondary\" | undefined",
+          "type": "\"primary\" | \"secondary\" | \"link\" | \"plain\" | undefined",
           "required": false,
-          "default": "clear",
-          "description": "`primary` uses text/link, `secondary` uses text/body."
+          "default": "tertiary",
+          "description": "`primary` uses text/link, `secondary` uses text/body. `link` is an inline text link in foreground/link (emails, phone numbers): it keeps the surrounding text style. `plain` keeps the surrounding colour and style and underlines on hover, for names that open a record."
         }
       }
     },
     "SegmentedControl": {
       "file": "src/ds/button.tsx",
-      "description": "Switches the display of the same content in place, such as List and Grid. Not for page navigation (TopNav).",
+      "description": "Switches the display of the same content in place, such as List and Grid. Not for page navigation (TopNav). Segments share the width equally, sized to the longest label.",
       "status": "Beta",
       "since": "v0.1",
       "figma": "Segmented Control",
@@ -216,7 +216,7 @@
           "description": "Selected filter state, announced with `aria-pressed`."
         },
         "icon": {
-          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 31 more ... | undefined",
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 56 more ... | undefined",
           "required": false,
           "description": "Icon before the text."
         },
@@ -240,13 +240,13 @@
       "since": "v0.1",
       "figma": "Button",
       "category": "Actions and navigation",
-      "example": "<Button variant=\"outline\" onClick={save}>Save draft</Button>",
+      "example": "<Button variant=\"secondary\" onClick={save}>Save draft</Button>",
       "props": {
         "variant": {
-          "type": "\"filled\" | \"outline\" | \"clear\" | \"cta\" | \"danger\" | \"danger-outline\" | undefined",
+          "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"primary-2\" | \"danger\" | \"danger-secondary\" | undefined",
           "required": false,
-          "default": "clear",
-          "description": "Emphasis. `filled` = the main action of a view. `outline` = a real alternative. `clear` = the least emphasis: a way out such as Cancel.\n`cta` = orange marketing or commercial call to action, at most one per view; never for a normal form save.\n`danger` = the final irreversible action inside a confirmation. `danger-outline` = the entry point that opens that confirmation."
+          "default": "tertiary",
+          "description": "Emphasis. `primary` = the main action of a view. `secondary` = a real alternative. `tertiary` = the least emphasis: a way out such as Cancel.\n`primary-2` = the orange marketing or commercial call to action, at most one per view; never for a normal form save.\n`danger` = the final irreversible action inside a confirmation. `danger-secondary` = the entry point that opens that confirmation."
         },
         "size": {
           "type": "\"tiny\" | \"small\" | \"medium\" | \"large\" | \"giant\" | undefined",
@@ -254,15 +254,16 @@
           "default": "medium",
           "description": "Height: `tiny` 24, `small` 32, `medium` 40 (default), `large` 48, `giant` 56."
         },
-        "iconLeft": {
-          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 31 more ... | undefined",
+        "icon": {
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 56 more ... | undefined",
           "required": false,
-          "description": "Icon before the label. Buttons are text-only by default; add an icon only when it adds meaning."
+          "description": "Which icon to show. Buttons are text-only by default; add an icon only when it adds meaning. Pick the side with `iconPosition`."
         },
-        "iconRight": {
-          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 31 more ... | undefined",
+        "iconPosition": {
+          "type": "\"left\" | \"right\" | undefined",
           "required": false,
-          "description": "Icon after the label."
+          "default": "left",
+          "description": "Which side of the label the `icon` goes on. Defaults to `left`."
         },
         "loading": {
           "type": "boolean | undefined",
@@ -286,7 +287,7 @@
       "example": "<IconButton icon=\"trash\" label=\"Remove file\" />",
       "props": {
         "icon": {
-          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 30 more ... | \"close\"",
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 55 more ... | \"map-pin\"",
           "required": true,
           "description": "The icon to show."
         },
@@ -296,16 +297,21 @@
           "description": "Required accessible name, such as \"Remove file\"."
         },
         "variant": {
-          "type": "\"filled\" | \"outline\" | \"clear\" | \"cta\" | \"danger\" | \"danger-outline\" | undefined",
+          "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"primary-2\" | \"danger\" | \"danger-secondary\" | undefined",
           "required": false,
-          "default": "clear",
-          "description": "Same emphasis as Button. Defaults to `clear`."
+          "default": "tertiary",
+          "description": "Same emphasis as Button. Defaults to `tertiary`."
         },
         "size": {
           "type": "\"tiny\" | \"small\" | \"medium\" | \"large\" | \"giant\" | undefined",
           "required": false,
           "default": "medium",
           "description": "Square size, same scale as Button."
+        },
+        "indicator": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Small dot in the corner: something behind this button is on, such as an active filter or sort. Say so in `label` too."
         }
       }
     },
@@ -468,7 +474,7 @@
           "description": "Accessible names of the buttons in the page's language."
         },
         "variant": {
-          "type": "\"filled\" | \"outline\" | undefined",
+          "type": "\"outline\" | \"filled\" | undefined",
           "required": false,
           "default": "outline",
           "description": "`filled` or `outline`."
@@ -736,6 +742,58 @@
         }
       }
     },
+    "SearchField": {
+      "file": "src/ds/form.tsx",
+      "description": "Search box with a suggestion list (combobox). Type to see matches, arrow keys to move, Enter to open one, Escape to close. Width is size/field-lg.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Input (Style=Filled) + Menu",
+      "category": "Inputs",
+      "example": "<SearchField label=\"Search contacts\" value={q} onChange={setQ} results={results} onSelect={open} />",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible name. Hidden visually, like a header search."
+        },
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "Current text."
+        },
+        "onChange": {
+          "type": "(value: string) => void",
+          "required": true,
+          "description": "Called with the new text. Filter `results` from it."
+        },
+        "results": {
+          "type": "SearchResult[]",
+          "required": true,
+          "description": "Suggestions for the current text, already filtered."
+        },
+        "onSelect": {
+          "type": "(result: SearchResult) => void",
+          "required": true,
+          "description": "Called when a suggestion is chosen with click or Enter."
+        },
+        "placeholder": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Placeholder text."
+        },
+        "emptyText": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "No matches",
+          "description": "Shown in the list when the text matches nothing."
+        },
+        "labels": {
+          "type": "{ clear?: string | undefined; count?: ((n: number) => string) | undefined; } | undefined",
+          "required": false,
+          "description": "Names of the built-in parts. Pass them in the page's language. `count` announces the number of suggestions."
+        }
+      }
+    },
     "Input": {
       "file": "src/ds/form.tsx",
       "description": "Single-line text entry. `type=\"password\"` adds a built-in show or hide button, so never build one yourself. For choosing from a list use Dropdown.",
@@ -774,10 +832,16 @@
           "type": "\"medium\" | \"large\" | undefined",
           "required": false,
           "default": "medium",
-          "description": "Height: `medium` 40 (default), `large` 48."
+          "description": "Height: `medium` 40 (default), `large` 48. The `filled` variant is always 38."
+        },
+        "variant": {
+          "type": "\"outline\" | \"filled\" | undefined",
+          "required": false,
+          "default": "outline",
+          "description": "`outline` white field with a border (default). `filled` tinted field for a header search (Figma Input Style=Filled)."
         },
         "iconLeft": {
-          "type": "\"help\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | ... 31 more ... | undefined",
+          "type": "\"list\" | \"label\" | \"help\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | ... 56 more ... | undefined",
           "required": false,
           "description": "Icon inside the field on the left."
         },
@@ -1073,7 +1137,7 @@
           "description": "`tiny`, `small` or `medium`."
         },
         "icon": {
-          "type": "\"info\" | \"search\" | \"group\" | \"link\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | ... 30 more ... | undefined",
+          "type": "\"info\" | \"search\" | \"group\" | \"link\" | \"list\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | ... 55 more ... | undefined",
           "required": false,
           "description": "Icon before the text. Pair status with text or an icon, never colour alone."
         }
@@ -1372,7 +1436,7 @@
     },
     "SideNav": {
       "file": "src/ds/navigation.tsx",
-      "description": "Left navigation between app sections, 240 wide or a 72 rail when collapsed.",
+      "description": "Left navigation between app sections, 240 wide or a 72 rail when collapsed. A collapsed rail can be `expandable`; with `overflow` it never runs out of room.",
       "status": "Beta",
       "since": "v0.1",
       "figma": "Side Nav",
@@ -1382,7 +1446,7 @@
         "items": {
           "type": "SideNavItem[]",
           "required": true,
-          "description": "Items in order."
+          "description": "Items in order of priority: the first ones stay visible longest."
         },
         "label": {
           "type": "string",
@@ -1392,7 +1456,48 @@
         "collapsed": {
           "type": "boolean | undefined",
           "required": false,
-          "description": "Icon-only rail, 72 wide."
+          "description": "Icon-only rail, 72 wide. Each icon shows its name in a tooltip."
+        },
+        "theme": {
+          "type": "\"light\" | \"dark\" | undefined",
+          "required": false,
+          "default": "light",
+          "description": "Surface. `light` is white (default). `dark` is the navy rail from Figma's Side Nav Theme=Dark."
+        },
+        "logo": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Shows the bottle mark in a tile with a divider above the items (Figma Side Nav Logo). The row is as tall as the small Header."
+        },
+        "logoLabel": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Product name next to the mark while the nav is expanded."
+        },
+        "sticky": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Stays in view at full window height while the page scrolls. The nav itself never scrolls."
+        },
+        "expandable": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "With `collapsed`: a toggle at the bottom (and the `[` key) slides the nav out over the page to show names and counts.\nA modal-style layer dims and blurs the page; choosing an item, clicking the layer or Escape folds it back. The page does not move."
+        },
+        "overflow": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Adds a More (⋯) button as the last item. Items that do not fit the height move into its menu from the end of the\nlist, and come back when there is room. The selected item always stays visible. Use with `sticky`."
+        },
+        "moreItems": {
+          "type": "SideNavItem[] | undefined",
+          "required": false,
+          "description": "Items that always sit in the More menu, after any that moved there."
+        },
+        "labels": {
+          "type": "{ expand?: string | undefined; collapse?: string | undefined; more?: string | undefined; } | undefined",
+          "required": false,
+          "description": "Names of the built-in parts. Pass them in the page's language."
         },
         "footer": {
           "type": "ReactNode",
@@ -1514,7 +1619,7 @@
           "description": "`default` on light surfaces, `inverse` on dark."
         },
         "size": {
-          "type": "\"small\" | \"medium\" | \"large\" | undefined",
+          "type": "\"medium\" | \"large\" | \"small\" | undefined",
           "required": false,
           "default": "medium",
           "description": "Scale."
@@ -1546,10 +1651,16 @@
           "description": "Right slot: actions and UserMenu."
         },
         "size": {
-          "type": "\"small\" | \"medium\" | \"large\" | undefined",
+          "type": "\"medium\" | \"large\" | \"small\" | undefined",
           "required": false,
           "default": "medium",
           "description": "Height: `small` 56, `medium` 64, `large` 72."
+        },
+        "layout": {
+          "type": "\"fill\" | \"between\" | undefined",
+          "required": false,
+          "default": "fill",
+          "description": "`fill`: the middle slot takes the free space (TopNav). `between`: the middle slot keeps its own width (size/field-lg) and sits between the ends, as for a search."
         }
       }
     },
@@ -1581,6 +1692,17 @@
           "type": "ReactNode",
           "required": false,
           "description": "Primary action Button slot, on the right."
+        },
+        "size": {
+          "type": "\"medium\" | \"large\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "`large` Heading H1 for top-level pages (default). `medium` Heading H4 for record pages, such as one organisation."
+        },
+        "icon": {
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 56 more ... | undefined",
+          "required": false,
+          "description": "Icon in a tile before the title, such as `building` for an organisation."
         }
       }
     },
@@ -1602,6 +1724,43 @@
           "type": "{ label: string; href: string; }[] | undefined",
           "required": false,
           "description": "Links on the right."
+        }
+      }
+    },
+    "FilterTabs": {
+      "file": "src/ds/navigation.tsx",
+      "description": "Filter tabs (pill tabs): one choice from many filters for the list below, such as a history feed.\nUse SegmentedControl for 2 to 4 equal options, Chip for several filters at once, TopNav for views.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Filter Tabs (not in Figma yet)",
+      "category": "Actions and navigation",
+      "example": "<FilterTabs label=\"Filter history\" value={f} onChange={setF} items={[{ id: 'all', label: 'All' }, { id: 'notes', label: 'Notes', count: 5 }]} />",
+      "props": {
+        "items": {
+          "type": "FilterTabItem[]",
+          "required": true,
+          "description": "Filters in order. The first is usually \"All\"."
+        },
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "Selected id."
+        },
+        "onChange": {
+          "type": "(id: string) => void",
+          "required": true,
+          "description": "Called with the chosen id."
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the group, such as \"Filter history\"."
+        },
+        "variant": {
+          "type": "\"pill\" | \"chip\" | undefined",
+          "required": false,
+          "default": "pill",
+          "description": "`pill` soft pill on the selected tab (default). `chip` each tab looks like a Chip. Both stay on one line and scroll sideways when narrow."
         }
       }
     },
@@ -1632,7 +1791,13 @@
         "compact": {
           "type": "boolean | undefined",
           "required": false,
-          "description": "Avatar only. Name stays available to screen readers."
+          "description": "Avatar and chevron only. Name stays available to screen readers."
+        },
+        "size": {
+          "type": "\"medium\" | \"large\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "`medium` 32 avatar (default) or `large` 48 avatar (Figma User Menu Size=Large)."
         }
       }
     },
@@ -1775,7 +1940,7 @@
           "description": "`small` 40, `medium` 48, `large` 64."
         },
         "icon": {
-          "type": "\"search\" | \"group\" | \"link\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | ... 31 more ... | undefined",
+          "type": "\"search\" | \"group\" | \"link\" | \"list\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | ... 55 more ... | undefined",
           "required": false,
           "default": "box",
           "description": "Placeholder icon."
@@ -1802,7 +1967,7 @@
           "description": "What to do next."
         },
         "icon": {
-          "type": "\"search\" | \"group\" | \"link\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | ... 31 more ... | undefined",
+          "type": "\"search\" | \"group\" | \"link\" | \"list\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | ... 55 more ... | undefined",
           "required": false,
           "default": "box",
           "description": "Icon."
@@ -1864,12 +2029,68 @@
         "children": {
           "type": "ReactNode",
           "required": true,
-          "description": "TimelineItem children, newest first."
+          "description": "TimelineItem or ActivityItem children, newest first."
         },
         "label": {
           "type": "string | undefined",
           "required": false,
           "description": "Accessible name."
+        },
+        "progress": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Scroll-linked: the line fills as the page scrolls, markers that passed the reading line light up and the entry at\nthe reading line is highlighted. Best with ActivityItem. Off when people prefer reduced motion."
+        }
+      }
+    },
+    "ActivityItem": {
+      "file": "src/ds/display.tsx",
+      "description": "A rich event in a Timeline, such as an email or a call, shown as a card next to an icon marker. Figma: Email Activity Item.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Email Activity Item",
+      "category": "Content",
+      "example": "<ActivityItem icon=\"mail\" title=\"Subject\" meta=\"Today · Anna → Ben\">Preview</ActivityItem>",
+      "props": {
+        "icon": {
+          "type": "\"search\" | \"group\" | \"link\" | \"list\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | ... 54 more ... | \"map-pin\"",
+          "required": true,
+          "description": "Marker icon, such as `mail` for an email or `phone` for a call."
+        },
+        "title": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "Subject line."
+        },
+        "meta": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Line under the subject: date, sender and recipients."
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Preview text. One line, ends with an ellipsis."
+        },
+        "footer": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Bottom row: people, organisation, links."
+        },
+        "actions": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Right of the subject: IconButtons and a Button such as Reply."
+        },
+        "expanded": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Shows the whole preview text instead of one line."
+        },
+        "onOpen": {
+          "type": "(() => void) | undefined",
+          "required": false,
+          "description": "Makes the card clickable (hover, press and focus states). The subject becomes the button; buttons inside keep their own action."
         }
       }
     },
@@ -1971,12 +2192,50 @@
           "required": false,
           "default": "section",
           "description": "Element to render."
+        },
+        "collapsible": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Adds a chevron that shows and hides the content. Needs a `title`."
+        },
+        "defaultOpen": {
+          "type": "boolean | undefined",
+          "required": false,
+          "default": true,
+          "description": "With `collapsible`: starts open. Defaults to true."
+        },
+        "toggleLabel": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "With `collapsible`: accessible name of the chevron, such as \"Show or hide Details\". Defaults to the title."
+        }
+      }
+    },
+    "KeyValueList": {
+      "file": "src/ds/display.tsx",
+      "description": "Label and value pairs, such as the details of a record. Figma: Key Value Pair.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Key Value Pair",
+      "category": "Content",
+      "example": "<KeyValueList items={[{ label: 'Website', value: url }]} />",
+      "props": {
+        "items": {
+          "type": "{ label: string; value: ReactNode; }[]",
+          "required": true,
+          "description": "Rows in order. Values can be text or a link."
+        },
+        "layout": {
+          "type": "\"stacked\" | \"columns\" | undefined",
+          "required": false,
+          "default": "stacked",
+          "description": "`stacked`: label then value, wrapping (default). `columns`: labels in their own column, values beside them."
         }
       }
     },
     "Table": {
       "file": "src/ds/display.tsx",
-      "description": "Table only: toolbars, filters and Pagination sit around it. Header checkbox selects all. Selected rows get the accent tint.",
+      "description": "Table only: toolbars, filters and Pagination sit around it. Rows tint on hover. Header checkbox selects all. Selected rows get the accent tint.",
       "status": "Beta",
       "since": "v0.1",
       "figma": "Table/Table, Table/Table Cell",
@@ -2211,6 +2470,172 @@
           "type": "ReactNode",
           "required": true,
           "description": "The chart."
+        }
+      }
+    },
+    "GlobalSearch": {
+      "file": "src/ds/global-search.tsx",
+      "description": "App-wide search: a header field that opens a large panel over a dimmed page, with categories on the left and\nhits on the right. Matches are highlighted. Arrow keys move through hits, Enter opens one, Escape closes.\nFor a simple field with a short suggestion list use SearchField.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Input (Style=Filled) + search panel (not in Figma yet)",
+      "category": "Inputs",
+      "example": "<GlobalSearch label=\"Search\" value={q} onChange={setQ} categories={cats} category={cat} onCategoryChange={setCat} results={hits} onSelect={open} heading=\"All results\" />",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the search field."
+        },
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "Current text."
+        },
+        "onChange": {
+          "type": "(value: string) => void",
+          "required": true,
+          "description": "Called with the new text."
+        },
+        "categories": {
+          "type": "GlobalSearchCategory[]",
+          "required": true,
+          "description": "Categories in the left column. The first is usually \"All\"."
+        },
+        "category": {
+          "type": "string",
+          "required": true,
+          "description": "Selected category id."
+        },
+        "onCategoryChange": {
+          "type": "(id: string) => void",
+          "required": true,
+          "description": "Called when a category is chosen."
+        },
+        "results": {
+          "type": "GlobalSearchHit[]",
+          "required": true,
+          "description": "Hits for the current text and category, already filtered."
+        },
+        "onSelect": {
+          "type": "(hit: GlobalSearchHit) => void",
+          "required": true,
+          "description": "Called when a hit is opened with click or Enter. The panel closes."
+        },
+        "heading": {
+          "type": "string",
+          "required": true,
+          "description": "Heading above the hits, such as \"All results\"."
+        },
+        "placeholder": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Placeholder of the field."
+        },
+        "emptyText": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "No matches",
+          "description": "Shown when the text matches nothing."
+        },
+        "footer": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Bottom of the category column, such as a help link."
+        },
+        "labels": {
+          "type": "{ clear?: string | undefined; categories?: string | undefined; count?: ((n: number) => string) | undefined; } | undefined",
+          "required": false,
+          "description": "Names of the built-in parts. Pass them in the page's language."
+        }
+      }
+    },
+    "LabelPicker": {
+      "file": "src/ds/label-picker.tsx",
+      "description": "Shows a label as a Badge and lets people change it in place, such as in a table cell. A pencil appears on hover and focus.\nThe popover has a search, the labels as badges (the current one checked) and an add button for a new label.\nArrow keys move, Enter picks, Escape closes. It is positioned against the window, so table scrolling never cuts it off.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Badge + Input (Style=Filled) + Button (not in Figma yet)",
+      "category": "Content",
+      "example": "<LabelPicker label=\"Label for Anna\" value={id} options={labels} onChange={setId} onCreate={add} />",
+      "props": {
+        "value": {
+          "type": "string | null",
+          "required": true,
+          "description": "Selected label id, or null for none."
+        },
+        "options": {
+          "type": "LabelOption[]",
+          "required": true,
+          "description": "All labels people can choose."
+        },
+        "onChange": {
+          "type": "(id: string) => void",
+          "required": true,
+          "description": "Called with the chosen label id."
+        },
+        "onCreate": {
+          "type": "((name: string) => void) | undefined",
+          "required": false,
+          "description": "Called with the typed name when someone adds a new label. Add it to `options` and select it. Leave out to hide the add button."
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the trigger, such as \"Label for Anna Roell\". The current label is added after it."
+        },
+        "labels": {
+          "type": "{ search?: string | undefined; add?: string | undefined; addNamed?: ((name: string) => string) | undefined; empty?: string | undefined; none?: string | undefined; } | undefined",
+          "required": false,
+          "description": "Names of the built-in parts. Pass them in the page's language."
+        }
+      }
+    },
+    "InlineEdit": {
+      "file": "src/ds/inline-edit.tsx",
+      "description": "A value that people change in place, such as a table cell or a detail field. A pencil appears on hover and focus.\nText: Enter or leaving the field saves, Escape cancels. Date: picking a day saves, Escape cancels.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Input (Style=Outline) + Calendar (not in Figma yet)",
+      "category": "Content",
+      "example": "<InlineEdit label=\"Edit name\" value={name} onChange={setName} />",
+      "props": {
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "Current value. For `type=\"date\"` an ISO day `YYYY-MM-DD`."
+        },
+        "onChange": {
+          "type": "(value: string) => void",
+          "required": true,
+          "description": "Called with the new value when people save. Not called when the value did not change."
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the edit button, such as \"Edit name of Anna Roell\"."
+        },
+        "type": {
+          "type": "\"number\" | \"text\" | \"email\" | \"tel\" | \"date\" | undefined",
+          "required": false,
+          "default": "text",
+          "description": "Kind of value. `date` opens a Calendar."
+        },
+        "display": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "What to show while not editing, such as a link or formatted date. Without it the value shows as text and a click on it edits."
+        },
+        "required": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Blocks saving an empty value."
+        },
+        "locale": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "en",
+          "description": "For `type=\"date\"`: BCP 47 locale for the Calendar."
         }
       }
     }

@@ -14,7 +14,7 @@ Figma: Brand & Icons (Iconoir)
 
 | Prop | Type | Default | Meaning |
 |---|---|---|---|
-| `name` (required) | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 30 more ... \| "close" |  | Which icon to draw, in Iconoir naming: `trash`, `check`, `warning-triangle`, `close`. |
+| `name` (required) | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 55 more ... \| "map-pin" |  | Which icon to draw, in Iconoir naming: `trash`, `check`, `warning-triangle`, `close`. |
 | `size` | "xs" \| "sm" \| "md" \| "lg" \| undefined | md | Size token: `xs` 12, `sm` 16, `md` 20, `lg` 24. |
 | `label` | string \| undefined |  | Accessible name. Leave empty when the icon is decoration next to text; it is then hidden from screen readers. |
 | `className` | string \| undefined |  | Extra class on the svg. The colour comes from the surrounding text colour. |

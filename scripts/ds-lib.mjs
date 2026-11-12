@@ -23,6 +23,6 @@ export function check(path) {
   imp.forEach((m) => out.push(`${path}: foreign import ${m}`));
   const known = new Set(Object.keys(catalog()));
   const ds = src.match(/import\s*\{([^}]+)\}\s*from\s*['"]@euvino\/ds['"]/);
-  if (ds) ds[1].split(',').map((x) => x.trim().replace(/^type\s+/, '').split(' ')[0]).filter((x) => /^[A-Z]/.test(x) && !/Props$|Option$|Column$|Def$|Item$|Name$|Status$|Datum$|Style$|Tone$/.test(x)).forEach((x) => { if (!known.has(x)) out.push(`${path}: ${x} is not exported by @euvino/ds`); });
+  if (ds) ds[1].split(',').map((x) => x.trim().replace(/^type\s+/, '').split(' ')[0]).filter((x) => /^[A-Z]/.test(x) && !/Props$|Option$|Column$|Def$|Item$|Name$|Status$|Datum$|Style$|Tone$|Result$|Hit$|Category$|Option$/.test(x)).forEach((x) => { if (!known.has(x)) out.push(`${path}: ${x} is not exported by @euvino/ds`); });
   return out.length ? out.join('\n') : 'ok';
 }

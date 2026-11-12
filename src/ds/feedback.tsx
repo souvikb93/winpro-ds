@@ -238,8 +238,8 @@ export function ConfirmDialog({ open, onCancel, onConfirm, title, children, conf
           <header className="eu-modal__head"><h2 id={tid} className="eu-type-mobile-h6 eu-modal__title">{title}</h2></header>
           <div id={did} className="eu-modal__body eu-type-body-small eu-check__desc">{children}</div>
           <footer className="eu-modal__foot">
-            <button type="button" autoFocus className="eu-btn eu-btn--clear eu-btn--medium" onClick={onCancel}>{cancelLabel}</button>
-            <button type="button" aria-busy={busy || undefined} className={cn('eu-btn eu-btn--medium', tone === 'danger' ? 'eu-btn--danger' : 'eu-btn--filled')} onClick={busy ? undefined : onConfirm}>{busy ? <Loader size="tiny" label="" /> : null}{confirmLabel}</button>
+            <button type="button" autoFocus className="eu-btn eu-btn--tertiary eu-btn--medium" onClick={onCancel}>{cancelLabel}</button>
+            <button type="button" aria-busy={busy || undefined} className={cn('eu-btn eu-btn--medium', tone === 'danger' ? 'eu-btn--danger' : 'eu-btn--primary')} onClick={busy ? undefined : onConfirm}>{busy ? <Loader size="tiny" label="" /> : null}{confirmLabel}</button>
           </footer>
         </div>
       ) : null}
@@ -348,6 +348,8 @@ export interface MenuItemDef {
   disabled?: boolean;
   /** Marks a destructive command with error colour. */
   danger?: boolean;
+  /** For a choice such as a sort order or filter: `true` shows a check on the current one. Set it on every item of the group. */
+  selected?: boolean;
 }
 
 export interface MenuProps {
@@ -385,8 +387,9 @@ export function Menu({ trigger, items, label }: MenuProps) {
           else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(active); }
         }}>
           {items.map((it, i) => (
-            <li key={it.label} role="menuitem" aria-disabled={it.disabled || undefined} className={cn('eu-menu__item eu-type-body-small', i === active && 'is-active', it.disabled && 'is-disabled', it.danger && 'is-danger')} onMouseEnter={() => setActive(i)} onClick={() => pick(i)}>
-              {it.icon ? <Icon name={it.icon} size="md" /> : null}<span>{it.label}</span>
+            <li key={it.label} role={it.selected === undefined ? 'menuitem' : 'menuitemradio'} aria-checked={it.selected === undefined ? undefined : it.selected} aria-disabled={it.disabled || undefined} className={cn('eu-menu__item eu-type-body-small', i === active && 'is-active', it.disabled && 'is-disabled', it.danger && 'is-danger', it.selected && 'is-selected')} onMouseEnter={() => setActive(i)} onClick={() => pick(i)}>
+              {it.icon ? <Icon name={it.icon} size="md" /> : null}<span className="eu-menu__label">{it.label}</span>
+              {it.selected ? <Icon name="check" size="md" className="eu-menu__check" /> : null}
             </li>
           ))}
         </ul>

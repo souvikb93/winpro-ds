@@ -26,5 +26,5 @@
 | Typography, Heading, Title | `Text` |
 | color, severity, intent (on status components) | `status` |
 | color, kind (on Button) | `variant` |
-| startIcon, leftIcon | `iconLeft` (Button, Input) or `icon` |
+| startIcon, leftIcon, endIcon, rightIcon | Button: `icon` plus `iconPosition="left"` or `"right"`. Input: `iconLeft` |
 | isDisabled, isLoading | `disabled`, `loading` |

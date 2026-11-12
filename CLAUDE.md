@@ -27,7 +27,7 @@ Everything comes from that one import. CSS loads with it. Never import a UI, ico
 
 | Need | Use | Not |
 |---|---|---|
-| Confirm a delete or anything that cannot be undone | `ConfirmDialog tone="danger"`, opened by `Button variant="danger-outline"` | `window.confirm`, `Modal`, an inline warning |
+| Confirm a delete or anything that cannot be undone | `ConfirmDialog tone="danger"`, opened by `Button variant="danger-secondary"` | `window.confirm`, `Modal`, an inline warning |
 | A focused task with a form | `Modal` | `ConfirmDialog` |
 | Details while keeping the page in view | `Drawer` | `Modal` |
 | Message that stays until resolved | `Alert` | `Toast` |

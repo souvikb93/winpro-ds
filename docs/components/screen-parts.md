@@ -12,7 +12,7 @@ Figma: Brand Logo
 |---|---|---|---|
 | `brand` | "EuvinoPRO" \| "WIN" \| undefined | EuvinoPRO | Which product mark. |
 | `color` | "default" \| "inverse" \| undefined | default | `default` on light surfaces, `inverse` on dark. |
-| `size` | "small" \| "medium" \| "large" \| undefined | medium | Scale. |
+| `size` | "medium" \| "large" \| "small" \| undefined | medium | Scale. |
 
 ## Header
 
@@ -25,7 +25,8 @@ Figma: Header
 | `brand` | ReactNode |  | Left slot. Defaults to BrandLogo. |
 | `children` | ReactNode |  | Middle slot, usually TopNav or a search Input. |
 | `actions` | ReactNode |  | Right slot: actions and UserMenu. |
-| `size` | "small" \| "medium" \| "large" \| undefined | medium | Height: `small` 56, `medium` 64, `large` 72. |
+| `size` | "medium" \| "large" \| "small" \| undefined | medium | Height: `small` 56, `medium` 64, `large` 72. |
+| `layout` | "fill" \| "between" \| undefined | fill | `fill`: the middle slot takes the free space (TopNav). `between`: the middle slot keeps its own width (size/field-lg) and sits between the ends, as for a search. |
 
 ## PageHeader
 
@@ -43,6 +44,8 @@ Figma: Page Header
 | `subtitle` | ReactNode |  | Line under the title. |
 | `breadcrumbs` | ReactNode |  | Breadcrumbs slot above the title. |
 | `actions` | ReactNode |  | Primary action Button slot, on the right. |
+| `size` | "medium" \| "large" \| undefined | medium | `large` Heading H1 for top-level pages (default). `medium` Heading H4 for record pages, such as one organisation. |
+| `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 56 more ... \| undefined |  | Icon in a tile before the title, such as `building` for an organisation. |
 
 ## Footer
 

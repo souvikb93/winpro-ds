@@ -5,7 +5,7 @@
   <Input label="Email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} error={errors.email} ref={emailRef} />
   <Dropdown label="Role" options={roles} value={role} onChange={setRole} error={errors.role} />
   <Stack direction="horizontal" gap="2" justify="end">
-    <Button variant="clear" onClick={cancel}>Cancel</Button>
+    <Button variant="tertiary" onClick={cancel}>Cancel</Button>
     <Button type="submit" loading={saving}>Send invite</Button>
   </Stack>
 </Stack>
