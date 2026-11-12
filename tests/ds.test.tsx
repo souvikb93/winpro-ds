@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import * as React from 'react';
 import { afterEach } from 'vitest';
-import { Button, Input, Toggle, ToastProvider, useToast, Pagination, Table, Dropdown, Checkbox, Alert, Steps, SideNav, Breadcrumbs, Icon, GlobalSearch, Menu, IconButton, LabelPicker, InlineEdit, Card, KeyValueList, ActivityItem, Timeline, TopNav, FilterTabs, PageHeader } from '../src/ds/index';
+import { Button, Input, Toggle, ToastProvider, useToast, Pagination, Table, Dropdown, Checkbox, Alert, Steps, SideNav, Breadcrumbs, Icon, GlobalSearch, Menu, IconButton, LabelPicker, InlineEdit, Card, KeyValueList, ActivityItem, Timeline, TopNav, FilterTabs, PageHeader, SplitButton } from '../src/ds/index';
 
 afterEach(cleanup);
 
@@ -198,5 +198,15 @@ describe('@euvino/ds', () => {
     expect(onOpen).toHaveBeenCalled();
     fireEvent.click(screen.getByRole('button', { name: 'Reply' }));
     expect(onOpen).toHaveBeenCalledTimes(1);
+  });
+  it('SplitButton runs the main action and opens the related actions from the arrow', () => {
+    const main = vi.fn(); const imp = vi.fn();
+    render(<SplitButton icon="plus" onClick={main} menuLabel="More ways to add" items={[{ label: 'Import', onSelect: imp }]}>Contact</SplitButton>);
+    fireEvent.click(screen.getByRole('button', { name: 'Contact' }));
+    expect(main).toHaveBeenCalled();
+    fireEvent.click(screen.getByRole('button', { name: 'More ways to add' }));
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Import' }));
+    expect(imp).toHaveBeenCalled();
+    expect(screen.getByRole('group')).toBeTruthy();
   });
 });

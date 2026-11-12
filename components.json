@@ -55,6 +55,11 @@
           "default": "4",
           "description": "Space token between children, from `spacing/*`: form fields `4`, button rows `2`, page sections `8`."
         },
+        "noValidate": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "With `as=\"form\"`: turn off browser validation bubbles so field `error` messages show instead."
+        },
         "padding": {
           "type": "SpaceToken | undefined",
           "required": false,
@@ -243,10 +248,10 @@
       "example": "<Button variant=\"secondary\" onClick={save}>Save draft</Button>",
       "props": {
         "variant": {
-          "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"primary-2\" | \"danger\" | \"danger-secondary\" | undefined",
+          "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"primary-2\" | \"danger\" | \"danger-secondary\" | \"danger-tertiary\" | undefined",
           "required": false,
           "default": "tertiary",
-          "description": "Emphasis. `primary` = the main action of a view. `secondary` = a real alternative. `tertiary` = the least emphasis: a way out such as Cancel.\n`primary-2` = the orange marketing or commercial call to action, at most one per view; never for a normal form save.\n`danger` = the final irreversible action inside a confirmation. `danger-secondary` = the entry point that opens that confirmation."
+          "description": "Emphasis. `primary` = the main action of a view. `secondary` = a real alternative. `tertiary` = the least emphasis: a way out such as Cancel.\n`primary-2` = deprecated: Hydra has no orange call to action, so it renders as `primary`. Use `primary`.\n`danger` = the final irreversible action inside a confirmation. `danger-secondary` = the entry point that opens that confirmation."
         },
         "size": {
           "type": "\"tiny\" | \"small\" | \"medium\" | \"large\" | \"giant\" | undefined",
@@ -297,7 +302,7 @@
           "description": "Required accessible name, such as \"Remove file\"."
         },
         "variant": {
-          "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"primary-2\" | \"danger\" | \"danger-secondary\" | undefined",
+          "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"primary-2\" | \"danger\" | \"danger-secondary\" | \"danger-tertiary\" | undefined",
           "required": false,
           "default": "tertiary",
           "description": "Same emphasis as Button. Defaults to `tertiary`."
@@ -343,6 +348,11 @@
           "type": "string | undefined",
           "required": false,
           "description": "Visible label."
+        },
+        "hideLabel": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Keeps the label for screen readers only, for repeated rows where a visible label already sits above."
         },
         "placeholder": {
           "type": "string | undefined",
@@ -1199,11 +1209,16 @@
           "required": false,
           "description": "Footer actions, rightmost is the main one."
         },
+        "footerStart": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Secondary footer action on the left, away from the main actions, such as Import."
+        },
         "size": {
-          "type": "\"small\" | \"medium\" | \"large\" | undefined",
+          "type": "\"small\" | \"medium\" | \"large\" | \"xlarge\" | undefined",
           "required": false,
           "default": "medium",
-          "description": "Width: `small` 400, `medium` 560, `large` 720."
+          "description": "Width: `small` 400, `medium` 560, `large` 720, `xlarge` 960 for landscape forms in two or three columns."
         },
         "closeLabel": {
           "type": "string | undefined",
@@ -2555,7 +2570,7 @@
       "description": "Shows a label as a Badge and lets people change it in place, such as in a table cell. A pencil appears on hover and focus.\nThe popover has a search, the labels as badges (the current one checked) and an add button for a new label.\nArrow keys move, Enter picks, Escape closes. It is positioned against the window, so table scrolling never cuts it off.",
       "status": "Beta",
       "since": "v0.1",
-      "figma": "Badge + Input (Style=Filled) + Button (not in Figma yet)",
+      "figma": "Label Picker",
       "category": "Content",
       "example": "<LabelPicker label=\"Label for Anna\" value={id} options={labels} onChange={setId} onCreate={add} />",
       "props": {
@@ -2636,6 +2651,59 @@
           "required": false,
           "default": "en",
           "description": "For `type=\"date\"`: BCP 47 locale for the Calendar."
+        }
+      }
+    },
+    "SplitButton": {
+      "file": "src/ds/split-button.tsx",
+      "description": "Main action plus a menu of related actions, split by a divider (Hydra \"Button Select\").\nUse it when one action is the usual choice and a few others belong to it, such as \"Kontakt\" with \"Import\".",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Button Select",
+      "category": "Actions and navigation",
+      "example": "<SplitButton icon=\"plus\" onClick={add} menuLabel=\"More ways to add\" items={[{ label: 'Import', icon: 'upload', onSelect: openImport }]}>Contact</SplitButton>",
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "Label of the main action, verb first: \"Kontakt\", \"Create request\"."
+        },
+        "onClick": {
+          "type": "(() => void) | undefined",
+          "required": false,
+          "description": "Runs the main action."
+        },
+        "items": {
+          "type": "MenuItemDef[]",
+          "required": true,
+          "description": "Related actions behind the arrow. The first one should repeat or extend the main action."
+        },
+        "menuLabel": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the arrow button and its menu, such as \"More ways to add\"."
+        },
+        "variant": {
+          "type": "\"primary\" | \"secondary\" | undefined",
+          "required": false,
+          "default": "primary",
+          "description": "Emphasis, same as Button. Hydra Button Select has Primary and Secondary."
+        },
+        "size": {
+          "type": "\"small\" | \"medium\" | \"large\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "Height, same scale as Button: `small` 28, `medium` 38 (default), `large` 44."
+        },
+        "icon": {
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 56 more ... | undefined",
+          "required": false,
+          "description": "Icon before the label, such as `plus` for create actions."
+        },
+        "disabled": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Disables both parts."
         }
       }
     }

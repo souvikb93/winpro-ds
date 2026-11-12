@@ -33,6 +33,7 @@ Figma: Auto layout
 |---|---|---|---|
 | `direction` | "vertical" \| "horizontal" \| undefined | vertical | `vertical` for a column (default), `horizontal` for a row. |
 | `gap` | SpaceToken \| undefined | 4 | Space token between children, from `spacing/*`: form fields `4`, button rows `2`, page sections `8`. |
+| `noValidate` | boolean \| undefined |  | With `as="form"`: turn off browser validation bubbles so field `error` messages show instead. |
 | `padding` | SpaceToken \| undefined |  | Padding from the same space tokens. |
 | `align` | "start" \| "center" \| "end" \| "stretch" \| "baseline" \| undefined |  | Cross-axis alignment. |
 | `justify` | "start" \| "center" \| "end" \| "between" \| undefined |  | Main-axis distribution. `between` pushes children to both ends. |

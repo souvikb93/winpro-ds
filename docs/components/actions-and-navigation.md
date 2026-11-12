@@ -63,7 +63,7 @@ Figma: Button
 
 | Prop | Type | Default | Meaning |
 |---|---|---|---|
-| `variant` | "primary" \| "secondary" \| "tertiary" \| "primary-2" \| "danger" \| "danger-secondary" \| undefined | tertiary | Emphasis. `primary` = the main action of a view. `secondary` = a real alternative. `tertiary` = the least emphasis: a way out such as Cancel. `primary-2` = the orange marketing or commercial call to action, at most one per view; never for a normal form save. `danger` = the final irreversible action inside a confirmation. `danger-secondary` = the entry point that opens that confirmation. |
+| `variant` | "primary" \| "secondary" \| "tertiary" \| "primary-2" \| "danger" \| "danger-secondary" \| "danger-tertiary" \| undefined | tertiary | Emphasis. `primary` = the main action of a view. `secondary` = a real alternative. `tertiary` = the least emphasis: a way out such as Cancel. `primary-2` = deprecated: Hydra has no orange call to action, so it renders as `primary`. Use `primary`. `danger` = the final irreversible action inside a confirmation. `danger-secondary` = the entry point that opens that confirmation. |
 | `size` | "tiny" \| "small" \| "medium" \| "large" \| "giant" \| undefined | medium | Height: `tiny` 24, `small` 32, `medium` 40 (default), `large` 48, `giant` 56. |
 | `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 56 more ... \| undefined |  | Which icon to show. Buttons are text-only by default; add an icon only when it adds meaning. Pick the side with `iconPosition`. |
 | `iconPosition` | "left" \| "right" \| undefined | left | Which side of the label the `icon` goes on. Defaults to `left`. |
@@ -84,7 +84,7 @@ Figma: Button, Content=Only Icons
 |---|---|---|---|
 | `icon` (required) | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 55 more ... \| "map-pin" |  | The icon to show. |
 | `label` (required) | string |  | Required accessible name, such as "Remove file". |
-| `variant` | "primary" \| "secondary" \| "tertiary" \| "primary-2" \| "danger" \| "danger-secondary" \| undefined | tertiary | Same emphasis as Button. Defaults to `tertiary`. |
+| `variant` | "primary" \| "secondary" \| "tertiary" \| "primary-2" \| "danger" \| "danger-secondary" \| "danger-tertiary" \| undefined | tertiary | Same emphasis as Button. Defaults to `tertiary`. |
 | `size` | "tiny" \| "small" \| "medium" \| "large" \| "giant" \| undefined | medium | Square size, same scale as Button. |
 | `indicator` | boolean \| undefined |  | Small dot in the corner: something behind this button is on, such as an active filter or sort. Say so in `label` too. |
 
@@ -210,3 +210,25 @@ Figma: User Menu
 | `src` | string \| undefined |  | Picture URL. Initials show without one. |
 | `compact` | boolean \| undefined |  | Avatar and chevron only. Name stays available to screen readers. |
 | `size` | "medium" \| "large" \| undefined | medium | `medium` 32 avatar (default) or `large` 48 avatar (Figma User Menu Size=Large). |
+
+## SplitButton
+
+Main action plus a menu of related actions, split by a divider (Hydra "Button Select").
+Use it when one action is the usual choice and a few others belong to it, such as "Kontakt" with "Import".
+
+Figma: Button Select
+
+```tsx
+<SplitButton icon="plus" onClick={add} menuLabel="More ways to add" items={[{ label: 'Import', icon: 'upload', onSelect: openImport }]}>Contact</SplitButton>
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `children` (required) | ReactNode |  | Label of the main action, verb first: "Kontakt", "Create request". |
+| `onClick` | (() => void) \| undefined |  | Runs the main action. |
+| `items` (required) | MenuItemDef[] |  | Related actions behind the arrow. The first one should repeat or extend the main action. |
+| `menuLabel` (required) | string |  | Accessible name of the arrow button and its menu, such as "More ways to add". |
+| `variant` | "primary" \| "secondary" \| undefined | primary | Emphasis, same as Button. Hydra Button Select has Primary and Secondary. |
+| `size` | "small" \| "medium" \| "large" \| undefined | medium | Height, same scale as Button: `small` 28, `medium` 38 (default), `large` 44. |
+| `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 56 more ... \| undefined |  | Icon before the label, such as `plus` for create actions. |
+| `disabled` | boolean \| undefined |  | Disables both parts. |

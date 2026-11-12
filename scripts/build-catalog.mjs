@@ -3,7 +3,7 @@ import { writeFileSync, readFileSync, mkdirSync } from 'node:fs';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const docgen = require(process.env.BENCH_NM ? process.env.BENCH_NM + '/react-docgen-typescript' : 'react-docgen-typescript');
-const files = ['icon','layout','button','form','feedback','navigation','display','charts','global-search','label-picker','inline-edit'].map((f) => `src/ds/${f}.tsx`);
+const files = ['icon','layout','button','form','feedback','navigation','display','charts','global-search','label-picker','inline-edit','split-button'].map((f) => `src/ds/${f}.tsx`);
 const parser = docgen.withCustomConfig('tsconfig.json', { shouldExtractLiteralValuesFromEnum: true, skipChildrenPropWithoutDoc: false, propFilter: (p) => !p.parent || !/node_modules/.test(p.parent.fileName) });
 const META = JSON.parse(readFileSync('scripts/meta.json', 'utf8'));
 const out = {};

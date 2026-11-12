@@ -18,6 +18,7 @@ Figma: Dropdown
 | `value` | string \| undefined |  | Selected value. |
 | `onChange` | ((value: string) => void) \| undefined |  | Called with the picked value. |
 | `label` | string \| undefined |  | Visible label. |
+| `hideLabel` | boolean \| undefined |  | Keeps the label for screen readers only, for repeated rows where a visible label already sits above. |
 | `placeholder` | string \| undefined | Select | Text shown when nothing is selected. |
 | `help` | ReactNode |  | Help text. |
 | `error` | string \| undefined |  | Error message. |

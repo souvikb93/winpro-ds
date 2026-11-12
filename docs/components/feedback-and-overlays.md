@@ -85,7 +85,8 @@ Figma: Modal
 | `title` (required) | string |  | Heading. |
 | `description` | ReactNode |  | Line under the heading. |
 | `footer` | ReactNode |  | Footer actions, rightmost is the main one. |
-| `size` | "small" \| "medium" \| "large" \| undefined | medium | Width: `small` 400, `medium` 560, `large` 720. |
+| `footerStart` | ReactNode |  | Secondary footer action on the left, away from the main actions, such as Import. |
+| `size` | "small" \| "medium" \| "large" \| "xlarge" \| undefined | medium | Width: `small` 400, `medium` 560, `large` 720, `xlarge` 960 for landscape forms in two or three columns. |
 | `closeLabel` | string \| undefined | Close | Accessible name of the close button. |
 | `children` | ReactNode |  | Free content area. |
 

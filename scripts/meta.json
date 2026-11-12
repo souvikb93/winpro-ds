@@ -297,7 +297,7 @@
   },
   "LabelPicker": {
     "category": "Content",
-    "figma": "Badge + Input (Style=Filled) + Button (not in Figma yet)",
+    "figma": "Label Picker",
     "example": "<LabelPicker label=\"Label for Anna\" value={id} options={labels} onChange={setId} onCreate={add} />"
   },
   "InlineEdit": {
@@ -308,7 +308,7 @@
   "ActivityItem": {
     "category": "Content",
     "figma": "Email Activity Item",
-    "example": "<ActivityItem icon=\"mail\" title=\"Subject\" meta=\"Today \u00b7 Anna \u2192 Ben\">Preview</ActivityItem>"
+    "example": "<ActivityItem icon=\"mail\" title=\"Subject\" meta=\"Today · Anna → Ben\">Preview</ActivityItem>"
   },
   "KeyValueList": {
     "category": "Content",
@@ -319,5 +319,10 @@
     "category": "Actions and navigation",
     "figma": "Filter Tabs (not in Figma yet)",
     "example": "<FilterTabs label=\"Filter history\" value={f} onChange={setF} items={[{ id: 'all', label: 'All' }, { id: 'notes', label: 'Notes', count: 5 }]} />"
+  },
+  "SplitButton": {
+    "figma": "Button Select",
+    "category": "Actions and navigation",
+    "example": "<SplitButton icon=\"plus\" onClick={add} menuLabel=\"More ways to add\" items={[{ label: 'Import', icon: 'upload', onSelect: openImport }]}>Contact</SplitButton>"
   }
 }

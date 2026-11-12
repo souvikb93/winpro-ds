@@ -254,7 +254,7 @@ Shows a label as a Badge and lets people change it in place, such as in a table 
 The popover has a search, the labels as badges (the current one checked) and an add button for a new label.
 Arrow keys move, Enter picks, Escape closes. It is positioned against the window, so table scrolling never cuts it off.
 
-Figma: Badge + Input (Style=Filled) + Button (not in Figma yet)
+Figma: Label Picker
 
 ```tsx
 <LabelPicker label="Label for Anna" value={id} options={labels} onChange={setId} onCreate={add} />
