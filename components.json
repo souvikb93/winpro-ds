@@ -451,6 +451,93 @@
         }
       }
     },
+    "Combobox": {
+      "file": "src/ds/form.tsx",
+      "description": "A field you can type into or pick from a scrolling list, such as a time or a duration. Text is read on Enter or when the field loses focus; unreadable text goes back to the last value. For a fixed list without typing use Dropdown.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Combobox",
+      "category": "Inputs",
+      "example": "<Combobox label=\"Beginn\" value={v} onChange={setV} parse={parseTime} options={[{value:'540',label:'09:00'}]} />",
+      "props": {
+        "options": {
+          "type": "DropdownOption[]",
+          "required": true,
+          "description": "Suggestions, one row each. The list scrolls and opens at the current value."
+        },
+        "value": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Current value."
+        },
+        "onChange": {
+          "type": "((value: string) => void) | undefined",
+          "required": false,
+          "description": "Called with a picked option or a typed value that `parse` accepted."
+        },
+        "parse": {
+          "type": "((text: string) => string | undefined) | undefined",
+          "required": false,
+          "description": "Turns typed text into a value, or `undefined` when it cannot be read. Without it only option labels are accepted."
+        },
+        "format": {
+          "type": "((value: string) => string) | undefined",
+          "required": false,
+          "description": "Text shown for a value that is not in `options`. Defaults to the value."
+        },
+        "label": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Visible label."
+        },
+        "hideLabel": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Keeps the label for screen readers only."
+        },
+        "placeholder": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Placeholder while empty."
+        },
+        "help": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Help text."
+        },
+        "error": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Error message."
+        },
+        "disabled": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Blocks interaction."
+        },
+        "required": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": "Marks the field as required."
+        },
+        "id": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Explicit id for the input."
+        },
+        "className": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Extra class."
+        },
+        "toggleLabel": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Show options",
+          "description": "Accessible name of the open button. Pass it in the page's language."
+        }
+      }
+    },
     "RadioGroup": {
       "file": "src/ds/form.tsx",
       "description": "A labelled set of Radio options. Use it for two to five visible choices.",
@@ -750,7 +837,7 @@
     },
     "DatePicker": {
       "file": "src/ds/form.tsx",
-      "description": "A field that opens a Calendar. Use it for dates near today; use Input for known dates such as birthdays.",
+      "description": "A date field you can type into, with a button that opens a Calendar. Accepts 12.11.2026, 12.11. and ISO. Use it for dates near today; use Input for known dates such as birthdays.",
       "status": "Beta",
       "since": "v0.1",
       "figma": "Date Picker",
@@ -782,6 +869,12 @@
           "type": "boolean | undefined",
           "required": false,
           "description": "Blocks interaction."
+        },
+        "calendarLabel": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Open calendar",
+          "description": "Accessible name of the calendar button. Pass it in the page's language."
         },
         "max": {
           "type": "string | undefined",
@@ -2130,52 +2223,57 @@
     },
     "ActivityItem": {
       "file": "src/ds/display.tsx",
-      "description": "A rich event in a Timeline, such as an email or a call, shown as a card next to an icon marker. Figma: Email Activity Item.",
+      "description": "A rich event in a Timeline, such as an email, call or note, shown as a card next to an icon marker.\nRhythm: subject and meta form one heading block, the preview sits apart, the footer apart again. The marker lines up with the subject.\nFigma: Activity Item.",
       "status": "Beta",
       "since": "v0.1",
       "figma": "Email Activity Item",
       "category": "Content",
-      "example": "<ActivityItem icon=\"mail\" title=\"Subject\" meta=\"Today · Anna → Ben\">Preview</ActivityItem>",
+      "example": "<ActivityItem icon=\"mail\" title=\"Subject\" meta={['28 Oct, 10:24', <>Anna → <PeopleList people={to} max={1} /></>]} lines={2} footer={<FileChipList files={files} onDownload={save} />} onOpen={open}>Preview</ActivityItem>",
       "props": {
         "icon": {
           "type": "\"search\" | \"group\" | \"link\" | \"list\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | ... 61 more ... | \"underline\"",
           "required": true,
-          "description": "Marker icon, such as `mail` for an email or `phone` for a call."
+          "description": "Marker icon on the timeline rail, such as `mail` for an email or `phone` for a call. The card itself repeats no type icon."
         },
         "title": {
           "type": "ReactNode",
           "required": true,
-          "description": "Subject line."
+          "description": "Subject line, the strongest text of the card."
         },
         "meta": {
-          "type": "ReactNode",
+          "type": "ReactNode | ReactNode[]",
           "required": false,
-          "description": "Line under the subject: date, sender and recipients."
+          "description": "Quiet line right under the subject: date, sender and recipients. Pass a list to split the facts with a thin line (InlineList)."
         },
         "children": {
           "type": "ReactNode",
           "required": false,
-          "description": "Preview text. One line, ends with an ellipsis."
+          "description": "Preview text. One line by default; see `lines` and `expanded`."
         },
         "footer": {
           "type": "ReactNode",
           "required": false,
-          "description": "Bottom row: people, organisation, links."
+          "description": "Bottom row, such as attachments (FileChipList) or related people. Several children are split by a divider."
         },
         "actions": {
           "type": "ReactNode",
           "required": false,
-          "description": "Right of the subject: IconButtons and a Button such as Reply."
+          "description": "Right of the subject: small buttons such as a Reply SplitButton and a more IconButton. The row keeps the height of a small button."
         },
         "expanded": {
           "type": "boolean | undefined",
           "required": false,
-          "description": "Shows the whole preview text instead of one line."
+          "description": "Shows the whole preview text."
+        },
+        "lines": {
+          "type": "number | undefined",
+          "required": false,
+          "description": "Clamps the preview to this many lines with an ellipsis. The detail view shows the rest."
         },
         "onOpen": {
           "type": "(() => void) | undefined",
           "required": false,
-          "description": "Makes the card clickable (hover, press and focus states). The subject becomes the button; buttons inside keep their own action."
+          "description": "Makes the card clickable (hover, press and focus states). The subject becomes the button; links, buttons and popovers inside keep their own action."
         }
       }
     },
@@ -2856,7 +2954,7 @@
     },
     "Editor": {
       "file": "src/ds/editor.tsx",
-      "description": "Text editor for notes and messages: a field that opens into a formatting toolbar with Cancel and Save.\nClosed it is one line; focus opens it. Toolbar buttons wrap the selection in Markdown. Cmd/Ctrl+Enter saves, Escape cancels.\nUse Textarea for a plain form field without formatting.",
+      "description": "Text editor for notes and messages: a field that opens into a formatting toolbar with Cancel and Save.\nClosed it is one line; focus opens it. Toolbar buttons wrap the selection in Markdown. Bold, italic and underline are toggles:\nthey show as selected (aria-pressed) while the cursor is inside that mark, and pressing them again removes it. Cmd/Ctrl+Enter saves, Escape cancels.\nUse Textarea for a plain form field without formatting.",
       "status": "Beta",
       "since": "v0.1",
       "figma": "Editor",
@@ -3099,6 +3197,118 @@
           "type": "ReactNode",
           "required": false,
           "description": "Right slot, such as a Badge."
+        }
+      }
+    },
+    "PeopleList": {
+      "file": "src/ds/people-list.tsx",
+      "description": "Names of people inline, such as recipients or participants: \"Anna Berg, Ben Kohl +3\". Names are blue links to the person's record;\nyour own name stays plain. \"+N\" opens a list of exactly the hidden people on hover, click or Enter. Inherits the surrounding text style.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "People List",
+      "category": "Content",
+      "example": "<PeopleList people={[{ name: 'Anna Berg', href: '#/kontakte/1' }, { name: 'Ben Kohl', href: '#/kontakte/2' }]} max={1} moreLabel={(n) => `${n} weitere Personen`} />",
+      "props": {
+        "people": {
+          "type": "PersonItem[]",
+          "required": true,
+          "description": "People in order. The first `max` show inline; the rest sit behind \"+N\"."
+        },
+        "max": {
+          "type": "number | undefined",
+          "required": false,
+          "default": 2,
+          "description": "How many names show inline."
+        },
+        "moreLabel": {
+          "type": "((count: number) => string) | undefined",
+          "required": false,
+          "default": "(n) => `${n} more`",
+          "description": "Heading of the \"+N\" list, such as `(n) => \\`${n} weitere Personen\\``. Pass it in the page's language."
+        },
+        "className": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Extra class."
+        }
+      }
+    },
+    "FileChip": {
+      "file": "src/ds/file-chip.tsx",
+      "description": "An attached file as a compact pill: name and its own download button. Size and type live in the detail view. Use FileItem for uploads.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "File Chip",
+      "category": "Content",
+      "example": "<FileChip name=\"Preisliste.pdf\" onDownload={save} downloadLabel=\"Preisliste.pdf herunterladen\" />",
+      "props": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "File name, shown in full on hover when it is cut."
+        },
+        "onDownload": {
+          "type": "() => void",
+          "required": true,
+          "description": "Downloads the file."
+        },
+        "downloadLabel": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Accessible name of the download button. Pass it in the page's language. Default: \"Download <name>\"."
+        }
+      }
+    },
+    "FileChipList": {
+      "file": "src/ds/file-chip.tsx",
+      "description": "Attachments on one wrapping line, such as in an ActivityItem footer.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "File Chip",
+      "category": "Content",
+      "example": "<FileChipList label=\"Anhänge\" files={files} onDownload={save} />",
+      "props": {
+        "files": {
+          "type": "{ name: string; }[]",
+          "required": true,
+          "description": "Files in order."
+        },
+        "onDownload": {
+          "type": "(name: string) => void",
+          "required": true,
+          "description": "Downloads one file."
+        },
+        "downloadLabel": {
+          "type": "((name: string) => string) | undefined",
+          "required": false,
+          "description": "Accessible name of each download button. Pass it in the page's language."
+        },
+        "label": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Attachments",
+          "description": "Accessible name of the list, such as \"Anhänge\"."
+        }
+      }
+    },
+    "InlineList": {
+      "file": "src/ds/inline-list.tsx",
+      "description": "Short facts on one line, split by a thin vertical line: \"4. Nov. 2026, 14:20 | Johannes Finzer → Anna Berg | 12 Min.\". Inherits the surrounding text style.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Inline List",
+      "category": "Content",
+      "example": "<InlineList items={['4. Nov. 2026, 14:20', 'Johannes Finzer', '12 Min.']} />",
+      "props": {
+        "items": {
+          "type": "ReactNode[]",
+          "required": true,
+          "description": "Facts in order, such as a date, a person and a duration. Empty items are skipped."
+        },
+        "className": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Extra class."
         }
       }
     }

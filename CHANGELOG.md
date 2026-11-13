@@ -2,8 +2,23 @@
 
 ## [Unreleased] - 2026-11-10
 
+### Changed
+
+- `ActivityItem`: meta is a `div` (popovers may sit in it) and takes a list of facts split by a thin line (InlineList); `lines` clamps the preview; built-in rhythm (subject → meta 3xs, preview xs, footer s); the rail marker is centred on the subject row; links, buttons and popovers inside a clickable card stay clickable and on top. Figma: Activity Item rebuilt to match.
+- Links in running text (ActivityItem meta and preview) are underlined subtly, so colour is not the only cue (WCAG 1.4.1).
+- `UserMenu` compact: the accessible name comes from screen-reader text, not `aria-label`, so it matches the visible initials (WCAG 2.5.3).
+- `Breadcrumbs`: the current page keeps the trail's size and weight (Body Small) and differs only by colour (foreground/static/base). Figma: Breadcrumbs updated.
+
 ### Added
 
+- `InlineList`: short facts on one line split by a thin vertical line (8px either side); replaces dot separators everywhere. ActivityItem meta uses it. Figma: Data Display › Inline List.
+- `PeopleList`: inline names with an exact "+N" list on hover, click or Enter; your own name plain, others blue links. Figma: Data Display › People List.
+- `FileChip`, `FileChipList`: attachment pill with its own download. Figma: Data Display › File Chip.
+- `Editor`: bold, italic and underline are toggles with `aria-pressed`, shown Selected (accent fill, accent icon, Selected icon weight) while the cursor is inside that formatting; pressing again removes it. Hover, pressed and focus states for every tool. Figma: Forms › Editor Tool, Editor State=Formatting.
+- `Editor` fix: after a toolbar action the cursor lands inside the new formatting instead of jumping to the end.
+- `Combobox`: type a value (read through `parse`) or pick from a scrolling list that opens centred on the current value. Figma: Forms › Combobox.
+- `DatePicker` is typeable (DD.MM.YYYY, DD.MM., ISO) with the calendar button on the right; new `calendarLabel` prop and `parseDay` helper.
+- `Dropdown` list is capped at `size/dialog-sm`, scrolls, and opens at the selected option.
 - `SideNav` `theme="dark"`: navy rail from Figma Side Nav Theme=Dark (background/static/inverse, selected item background/accent/subtle).
 - `SideNav` counts now show on the collapsed rail as a small info badge, and the rail link's name includes the count.
 - `Icon`: `box-iso`, `chat-bubble-check`, `coin`, `credit-cards`, `list`, `page-edit`, `precision-tool`, `send-mail`, `shop`, `stats-down-square`, `view-grid`.

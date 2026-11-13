@@ -23,7 +23,9 @@ Read first: [Rules for agents](AGENTS.md). Ask: `npm run ds -- list | describe <
 - `EmptyState` (Beta, v0.1): Shown when there is nothing to display. Say why and offer the next action.
 - `TimelineItem` (Beta, v0.1): One event in a Timeline.
 - `Timeline` (Beta, v0.1): Chronological list of events, such as request history or an activity log.
-- `ActivityItem` (Beta, v0.1): A rich event in a Timeline, such as an email or a call, shown as a card next to an icon marker. Figma: Email Activity Item.
+- `ActivityItem` (Beta, v0.1): A rich event in a Timeline, such as an email, call or note, shown as a card next to an icon marker.
+Rhythm: subject and meta form one heading block, the preview sits apart, the footer apart again. The marker lines up with the subject.
+Figma: Activity Item.
 - `AccordionItem` (Beta, v0.1): One expandable row of an Accordion.
 - `Accordion` (Beta, v0.1): Stacked expandable sections, when people need only some of the content.
 - `Card` (Beta, v0.1): The one surface for grouped content: white, radius/xl, soft shadow. The Figma Card/* layouts are all this with different content. Do not stack cards inside cards.
@@ -37,6 +39,11 @@ Text: Enter or leaving the field saves, Escape cancels. Date: picking a day save
 - `ActivityCard` (Beta, v0.1): The next activity as one click target with an accent stroke, such as in a Fokus panel.
 The title is the button and stretches over the card, so links in `rows` keep working on top.
 - `StatusSummary` (Beta, v0.1): A quiet bar that states what is set and whether it works, such as the time of a Termin above its availability. Read-only.
+- `PeopleList` (Beta, v0.1): Names of people inline, such as recipients or participants: "Anna Berg, Ben Kohl +3". Names are blue links to the person's record;
+your own name stays plain. "+N" opens a list of exactly the hidden people on hover, click or Enter. Inherits the surrounding text style.
+- `FileChip` (Beta, v0.1): An attached file as a compact pill: name and its own download button. Size and type live in the detail view. Use FileItem for uploads.
+- `FileChipList` (Beta, v0.1): Attachments on one wrapping line, such as in an ActivityItem footer.
+- `InlineList` (Beta, v0.1): Short facts on one line, split by a thin vertical line: "4. Nov. 2026, 14:20 | Johannes Finzer → Anna Berg | 12 Min.". Inherits the surrounding text style.
 
 ## Actions and navigation
 
@@ -67,6 +74,7 @@ Place it directly under the field in a `Stack gap="2"` (8, same as label to inpu
 - `PersonChip` (Beta, v0.1): A person in a field or list, such as a participant: avatar (initials or picture), name and a remove button.
 Not a filter: use Chip for filters and tags. Grey fill, no stroke; the avatar sits inset on the left.
 - `Dropdown` (Beta, v0.1): Choose one value from a list. It opens below the field and supports the arrow keys. To run commands use Menu; for two to four visible choices use Radio or SegmentedControl.
+- `Combobox` (Beta, v0.1): A field you can type into or pick from a scrolling list, such as a time or a duration. Text is read on Enter or when the field loses focus; unreadable text goes back to the last value. For a fixed list without typing use Dropdown.
 - `RadioGroup` (Beta, v0.1): A labelled set of Radio options. Use it for two to five visible choices.
 - `Stepper` (Beta, v0.1): Change a small number with plus and minus buttons, such as a quantity.
 - `Slider` (Beta, v0.1): Pick a value on a range. Use Input when an exact number is required.
@@ -74,7 +82,7 @@ Not a filter: use Chip for filters and tags. Grey fill, no stroke; the avatar si
 - `FileItem` (Beta, v0.1): One uploaded file with its progress, result and a remove action.
 - `TagInput` (Beta, v0.1): Enter several values as removable tags. Enter or comma adds, Backspace removes the last one.
 - `Calendar` (Beta, v0.1): Month grid for picking one day. Use DatePicker for the field-plus-calendar pattern.
-- `DatePicker` (Beta, v0.1): A field that opens a Calendar. Use it for dates near today; use Input for known dates such as birthdays.
+- `DatePicker` (Beta, v0.1): A date field you can type into, with a button that opens a Calendar. Accepts 12.11.2026, 12.11. and ISO. Use it for dates near today; use Input for known dates such as birthdays.
 - `SearchField` (Beta, v0.1): Search box with a suggestion list (combobox). Type to see matches, arrow keys to move, Enter to open one, Escape to close. Width is size/field-lg.
 - `Input` (Beta, v0.1): Single-line text entry. `type="password"` adds a built-in show or hide button, so never build one yourself. For choosing from a list use Dropdown.
 - `Textarea` (Beta, v0.1): Multi-line text entry for comments and descriptions. Use Input for single-line values.
@@ -85,7 +93,8 @@ Not a filter: use Chip for filters and tags. Grey fill, no stroke; the avatar si
 hits on the right. Matches are highlighted. Arrow keys move through hits, Enter opens one, Escape closes.
 For a simple field with a short suggestion list use SearchField.
 - `Editor` (Beta, v0.1): Text editor for notes and messages: a field that opens into a formatting toolbar with Cancel and Save.
-Closed it is one line; focus opens it. Toolbar buttons wrap the selection in Markdown. Cmd/Ctrl+Enter saves, Escape cancels.
+Closed it is one line; focus opens it. Toolbar buttons wrap the selection in Markdown. Bold, italic and underline are toggles:
+they show as selected (aria-pressed) while the cursor is inside that mark, and pressing them again removes it. Cmd/Ctrl+Enter saves, Escape cancels.
 Use Textarea for a plain form field without formatting.
 
 ## Feedback and overlays

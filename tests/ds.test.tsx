@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import * as React from 'react';
 import { afterEach } from 'vitest';
-import { Button, Input, Toggle, ToastProvider, useToast, Pagination, Table, Dropdown, Checkbox, Alert, Steps, SideNav, Breadcrumbs, Icon, GlobalSearch, Menu, IconButton, LabelPicker, InlineEdit, Card, KeyValueList, ActivityItem, Timeline, TopNav, FilterTabs, PageHeader, SplitButton, FieldAction, CloseButton, Editor, AvailabilityTimeline, ActivityCard, DateNav, SegmentedControl, Chip, PersonChip } from '../src/ds/index';
+import { Button, Input, Toggle, ToastProvider, useToast, Pagination, Table, Dropdown, Checkbox, Alert, Steps, SideNav, Breadcrumbs, Icon, GlobalSearch, Menu, IconButton, LabelPicker, InlineEdit, Card, KeyValueList, ActivityItem, Timeline, TopNav, FilterTabs, PageHeader, SplitButton, FieldAction, CloseButton, Editor, AvailabilityTimeline, ActivityCard, DateNav, SegmentedControl, Chip, PersonChip, Combobox, DatePicker, parseDay, PeopleList, FileChipList } from '../src/ds/index';
 
 afterEach(cleanup);
 
@@ -260,5 +260,98 @@ describe('@euvino/ds', () => {
     expect(document.querySelectorAll('.eu-pchip__avatar img').length).toBe(1);
     fireEvent.click(screen.getByRole('button', { name: 'Max Eul entfernen' }));
     expect(onRemove).toHaveBeenCalled();
+  });
+});
+
+describe('Combobox and typed dates', () => {
+  it('accepts a typed value through parse and a picked option', () => {
+    const onChange = vi.fn();
+    render(<Combobox label="Beginn" value="540" options={[{ value: '540', label: '09:00' }, { value: '555', label: '09:15' }]} format={(v) => v} parse={(t) => (t === '930' ? '570' : undefined)} onChange={onChange} />);
+    const box = screen.getByRole('combobox', { name: 'Beginn' });
+    expect((box as HTMLInputElement).value).toBe('09:00');
+    fireEvent.change(box, { target: { value: '930' } });
+    fireEvent.keyDown(box, { key: 'Enter' });
+    expect(onChange).toHaveBeenLastCalledWith('570');
+    fireEvent.click(box);
+    fireEvent.click(screen.getByRole('option', { name: '09:15' }));
+    expect(onChange).toHaveBeenLastCalledWith('555');
+  });
+  it('puts unreadable text back', () => {
+    const onChange = vi.fn();
+    render(<Combobox label="Dauer" value="30" options={[{ value: '30', label: '30 Min.' }]} onChange={onChange} />);
+    const box = screen.getByRole('combobox', { name: 'Dauer' }) as HTMLInputElement;
+    fireEvent.change(box, { target: { value: 'xyz' } });
+    fireEvent.blur(box);
+    expect(onChange).not.toHaveBeenCalled();
+    expect(box.value).toBe('30 Min.');
+  });
+  it('reads typed days', () => {
+    expect(parseDay('12.11.2026')).toBe('2026-11-12');
+    expect(parseDay('1.2.26')).toBe('2026-02-01');
+    expect(parseDay('2026-11-12')).toBe('2026-11-12');
+    expect(parseDay('31.02.2026')).toBeUndefined();
+    const onChange = vi.fn();
+    render(<DatePicker label="Datum" locale="de-DE" value="2026-11-12" onChange={onChange} />);
+    const field = screen.getByLabelText('Datum') as HTMLInputElement;
+    fireEvent.change(field, { target: { value: '13.11.2026' } });
+    fireEvent.blur(field);
+    expect(onChange).toHaveBeenCalledWith('2026-11-13');
+  });
+});
+
+describe('Editor toggles', () => {
+  it('finds the mark around the cursor', async () => {
+    const { markAround } = await import('../src/ds/editor');
+    expect(markAround('a **bold** b', 'bold', 5, 5)).toEqual([2, 4, 8, 10]);
+    expect(markAround('a **bold** b', 'bold', 11, 11)).toBeNull();
+    expect(markAround('x _it_ y', 'italic', 4, 4)).toEqual([2, 3, 5, 6]);
+    expect(markAround('<u>u</u>', 'underline', 3, 4)).toEqual([0, 3, 4, 8]);
+  });
+  it('shows bold as pressed inside bold text and removes it on a second press', () => {
+    function Host() { const [v, setV] = React.useState('**Hallo**'); return <Editor label="Notiz" value={v} onChange={setV} onSave={() => {}} defaultExpanded />; }
+    render(<Host />);
+    const box = screen.getByRole('textbox', { name: 'Notiz' }) as HTMLTextAreaElement;
+    box.setSelectionRange(4, 4);
+    fireEvent.select(box);
+    const bold = screen.getByRole('button', { name: 'Bold' });
+    expect(bold.getAttribute('aria-pressed')).toBe('true');
+    expect(screen.getByRole('button', { name: 'Italic' }).getAttribute('aria-pressed')).toBe('false');
+    fireEvent.click(bold);
+    expect(box.value).toBe('Hallo');
+  });
+});
+
+describe('Editor nested marks', () => {
+  it('finds italic inside bold', async () => {
+    const { markAround } = await import('../src/ds/editor');
+    expect(markAround('**_x_**', 'italic', 4, 4)).toEqual([2, 3, 4, 5]);
+    expect(markAround('**_x_**', 'bold', 4, 4)).toEqual([0, 2, 5, 7]);
+  });
+});
+
+describe('PeopleList, FileChipList and ActivityItem meta', () => {
+  it('links people, keeps the current user plain and lists exactly the hidden ones', () => {
+    render(<PeopleList people={[{ name: 'Ich', current: true }, { name: 'Anna Berg', href: '#/a' }, { name: 'Ben Kohl', href: '#/b', detail: 'ben@x.de' }, { name: 'Cem Arslan', onClick: () => {} }]} moreLabel={(n) => `${n} weitere Personen`} />);
+    expect(screen.queryByRole('link', { name: 'Ich' })).toBeNull();
+    expect(screen.getByRole('link', { name: 'Anna Berg' }).getAttribute('href')).toBe('#/a');
+    const more = screen.getByRole('button', { name: '2 weitere Personen' });
+    expect(more.textContent).toBe('+2');
+    fireEvent.click(more);
+    expect(screen.getByRole('link', { name: 'Ben Kohl' })).toBeTruthy();
+    expect(screen.getByText('ben@x.de')).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Cem Arslan' })).toBeTruthy();
+  });
+  it('downloads each attachment from its own button', () => {
+    const onDownload = vi.fn();
+    render(<FileChipList label="Anhänge" files={[{ name: 'a.pdf' }, { name: 'b.xlsx' }]} onDownload={onDownload} downloadLabel={(n) => `${n} herunterladen`} />);
+    fireEvent.click(screen.getByRole('button', { name: 'b.xlsx herunterladen' }));
+    expect(onDownload).toHaveBeenCalledWith('b.xlsx');
+    expect(screen.getByRole('list', { name: 'Anhänge' }).children.length).toBe(2);
+  });
+  it('separates meta facts and clamps the preview', () => {
+    const { container } = render(<Timeline label="Verlauf"><ActivityItem icon="mail" title="Betreff" meta={['28. Okt.', null, 'Anna']} lines={2}>Text</ActivityItem></Timeline>);
+    expect(container.querySelectorAll('.eu-inline-list__sep').length).toBe(1);
+    expect(container.querySelector('.eu-activity__body.is-clamped')).toBeTruthy();
+    expect(container.querySelector('p .eu-popover, p div')).toBeNull();
   });
 });

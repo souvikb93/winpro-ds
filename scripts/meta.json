@@ -67,6 +67,11 @@
     "figma": "Dropdown",
     "example": "<Dropdown label=\"Role\" value={v} onChange={setV} options={[{value:'admin',label:'Admin'}]} />"
   },
+  "Combobox": {
+    "category": "Inputs",
+    "figma": "Combobox",
+    "example": "<Combobox label=\"Beginn\" value={v} onChange={setV} parse={parseTime} options={[{value:'540',label:'09:00'}]} />"
+  },
   "Checkbox": {
     "category": "Inputs",
     "figma": "Checkbox/Checkbox + Text",
@@ -314,10 +319,30 @@
     "figma": "Input (Style=Outline) + Calendar (not in Figma yet)",
     "example": "<InlineEdit label=\"Edit name\" value={name} onChange={setName} />"
   },
+  "InlineList": {
+    "category": "Content",
+    "figma": "Inline List",
+    "example": "<InlineList items={['4. Nov. 2026, 14:20', 'Johannes Finzer', '12 Min.']} />"
+  },
+  "PeopleList": {
+    "category": "Content",
+    "figma": "People List",
+    "example": "<PeopleList people={[{ name: 'Anna Berg', href: '#/kontakte/1' }, { name: 'Ben Kohl', href: '#/kontakte/2' }]} max={1} moreLabel={(n) => `${n} weitere Personen`} />"
+  },
+  "FileChip": {
+    "category": "Content",
+    "figma": "File Chip",
+    "example": "<FileChip name=\"Preisliste.pdf\" onDownload={save} downloadLabel=\"Preisliste.pdf herunterladen\" />"
+  },
+  "FileChipList": {
+    "category": "Content",
+    "figma": "File Chip",
+    "example": "<FileChipList label=\"Anhänge\" files={files} onDownload={save} />"
+  },
   "ActivityItem": {
     "category": "Content",
     "figma": "Email Activity Item",
-    "example": "<ActivityItem icon=\"mail\" title=\"Subject\" meta=\"Today · Anna → Ben\">Preview</ActivityItem>"
+    "example": "<ActivityItem icon=\"mail\" title=\"Subject\" meta={['28 Oct, 10:24', <>Anna → <PeopleList people={to} max={1} /></>]} lines={2} footer={<FileChipList files={files} onDownload={save} />} onOpen={open}>Preview</ActivityItem>"
   },
   "KeyValueList": {
     "category": "Content",

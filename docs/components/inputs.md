@@ -49,6 +49,34 @@ Figma: Dropdown
 | `id` | string \| undefined |  | Explicit id for the trigger. |
 | `className` | string \| undefined |  | Extra class. |
 
+## Combobox
+
+A field you can type into or pick from a scrolling list, such as a time or a duration. Text is read on Enter or when the field loses focus; unreadable text goes back to the last value. For a fixed list without typing use Dropdown.
+
+Figma: Combobox
+
+```tsx
+<Combobox label="Beginn" value={v} onChange={setV} parse={parseTime} options={[{value:'540',label:'09:00'}]} />
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `options` (required) | DropdownOption[] |  | Suggestions, one row each. The list scrolls and opens at the current value. |
+| `value` | string \| undefined |  | Current value. |
+| `onChange` | ((value: string) => void) \| undefined |  | Called with a picked option or a typed value that `parse` accepted. |
+| `parse` | ((text: string) => string \| undefined) \| undefined |  | Turns typed text into a value, or `undefined` when it cannot be read. Without it only option labels are accepted. |
+| `format` | ((value: string) => string) \| undefined |  | Text shown for a value that is not in `options`. Defaults to the value. |
+| `label` | string \| undefined |  | Visible label. |
+| `hideLabel` | boolean \| undefined |  | Keeps the label for screen readers only. |
+| `placeholder` | string \| undefined |  | Placeholder while empty. |
+| `help` | ReactNode |  | Help text. |
+| `error` | string \| undefined |  | Error message. |
+| `disabled` | boolean \| undefined |  | Blocks interaction. |
+| `required` | boolean \| undefined |  | Marks the field as required. |
+| `id` | string \| undefined |  | Explicit id for the input. |
+| `className` | string \| undefined |  | Extra class. |
+| `toggleLabel` | string \| undefined | Show options | Accessible name of the open button. Pass it in the page's language. |
+
 ## RadioGroup
 
 A labelled set of Radio options. Use it for two to five visible choices.
@@ -165,7 +193,7 @@ Figma: Calendar
 
 ## DatePicker
 
-A field that opens a Calendar. Use it for dates near today; use Input for known dates such as birthdays.
+A date field you can type into, with a button that opens a Calendar. Accepts 12.11.2026, 12.11. and ISO. Use it for dates near today; use Input for known dates such as birthdays.
 
 Figma: Date Picker
 
@@ -176,6 +204,7 @@ Figma: Date Picker
 | `help` | string \| undefined |  | Help text. |
 | `error` | string \| undefined |  | Error message. |
 | `disabled` | boolean \| undefined |  | Blocks interaction. |
+| `calendarLabel` | string \| undefined | Open calendar | Accessible name of the calendar button. Pass it in the page's language. |
 | `max` | string \| undefined |  | Latest day that can be picked, as ISO. |
 | `min` | string \| undefined |  | Earliest day that can be picked, as ISO. |
 | `value` | string \| undefined |  | Selected day as ISO `YYYY-MM-DD`. |
@@ -321,7 +350,8 @@ Figma: Input (Style=Filled) + search panel (not in Figma yet)
 ## Editor
 
 Text editor for notes and messages: a field that opens into a formatting toolbar with Cancel and Save.
-Closed it is one line; focus opens it. Toolbar buttons wrap the selection in Markdown. Cmd/Ctrl+Enter saves, Escape cancels.
+Closed it is one line; focus opens it. Toolbar buttons wrap the selection in Markdown. Bold, italic and underline are toggles:
+they show as selected (aria-pressed) while the cursor is inside that mark, and pressing them again removes it. Cmd/Ctrl+Enter saves, Escape cancels.
 Use Textarea for a plain form field without formatting.
 
 Figma: Editor

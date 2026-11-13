@@ -146,24 +146,27 @@ Figma: Timeline
 
 ## ActivityItem
 
-A rich event in a Timeline, such as an email or a call, shown as a card next to an icon marker. Figma: Email Activity Item.
+A rich event in a Timeline, such as an email, call or note, shown as a card next to an icon marker.
+Rhythm: subject and meta form one heading block, the preview sits apart, the footer apart again. The marker lines up with the subject.
+Figma: Activity Item.
 
 Figma: Email Activity Item
 
 ```tsx
-<ActivityItem icon="mail" title="Subject" meta="Today · Anna → Ben">Preview</ActivityItem>
+<ActivityItem icon="mail" title="Subject" meta={['28 Oct, 10:24', <>Anna → <PeopleList people={to} max={1} /></>]} lines={2} footer={<FileChipList files={files} onDownload={save} />} onOpen={open}>Preview</ActivityItem>
 ```
 
 | Prop | Type | Default | Meaning |
 |---|---|---|---|
-| `icon` (required) | "search" \| "group" \| "link" \| "list" \| "menu" \| "page" \| "copy" \| "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| ... 61 more ... \| "underline" |  | Marker icon, such as `mail` for an email or `phone` for a call. |
-| `title` (required) | ReactNode |  | Subject line. |
-| `meta` | ReactNode |  | Line under the subject: date, sender and recipients. |
-| `children` | ReactNode |  | Preview text. One line, ends with an ellipsis. |
-| `footer` | ReactNode |  | Bottom row: people, organisation, links. |
-| `actions` | ReactNode |  | Right of the subject: IconButtons and a Button such as Reply. |
-| `expanded` | boolean \| undefined |  | Shows the whole preview text instead of one line. |
-| `onOpen` | (() => void) \| undefined |  | Makes the card clickable (hover, press and focus states). The subject becomes the button; buttons inside keep their own action. |
+| `icon` (required) | "search" \| "group" \| "link" \| "list" \| "menu" \| "page" \| "copy" \| "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| ... 61 more ... \| "underline" |  | Marker icon on the timeline rail, such as `mail` for an email or `phone` for a call. The card itself repeats no type icon. |
+| `title` (required) | ReactNode |  | Subject line, the strongest text of the card. |
+| `meta` | ReactNode \| ReactNode[] |  | Quiet line right under the subject: date, sender and recipients. Pass a list to split the facts with a thin line (InlineList). |
+| `children` | ReactNode |  | Preview text. One line by default; see `lines` and `expanded`. |
+| `footer` | ReactNode |  | Bottom row, such as attachments (FileChipList) or related people. Several children are split by a divider. |
+| `actions` | ReactNode |  | Right of the subject: small buttons such as a Reply SplitButton and a more IconButton. The row keeps the height of a small button. |
+| `expanded` | boolean \| undefined |  | Shows the whole preview text. |
+| `lines` | number \| undefined |  | Clamps the preview to this many lines with an ellipsis. The detail view shows the rest. |
+| `onOpen` | (() => void) \| undefined |  | Makes the card clickable (hover, press and focus states). The subject becomes the button; links, buttons and popovers inside keep their own action. |
 
 ## AccordionItem
 
@@ -328,3 +331,69 @@ Figma: Status Summary
 | `description` | ReactNode |  | Second line, such as who is busy. |
 | `tone` | "default" \| "error" \| undefined | default | `default` accent tile, `error` red tile and red description. |
 | `trailing` | ReactNode |  | Right slot, such as a Badge. |
+
+## PeopleList
+
+Names of people inline, such as recipients or participants: "Anna Berg, Ben Kohl +3". Names are blue links to the person's record;
+your own name stays plain. "+N" opens a list of exactly the hidden people on hover, click or Enter. Inherits the surrounding text style.
+
+Figma: People List
+
+```tsx
+<PeopleList people={[{ name: 'Anna Berg', href: '#/kontakte/1' }, { name: 'Ben Kohl', href: '#/kontakte/2' }]} max={1} moreLabel={(n) => `${n} weitere Personen`} />
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `people` (required) | PersonItem[] |  | People in order. The first `max` show inline; the rest sit behind "+N". |
+| `max` | number \| undefined | 2 | How many names show inline. |
+| `moreLabel` | ((count: number) => string) \| undefined | (n) => `${n} more` | Heading of the "+N" list, such as `(n) => \`${n} weitere Personen\``. Pass it in the page's language. |
+| `className` | string \| undefined |  | Extra class. |
+
+## FileChip
+
+An attached file as a compact pill: name and its own download button. Size and type live in the detail view. Use FileItem for uploads.
+
+Figma: File Chip
+
+```tsx
+<FileChip name="Preisliste.pdf" onDownload={save} downloadLabel="Preisliste.pdf herunterladen" />
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `name` (required) | string |  | File name, shown in full on hover when it is cut. |
+| `onDownload` (required) | () => void |  | Downloads the file. |
+| `downloadLabel` | string \| undefined |  | Accessible name of the download button. Pass it in the page's language. Default: "Download <name>". |
+
+## FileChipList
+
+Attachments on one wrapping line, such as in an ActivityItem footer.
+
+Figma: File Chip
+
+```tsx
+<FileChipList label="Anhänge" files={files} onDownload={save} />
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `files` (required) | { name: string; }[] |  | Files in order. |
+| `onDownload` (required) | (name: string) => void |  | Downloads one file. |
+| `downloadLabel` | ((name: string) => string) \| undefined |  | Accessible name of each download button. Pass it in the page's language. |
+| `label` | string \| undefined | Attachments | Accessible name of the list, such as "Anhänge". |
+
+## InlineList
+
+Short facts on one line, split by a thin vertical line: "4. Nov. 2026, 14:20 | Johannes Finzer → Anna Berg | 12 Min.". Inherits the surrounding text style.
+
+Figma: Inline List
+
+```tsx
+<InlineList items={['4. Nov. 2026, 14:20', 'Johannes Finzer', '12 Min.']} />
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `items` (required) | ReactNode[] |  | Facts in order, such as a date, a person and a duration. Empty items are skipped. |
+| `className` | string \| undefined |  | Extra class. |

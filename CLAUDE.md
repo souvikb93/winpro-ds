@@ -51,6 +51,10 @@ Everything comes from that one import. CSS loads with it. Never import a UI, ico
 | Columns of data | `Table`, with `Pagination` below it | `List` |
 | Rows of related items | `List` and `ListItem` | `Table`, stacked cards |
 | Events over time | `Timeline` | `List` |
+| An email, call or note in a history | `ActivityItem` in a `Timeline` | a hand-built card |
+| Several people named inline, such as recipients | `PeopleList` (own name plain, others blue links, exact "+N") | names joined by hand, a "+N" in plain text |
+| Short facts on one line (date, time, duration) | `InlineList` | dots or pipes typed into a string |
+| Attached files with a download | `FileChipList` | `FileItem` (that is for uploads) |
 | Show or hide a password | `Input type="password"`: the button is built in | your own eye button |
 | Page title | `PageHeader` | a bare heading |
 
