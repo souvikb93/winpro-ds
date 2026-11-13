@@ -4,6 +4,9 @@
 
 ### Changed
 
+- `Modal`: at least spacing/xl on the sides too.
+- `Modal`: keeps at least spacing/xl above and below on every screen; when the window is too short, only the body scrolls and the title and buttons stay in view (the XLarge exception that switched scrolling off is gone). Figma Modal description updated.
+- `Dropdown`, `Combobox`, `DatePicker`: open upward when there is not enough room below, measured against the scrolling area or the window.
 - `Icon` `more-horiz` / `more-vert`: solid dots, 4.5 of 24 (about twice the diameter of the Iconoir outline dots), so menu triggers are easy to see in the side nav, tables and cards. Figma icon updated the same way.
 - `Table` column `align="center"`, for columns of icon buttons such as row actions.
 - Code ↔ Figma parity audit (every component measured in both):
