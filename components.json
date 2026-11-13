@@ -12,7 +12,7 @@
       "example": "<Icon name=\"trash\" size=\"sm\" />",
       "props": {
         "name": {
-          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 55 more ... | \"map-pin\"",
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 62 more ... | \"underline\"",
           "required": true,
           "description": "Which icon to draw, in Iconoir naming: `trash`, `check`, `warning-triangle`, `close`."
         },
@@ -101,7 +101,7 @@
           "type": "TextStyle | undefined",
           "required": false,
           "default": "body",
-          "description": "Text style from the library. `h1` to `h6` are Roboto Condensed Bold; everything else is Roboto."
+          "description": "Text style from the library. `h1` to `h6` are Roboto Condensed Bold; everything else is Roboto. `caption-medium` is the field-label style (13 medium), for headings that sit among form fields."
         },
         "tone": {
           "type": "TextTone | undefined",
@@ -175,7 +175,7 @@
       "description": "Switches the display of the same content in place, such as List and Grid. Not for page navigation (TopNav). Segments share the width equally, sized to the longest label.",
       "status": "Beta",
       "since": "v0.1",
-      "figma": "Segmented Control",
+      "figma": "Segmented Control (Size=Medium · Small)",
       "category": "Actions and navigation",
       "example": "<SegmentedControl label=\"View\" value={v} onChange={setV} options={[{value:'list',label:'List'},{value:'grid',label:'Grid'}]} />",
       "props": {
@@ -199,6 +199,12 @@
           "required": true,
           "description": "Accessible name of the group, such as \"View\"."
         },
+        "size": {
+          "type": "\"small\" | \"medium\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "`medium` 40 high (default). `small` 32 high with caption text, for toolbars inside cards."
+        },
         "className": {
           "type": "string | undefined",
           "required": false,
@@ -221,7 +227,7 @@
           "description": "Selected filter state, announced with `aria-pressed`."
         },
         "icon": {
-          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 56 more ... | undefined",
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 63 more ... | undefined",
           "required": false,
           "description": "Icon before the text."
         },
@@ -235,6 +241,59 @@
           "required": false,
           "default": "Remove",
           "description": "Accessible name of the remove button, such as \"Remove Germany\"."
+        }
+      }
+    },
+    "PersonChip": {
+      "file": "src/ds/button.tsx",
+      "description": "A person in a field or list, such as a participant: avatar (initials or picture), name and a remove button.\nNot a filter: use Chip for filters and tags. Grey fill, no stroke; the avatar sits inset on the left.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Person Chip",
+      "category": "Inputs",
+      "example": "<PersonChip name=\"Maximilian Eul\" photo={url} onRemove={remove} removeLabel=\"Maximilian Eul entfernen\" />",
+      "props": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Person's name. Shown, and gives the avatar's initials."
+        },
+        "photo": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Picture URL. Without it the avatar shows initials."
+        },
+        "suffix": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Extra text after the name, such as \"(Sie)\"."
+        },
+        "onRemove": {
+          "type": "(() => void) | undefined",
+          "required": false,
+          "description": "Shows the remove button. Leave out for someone who cannot be removed, such as the organiser."
+        },
+        "removeLabel": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Remove",
+          "description": "Accessible name of the remove button, such as \"Maximilian Eul entfernen\"."
+        },
+        "onClick": {
+          "type": "(() => void) | undefined",
+          "required": false,
+          "description": "Opens the person, such as their contact. Makes the name area a button."
+        },
+        "size": {
+          "type": "\"small\" | \"medium\" | undefined",
+          "required": false,
+          "default": "medium",
+          "description": "`medium` 32 high (default). `small` 28 high with caption text."
+        },
+        "disabled": {
+          "type": "boolean | undefined",
+          "required": false,
+          "description": ""
         }
       }
     },
@@ -260,7 +319,7 @@
           "description": "Height: `tiny` 24, `small` 32, `medium` 40 (default), `large` 48, `giant` 56."
         },
         "icon": {
-          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 56 more ... | undefined",
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 63 more ... | undefined",
           "required": false,
           "description": "Which icon to show. Buttons are text-only by default; add an icon only when it adds meaning. Pick the side with `iconPosition`."
         },
@@ -292,7 +351,7 @@
       "example": "<IconButton icon=\"trash\" label=\"Remove file\" />",
       "props": {
         "icon": {
-          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 55 more ... | \"map-pin\"",
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 62 more ... | \"underline\"",
           "required": true,
           "description": "The icon to show."
         },
@@ -851,7 +910,7 @@
           "description": "`outline` white field with a border (default). `filled` tinted field for a header search (Figma Input Style=Filled)."
         },
         "iconLeft": {
-          "type": "\"list\" | \"label\" | \"help\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | ... 56 more ... | undefined",
+          "type": "\"list\" | \"label\" | \"help\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | ... 63 more ... | undefined",
           "required": false,
           "description": "Icon inside the field on the left."
         },
@@ -1147,7 +1206,7 @@
           "description": "`tiny`, `small` or `medium`."
         },
         "icon": {
-          "type": "\"info\" | \"search\" | \"group\" | \"link\" | \"list\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | ... 55 more ... | undefined",
+          "type": "\"info\" | \"search\" | \"group\" | \"link\" | \"list\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | ... 62 more ... | undefined",
           "required": false,
           "description": "Icon before the text. Pair status with text or an icon, never colour alone."
         }
@@ -1715,9 +1774,14 @@
           "description": "`large` Heading H1 for top-level pages (default). `medium` Heading H4 for record pages, such as one organisation."
         },
         "icon": {
-          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 56 more ... | undefined",
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 63 more ... | undefined",
           "required": false,
-          "description": "Icon in a tile before the title, such as `building` for an organisation."
+          "description": "Icon in a tile before the title, such as `building` for an organisation. With `meta`, the tile sits beside the title and the meta row."
+        },
+        "meta": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Row under the title for short record facts, such as a LabelPicker and a location. Wrap each fact in its own span; they sit on one line, spaced apart."
         }
       }
     },
@@ -1845,6 +1909,12 @@
           "type": "\"online\" | \"offline\" | \"busy\" | undefined",
           "required": false,
           "description": "Status dot. Pair it with text if the status matters."
+        },
+        "tone": {
+          "type": "\"light\" | \"solid\" | undefined",
+          "required": false,
+          "default": "light",
+          "description": "Initials on `light` accent tint (default, Figma Type=Letter Light) or `solid` accent (Figma Type=Letter)."
         }
       }
     },
@@ -1955,7 +2025,7 @@
           "description": "`small` 40, `medium` 48, `large` 64."
         },
         "icon": {
-          "type": "\"search\" | \"group\" | \"link\" | \"list\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | ... 55 more ... | undefined",
+          "type": "\"search\" | \"group\" | \"link\" | \"list\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | ... 62 more ... | undefined",
           "required": false,
           "default": "box",
           "description": "Placeholder icon."
@@ -1982,7 +2052,7 @@
           "description": "What to do next."
         },
         "icon": {
-          "type": "\"search\" | \"group\" | \"link\" | \"list\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | ... 55 more ... | undefined",
+          "type": "\"search\" | \"group\" | \"link\" | \"list\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | ... 62 more ... | undefined",
           "required": false,
           "default": "box",
           "description": "Icon."
@@ -2068,7 +2138,7 @@
       "example": "<ActivityItem icon=\"mail\" title=\"Subject\" meta=\"Today · Anna → Ben\">Preview</ActivityItem>",
       "props": {
         "icon": {
-          "type": "\"search\" | \"group\" | \"link\" | \"list\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | ... 54 more ... | \"map-pin\"",
+          "type": "\"search\" | \"group\" | \"link\" | \"list\" | \"menu\" | \"page\" | \"copy\" | \"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | ... 61 more ... | \"underline\"",
           "required": true,
           "description": "Marker icon, such as `mail` for an email or `phone` for a call."
         },
@@ -2426,6 +2496,27 @@
         }
       }
     },
+    "BreakdownBar": {
+      "file": "src/ds/charts.tsx",
+      "description": "One stacked bar plus rows of name, count and share. Use it for compact breakdowns in a side panel.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Breakdown Bar",
+      "category": "Charts",
+      "example": null,
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the whole breakdown, such as \"Top-Aktivitäten\"."
+        },
+        "items": {
+          "type": "BreakdownDatum[]",
+          "required": true,
+          "description": "Parts of the whole, largest first. Values are counts; the share is worked out."
+        }
+      }
+    },
     "Stat": {
       "file": "src/ds/charts.tsx",
       "description": "One KPI: label, value and change.",
@@ -2609,6 +2700,12 @@
           "type": "{ search?: string | undefined; add?: string | undefined; addNamed?: ((name: string) => string) | undefined; empty?: string | undefined; none?: string | undefined; } | undefined",
           "required": false,
           "description": "Names of the built-in parts. Pass them in the page's language."
+        },
+        "size": {
+          "type": "\"tiny\" | \"small\" | undefined",
+          "required": false,
+          "default": "tiny",
+          "description": "Badge size of the current label: `tiny` in tables and lists (default), `small` in a PageHeader meta row."
         }
       }
     },
@@ -2702,7 +2799,7 @@
           "description": "Height, same scale as Button: `small` 28, `medium` 38 (default), `large` 44."
         },
         "icon": {
-          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 56 more ... | undefined",
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 63 more ... | undefined",
           "required": false,
           "description": "Icon before the label, such as `plus` for create actions."
         },
@@ -2728,7 +2825,7 @@
           "description": "What it adds or does, verb last in German UIs: \"Telefonnummer hinzufügen\"."
         },
         "icon": {
-          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 56 more ... | undefined",
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 63 more ... | undefined",
           "required": false,
           "default": "plus",
           "description": "Leading icon. Defaults to `plus`."
@@ -2754,6 +2851,254 @@
           "required": false,
           "default": "medium",
           "description": "`medium` for dialogs and drawers (32 area, 20 icon), `small` for toasts and alerts (24 area, 16 icon)."
+        }
+      }
+    },
+    "Editor": {
+      "file": "src/ds/editor.tsx",
+      "description": "Text editor for notes and messages: a field that opens into a formatting toolbar with Cancel and Save.\nClosed it is one line; focus opens it. Toolbar buttons wrap the selection in Markdown. Cmd/Ctrl+Enter saves, Escape cancels.\nUse Textarea for a plain form field without formatting.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Editor",
+      "category": "Inputs",
+      "example": "<Editor label=\"Notiz\" placeholder=\"Notiz schreiben … Mit @ jemanden erwähnen\" value={v} onChange={setV} onSave={save} labels={{ cancel: 'Abbrechen', save: 'Speichern' }} />",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the text field, such as \"Note\"."
+        },
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "Current text. Formatting is written as Markdown (`**bold**`, `_italic_`, `- item`)."
+        },
+        "onChange": {
+          "type": "(value: string) => void",
+          "required": true,
+          "description": "Called with the new text."
+        },
+        "onSave": {
+          "type": "(value: string) => void",
+          "required": true,
+          "description": "Called with the text when someone saves. Clear `value` afterwards."
+        },
+        "onCancel": {
+          "type": "(() => void) | undefined",
+          "required": false,
+          "description": "Called after Cancel clears the text and closes the editor."
+        },
+        "placeholder": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Hint in the empty field, such as \"Write a note … Mention someone with\n@ \"."
+        },
+        "defaultExpanded": {
+          "type": "boolean | undefined",
+          "required": false,
+          "default": false,
+          "description": "Starts open with the toolbar showing. By default it opens on focus and closes when empty and left."
+        },
+        "labels": {
+          "type": "EditorLabels | undefined",
+          "required": false,
+          "description": "Names of the built-in parts. Pass them in the page's language."
+        }
+      }
+    },
+    "DateNav": {
+      "file": "src/ds/scheduling.tsx",
+      "description": "A date between two bare chevrons that step back and forward. The chevrons have no box; their colour changes on hover.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Date Nav",
+      "category": "Actions and navigation",
+      "example": "<DateNav label=\"Mittwoch, 11. November 2026\" onPrevious={prev} onNext={next} previousLabel=\"Vorheriger Tag\" nextLabel=\"Nächster Tag\" />",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "The date or range shown, such as \"Mittwoch, 11. November 2026\"."
+        },
+        "onPrevious": {
+          "type": "() => void",
+          "required": true,
+          "description": ""
+        },
+        "onNext": {
+          "type": "() => void",
+          "required": true,
+          "description": ""
+        },
+        "previousLabel": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Previous",
+          "description": "Accessible names of the arrows, in the page's language."
+        },
+        "nextLabel": {
+          "type": "string | undefined",
+          "required": false,
+          "default": "Next",
+          "description": ""
+        }
+      }
+    },
+    "ActivityCard": {
+      "file": "src/ds/scheduling.tsx",
+      "description": "The next activity as one click target with an accent stroke, such as in a Fokus panel.\nThe title is the button and stretches over the card, so links in `rows` keep working on top.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Activity Card",
+      "category": "Content",
+      "example": "<ActivityCard title=\"Jahresgespräch vorbereiten\" type=\"Termin\" rows={[{ icon: 'calendar', content: 'Mi, 11. Nov. 2026 · 09:00–09:30' }]} onOpen={open} />",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Activity title. The whole card opens it."
+        },
+        "type": {
+          "type": "string | undefined",
+          "required": false,
+          "description": "Type under the title, such as \"Termin\"."
+        },
+        "rows": {
+          "type": "ActivityCardRow[] | undefined",
+          "required": false,
+          "description": "Short facts with an icon each, such as date and participants. Links inside stay their own targets."
+        },
+        "onOpen": {
+          "type": "() => void",
+          "required": true,
+          "description": "Opens the activity."
+        }
+      }
+    },
+    "AvailabilityTimeline": {
+      "file": "src/ds/scheduling.tsx",
+      "description": "Shared availability, as in a scheduling assistant: one row per person on one time axis, plus an \"all participants\" row.\nFree time for everyone is a green fill, the planned time in conflict a red fill, the chosen slot a green frame.\nFills sit behind calendar entries and grid lines, so nothing under them is hidden. Entries show no titles.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Availability Timeline",
+      "category": "Charts",
+      "example": "<AvailabilityTimeline title=\"Mittwoch, 11. November 2026\" columns={[{ id: '2026-11-11', label: 'Mi 11.' }]} rows={rows} free={free} selection={{ column: '2026-11-11', start: 660, end: 690, valid: true }} onPick={pick} onPrevious={prev} onNext={next} />",
+      "props": {
+        "columns": {
+          "type": "{ id: string; label: string; }[]",
+          "required": true,
+          "description": "One column is a day view; several (such as Mon to Fri) a week view."
+        },
+        "rows": {
+          "type": "AvailabilityRow[]",
+          "required": true,
+          "description": ""
+        },
+        "free": {
+          "type": "AvailabilityRange[]",
+          "required": true,
+          "description": "Time when every row is free. Drawn as a light green fill across all rows."
+        },
+        "selection": {
+          "type": "(AvailabilityRange & { valid: boolean; }) | undefined",
+          "required": false,
+          "description": "The chosen slot. `valid: false` (someone is busy) draws it red; otherwise a deep green frame with a check."
+        },
+        "planned": {
+          "type": "AvailabilityRange | null | undefined",
+          "required": false,
+          "description": "The originally planned time after the selection moved away from it, drawn as a red fill."
+        },
+        "onPick": {
+          "type": "((column: string, start: number) => void) | undefined",
+          "required": false,
+          "description": "Called with the column and the start of the clicked step."
+        },
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Header: the date or week, with arrows."
+        },
+        "onPrevious": {
+          "type": "() => void",
+          "required": true,
+          "description": ""
+        },
+        "onNext": {
+          "type": "() => void",
+          "required": true,
+          "description": ""
+        },
+        "view": {
+          "type": "{ value: string; options: SegmentOption[]; onChange: (v: string) => void; label: string; } | undefined",
+          "required": false,
+          "description": "Optional view switch on the right, such as Tag and Woche."
+        },
+        "hours": {
+          "type": "{ start: number; end: number; } | undefined",
+          "required": false,
+          "default": "{ start: 480, end: 1080 }",
+          "description": "Visible hours in minutes. Defaults to 08:00 to 18:00."
+        },
+        "workHours": {
+          "type": "{ start: number; end: number; } | undefined",
+          "required": false,
+          "default": "{ start: 510, end: 1050 }",
+          "description": "Working hours in minutes; outside them is hatched. Defaults to 08:30 to 17:30."
+        },
+        "step": {
+          "type": "number | undefined",
+          "required": false,
+          "default": 30,
+          "description": "Click snapping in minutes. Defaults to 30."
+        },
+        "labels": {
+          "type": "AvailabilityTimelineLabels | undefined",
+          "required": false,
+          "description": "Names of the built-in parts, in the page's language."
+        },
+        "legend": {
+          "type": "(\"selected\" | \"conflict\" | \"free\" | \"busy\" | \"tentative\")[] | undefined",
+          "required": false,
+          "default": "['selected', 'conflict', 'free', 'busy', 'tentative']",
+          "description": "Fixed legend entries, in order. Defaults to all five. Leave out what explains itself, such as `selected` while planning."
+        }
+      }
+    },
+    "StatusSummary": {
+      "file": "src/ds/scheduling.tsx",
+      "description": "A quiet bar that states what is set and whether it works, such as the time of a Termin above its availability. Read-only.",
+      "status": "Beta",
+      "since": "v0.1",
+      "figma": "Status Summary",
+      "category": "Content",
+      "example": "<StatusSummary icon=\"calendar\" title=\"Mi, 11. Nov. 2026 · 11:00–11:30\" description=\"Alle Teilnehmer sind frei.\" />",
+      "props": {
+        "icon": {
+          "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 62 more ... | \"underline\"",
+          "required": true,
+          "description": "Icon in the tile."
+        },
+        "title": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "Main line, such as the date and time."
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Second line, such as who is busy."
+        },
+        "tone": {
+          "type": "\"default\" | \"error\" | undefined",
+          "required": false,
+          "default": "default",
+          "description": "`default` accent tile, `error` red tile and red description."
+        },
+        "trailing": {
+          "type": "ReactNode",
+          "required": false,
+          "description": "Right slot, such as a Badge."
         }
       }
     }

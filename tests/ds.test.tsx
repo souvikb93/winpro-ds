@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import * as React from 'react';
 import { afterEach } from 'vitest';
-import { Button, Input, Toggle, ToastProvider, useToast, Pagination, Table, Dropdown, Checkbox, Alert, Steps, SideNav, Breadcrumbs, Icon, GlobalSearch, Menu, IconButton, LabelPicker, InlineEdit, Card, KeyValueList, ActivityItem, Timeline, TopNav, FilterTabs, PageHeader, SplitButton, FieldAction, CloseButton } from '../src/ds/index';
+import { Button, Input, Toggle, ToastProvider, useToast, Pagination, Table, Dropdown, Checkbox, Alert, Steps, SideNav, Breadcrumbs, Icon, GlobalSearch, Menu, IconButton, LabelPicker, InlineEdit, Card, KeyValueList, ActivityItem, Timeline, TopNav, FilterTabs, PageHeader, SplitButton, FieldAction, CloseButton, Editor, AvailabilityTimeline, ActivityCard, DateNav, SegmentedControl, Chip, PersonChip } from '../src/ds/index';
 
 afterEach(cleanup);
 
@@ -216,5 +216,49 @@ describe('@euvino/ds', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Close' }));
     expect(add).toHaveBeenCalled(); expect(close).toHaveBeenCalled();
     expect(screen.getByRole('button', { name: 'Add phone number' }).getAttribute('type')).toBe('button');
+  });
+  it('Editor opens on focus, formats the selection and saves', () => {
+    const onSave = vi.fn();
+    function Host() {
+      const [v, setV] = React.useState('hallo');
+      return <Editor label="Note" value={v} onChange={setV} onSave={onSave} />;
+    }
+    render(<Host />);
+    const field = screen.getByRole('textbox', { name: 'Note' }) as HTMLTextAreaElement;
+    expect(screen.getByRole('toolbar', { name: 'Formatting' })).toBeTruthy();
+    field.setSelectionRange(0, 5);
+    fireEvent.click(screen.getByRole('button', { name: 'Bold' }));
+    expect(field.value).toBe('**hallo**');
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+    expect(onSave).toHaveBeenCalledWith('**hallo**');
+  });
+  it('AvailabilityTimeline draws free time, the selection and a legend; DateNav steps', () => {
+    const onPrevious = vi.fn();
+    render(
+      <AvailabilityTimeline
+        title="Wed" onPrevious={onPrevious} onNext={() => {}} columns={[{ id: 'd', label: 'Wed' }]}
+        rows={[{ id: 'a', name: 'Ann', events: { d: [{ start: 540, end: 600, status: 'busy' }] } }]}
+        free={[{ column: 'd', start: 660, end: 690 }]} selection={{ column: 'd', start: 540, end: 570, valid: false }}
+      />,
+    );
+    expect(screen.getByRole('img', { name: 'Ann: Busy, 09:00–10:00' })).toBeTruthy();
+    expect(screen.getByRole('list', { name: 'Legend' }).textContent).toContain('Conflict');
+    fireEvent.click(screen.getByRole('button', { name: 'Previous' }));
+    expect(onPrevious).toHaveBeenCalled();
+  });
+  it('ActivityCard opens from its title; small sizes render', () => {
+    const onOpen = vi.fn();
+    render(<><ActivityCard title="Call" type="Termin" onOpen={onOpen} /><DateNav label="x" onPrevious={() => {}} onNext={() => {}} /><SegmentedControl size="small" label="View" value="a" onChange={() => {}} options={[{ value: 'a', label: 'A' }, { value: 'b', label: 'B' }]} /><Chip>Tag</Chip></>);
+    fireEvent.click(screen.getByRole('button', { name: 'Call' }));
+    expect(onOpen).toHaveBeenCalled();
+    expect(screen.getByRole('radiogroup', { name: 'View' }).className).toContain('eu-seg--small');
+  });
+  it('PersonChip shows initials or a picture and removes', () => {
+    const onRemove = vi.fn();
+    render(<><PersonChip name="Max Eul" onRemove={onRemove} removeLabel="Max Eul entfernen" /><PersonChip name="Ann" photo="a.jpg" size="small" /></>);
+    expect(screen.getByText('ME')).toBeTruthy();
+    expect(document.querySelectorAll('.eu-pchip__avatar img').length).toBe(1);
+    fireEvent.click(screen.getByRole('button', { name: 'Max Eul entfernen' }));
+    expect(onRemove).toHaveBeenCalled();
   });
 });

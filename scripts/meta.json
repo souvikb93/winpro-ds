@@ -39,7 +39,7 @@
   },
   "SegmentedControl": {
     "category": "Actions and navigation",
-    "figma": "Segmented Control",
+    "figma": "Segmented Control (Size=Medium · Small)",
     "example": "<SegmentedControl label=\"View\" value={v} onChange={setV} options={[{value:'list',label:'List'},{value:'grid',label:'Grid'}]} />"
   },
   "Chip": {
@@ -56,6 +56,11 @@
     "category": "Inputs",
     "figma": "Textarea",
     "example": "<Textarea label=\"Comment\" maxLength={200} value={v} onChange={(e) => setV(e.target.value)} />"
+  },
+  "Editor": {
+    "category": "Inputs",
+    "figma": "Editor",
+    "example": "<Editor label=\"Notiz\" placeholder=\"Notiz schreiben … Mit @ jemanden erwähnen\" value={v} onChange={setV} onSave={save} labels={{ cancel: 'Abbrechen', save: 'Speichern' }} />"
   },
   "Dropdown": {
     "category": "Inputs",
@@ -277,6 +282,10 @@
     "category": "Charts",
     "figma": "Charts/Progress List"
   },
+  "BreakdownBar": {
+    "category": "Charts",
+    "figma": "Breakdown Bar"
+  },
   "Stat": {
     "category": "Charts",
     "figma": "Charts/Stat"
@@ -334,5 +343,30 @@
     "figma": "Close Button",
     "category": "Actions and navigation",
     "example": "<CloseButton label=\"Schließen\" onClick={close} />"
+  },
+  "DateNav": {
+    "category": "Actions and navigation",
+    "figma": "Date Nav",
+    "example": "<DateNav label=\"Mittwoch, 11. November 2026\" onPrevious={prev} onNext={next} previousLabel=\"Vorheriger Tag\" nextLabel=\"Nächster Tag\" />"
+  },
+  "ActivityCard": {
+    "category": "Content",
+    "figma": "Activity Card",
+    "example": "<ActivityCard title=\"Jahresgespräch vorbereiten\" type=\"Termin\" rows={[{ icon: 'calendar', content: 'Mi, 11. Nov. 2026 · 09:00–09:30' }]} onOpen={open} />"
+  },
+  "AvailabilityTimeline": {
+    "category": "Charts",
+    "figma": "Availability Timeline",
+    "example": "<AvailabilityTimeline title=\"Mittwoch, 11. November 2026\" columns={[{ id: '2026-11-11', label: 'Mi 11.' }]} rows={rows} free={free} selection={{ column: '2026-11-11', start: 660, end: 690, valid: true }} onPick={pick} onPrevious={prev} onNext={next} />"
+  },
+  "StatusSummary": {
+    "category": "Content",
+    "figma": "Status Summary",
+    "example": "<StatusSummary icon=\"calendar\" title=\"Mi, 11. Nov. 2026 · 11:00–11:30\" description=\"Alle Teilnehmer sind frei.\" />"
+  },
+  "PersonChip": {
+    "category": "Inputs",
+    "figma": "Person Chip",
+    "example": "<PersonChip name=\"Maximilian Eul\" photo={url} onRemove={remove} removeLabel=\"Maximilian Eul entfernen\" />"
   }
 }

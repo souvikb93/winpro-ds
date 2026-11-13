@@ -45,7 +45,8 @@ Figma: Page Header
 | `breadcrumbs` | ReactNode |  | Breadcrumbs slot above the title. |
 | `actions` | ReactNode |  | Primary action Button slot, on the right. |
 | `size` | "medium" \| "large" \| undefined | medium | `large` Heading H1 for top-level pages (default). `medium` Heading H4 for record pages, such as one organisation. |
-| `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 56 more ... \| undefined |  | Icon in a tile before the title, such as `building` for an organisation. |
+| `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 63 more ... \| undefined |  | Icon in a tile before the title, such as `building` for an organisation. With `meta`, the tile sits beside the title and the meta row. |
+| `meta` | ReactNode |  | Row under the title for short record facts, such as a LabelPicker and a location. Wrap each fact in its own span; they sit on one line, spaced apart. |
 
 ## Footer
 

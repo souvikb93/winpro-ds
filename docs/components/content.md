@@ -32,7 +32,7 @@ Figma: Badge
 | `status` | Status \| undefined | default | Meaning. |
 | `variant` | "outline" \| "filled" \| "subtle" \| undefined | subtle | `subtle` tint (default), `filled` or `outline`. |
 | `size` | "tiny" \| "small" \| "medium" \| undefined | small | `tiny`, `small` or `medium`. |
-| `icon` | "info" \| "search" \| "group" \| "link" \| "list" \| "menu" \| "page" \| "copy" \| "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| ... 55 more ... \| undefined |  | Icon before the text. Pair status with text or an icon, never colour alone. |
+| `icon` | "info" \| "search" \| "group" \| "link" \| "list" \| "menu" \| "page" \| "copy" \| "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| ... 62 more ... \| undefined |  | Icon before the text. Pair status with text or an icon, never colour alone. |
 
 ## Avatar
 
@@ -46,6 +46,7 @@ Figma: Avatar
 | `src` | string \| undefined |  | Picture URL. |
 | `size` | "tiny" \| "small" \| "medium" \| "large" \| "giant" \| undefined | medium | `tiny` 24, `small` 32, `medium` 40, `large` 48, `giant` 64. |
 | `status` | "online" \| "offline" \| "busy" \| undefined |  | Status dot. Pair it with text if the status matters. |
+| `tone` | "light" \| "solid" \| undefined | light | Initials on `light` accent tint (default, Figma Type=Letter Light) or `solid` accent (Figma Type=Letter). |
 
 ## AvatarGroup
 
@@ -98,7 +99,7 @@ Figma: Product Thumbnail
 | `src` | string \| undefined |  | Product photo URL. Without one an icon placeholder shows. |
 | `alt` (required) | string |  | Product name for the image. |
 | `size` | "small" \| "medium" \| "large" \| undefined | medium | `small` 40, `medium` 48, `large` 64. |
-| `icon` | "search" \| "group" \| "link" \| "list" \| "menu" \| "page" \| "copy" \| "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| ... 55 more ... \| undefined | box | Placeholder icon. |
+| `icon` | "search" \| "group" \| "link" \| "list" \| "menu" \| "page" \| "copy" \| "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| ... 62 more ... \| undefined | box | Placeholder icon. |
 
 ## EmptyState
 
@@ -114,7 +115,7 @@ Figma: Empty State
 |---|---|---|---|
 | `title` (required) | string |  | Why it is empty, as a heading. |
 | `description` | ReactNode |  | What to do next. |
-| `icon` | "search" \| "group" \| "link" \| "list" \| "menu" \| "page" \| "copy" \| "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| ... 55 more ... \| undefined | box | Icon. |
+| `icon` | "search" \| "group" \| "link" \| "list" \| "menu" \| "page" \| "copy" \| "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| ... 62 more ... \| undefined | box | Icon. |
 | `action` | ReactNode |  | Next action, usually a Button. |
 | `size` | "small" \| "medium" \| undefined | medium | `medium` for a page or section, `small` inside a card. |
 
@@ -155,7 +156,7 @@ Figma: Email Activity Item
 
 | Prop | Type | Default | Meaning |
 |---|---|---|---|
-| `icon` (required) | "search" \| "group" \| "link" \| "list" \| "menu" \| "page" \| "copy" \| "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| ... 54 more ... \| "map-pin" |  | Marker icon, such as `mail` for an email or `phone` for a call. |
+| `icon` (required) | "search" \| "group" \| "link" \| "list" \| "menu" \| "page" \| "copy" \| "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| ... 61 more ... \| "underline" |  | Marker icon, such as `mail` for an email or `phone` for a call. |
 | `title` (required) | ReactNode |  | Subject line. |
 | `meta` | ReactNode |  | Line under the subject: date, sender and recipients. |
 | `children` | ReactNode |  | Preview text. One line, ends with an ellipsis. |
@@ -269,6 +270,7 @@ Figma: Label Picker
 | `onCreate` | ((name: string) => void) \| undefined |  | Called with the typed name when someone adds a new label. Add it to `options` and select it. Leave out to hide the add button. |
 | `label` (required) | string |  | Accessible name of the trigger, such as "Label for Anna Roell". The current label is added after it. |
 | `labels` | { search?: string \| undefined; add?: string \| undefined; addNamed?: ((name: string) => string) \| undefined; empty?: string \| undefined; none?: string \| undefined; } \| undefined |  | Names of the built-in parts. Pass them in the page's language. |
+| `size` | "tiny" \| "small" \| undefined | tiny | Badge size of the current label: `tiny` in tables and lists (default), `small` in a PageHeader meta row. |
 
 ## InlineEdit
 
@@ -290,3 +292,39 @@ Figma: Input (Style=Outline) + Calendar (not in Figma yet)
 | `display` | ReactNode |  | What to show while not editing, such as a link or formatted date. Without it the value shows as text and a click on it edits. |
 | `required` | boolean \| undefined |  | Blocks saving an empty value. |
 | `locale` | string \| undefined | en | For `type="date"`: BCP 47 locale for the Calendar. |
+
+## ActivityCard
+
+The next activity as one click target with an accent stroke, such as in a Fokus panel.
+The title is the button and stretches over the card, so links in `rows` keep working on top.
+
+Figma: Activity Card
+
+```tsx
+<ActivityCard title="Jahresgespräch vorbereiten" type="Termin" rows={[{ icon: 'calendar', content: 'Mi, 11. Nov. 2026 · 09:00–09:30' }]} onOpen={open} />
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `title` (required) | string |  | Activity title. The whole card opens it. |
+| `type` | string \| undefined |  | Type under the title, such as "Termin". |
+| `rows` | ActivityCardRow[] \| undefined |  | Short facts with an icon each, such as date and participants. Links inside stay their own targets. |
+| `onOpen` (required) | () => void |  | Opens the activity. |
+
+## StatusSummary
+
+A quiet bar that states what is set and whether it works, such as the time of a Termin above its availability. Read-only.
+
+Figma: Status Summary
+
+```tsx
+<StatusSummary icon="calendar" title="Mi, 11. Nov. 2026 · 11:00–11:30" description="Alle Teilnehmer sind frei." />
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `icon` (required) | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 62 more ... \| "underline" |  | Icon in the tile. |
+| `title` (required) | ReactNode |  | Main line, such as the date and time. |
+| `description` | ReactNode |  | Second line, such as who is busy. |
+| `tone` | "default" \| "error" \| undefined | default | `default` accent tile, `error` red tile and red description. |
+| `trailing` | ReactNode |  | Right slot, such as a Badge. |

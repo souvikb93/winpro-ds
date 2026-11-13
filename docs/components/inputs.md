@@ -2,6 +2,28 @@
 
 Generated from source. Do not edit.
 
+## PersonChip
+
+A person in a field or list, such as a participant: avatar (initials or picture), name and a remove button.
+Not a filter: use Chip for filters and tags. Grey fill, no stroke; the avatar sits inset on the left.
+
+Figma: Person Chip
+
+```tsx
+<PersonChip name="Maximilian Eul" photo={url} onRemove={remove} removeLabel="Maximilian Eul entfernen" />
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `name` (required) | string |  | Person's name. Shown, and gives the avatar's initials. |
+| `photo` | string \| undefined |  | Picture URL. Without it the avatar shows initials. |
+| `suffix` | string \| undefined |  | Extra text after the name, such as "(Sie)". |
+| `onRemove` | (() => void) \| undefined |  | Shows the remove button. Leave out for someone who cannot be removed, such as the organiser. |
+| `removeLabel` | string \| undefined | Remove | Accessible name of the remove button, such as "Maximilian Eul entfernen". |
+| `onClick` | (() => void) \| undefined |  | Opens the person, such as their contact. Makes the name area a button. |
+| `size` | "small" \| "medium" \| undefined | medium | `medium` 32 high (default). `small` 28 high with caption text. |
+| `disabled` | boolean \| undefined |  |  |
+
 ## Dropdown
 
 Choose one value from a list. It opens below the field and supports the arrow keys. To run commands use Menu; for two to four visible choices use Radio or SegmentedControl.
@@ -200,7 +222,7 @@ Figma: Input
 | `success` | string \| undefined |  | Success message below the field. |
 | `size` | "medium" \| "large" \| undefined | medium | Height: `medium` 40 (default), `large` 48. The `filled` variant is always 38. |
 | `variant` | "outline" \| "filled" \| undefined | outline | `outline` white field with a border (default). `filled` tinted field for a header search (Figma Input Style=Filled). |
-| `iconLeft` | "list" \| "label" \| "help" \| "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| ... 56 more ... \| undefined |  | Icon inside the field on the left. |
+| `iconLeft` | "list" \| "label" \| "help" \| "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| ... 63 more ... \| undefined |  | Icon inside the field on the left. |
 | `onClear` | (() => void) \| undefined |  | Shows a clear button while there is text. Called when it is pressed. |
 | `labels` | { clear?: string \| undefined; showPassword?: string \| undefined; hidePassword?: string \| undefined; } \| undefined |  | Accessible names of the built-in buttons. Pass them in the page's language. |
 
@@ -295,3 +317,26 @@ Figma: Input (Style=Filled) + search panel (not in Figma yet)
 | `emptyText` | string \| undefined | No matches | Shown when the text matches nothing. |
 | `footer` | ReactNode |  | Bottom of the category column, such as a help link. |
 | `labels` | { clear?: string \| undefined; categories?: string \| undefined; count?: ((n: number) => string) \| undefined; } \| undefined |  | Names of the built-in parts. Pass them in the page's language. |
+
+## Editor
+
+Text editor for notes and messages: a field that opens into a formatting toolbar with Cancel and Save.
+Closed it is one line; focus opens it. Toolbar buttons wrap the selection in Markdown. Cmd/Ctrl+Enter saves, Escape cancels.
+Use Textarea for a plain form field without formatting.
+
+Figma: Editor
+
+```tsx
+<Editor label="Notiz" placeholder="Notiz schreiben … Mit @ jemanden erwähnen" value={v} onChange={setV} onSave={save} labels={{ cancel: 'Abbrechen', save: 'Speichern' }} />
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `label` (required) | string |  | Accessible name of the text field, such as "Note". |
+| `value` (required) | string |  | Current text. Formatting is written as Markdown (`**bold**`, `_italic_`, `- item`). |
+| `onChange` (required) | (value: string) => void |  | Called with the new text. |
+| `onSave` (required) | (value: string) => void |  | Called with the text when someone saves. Clear `value` afterwards. |
+| `onCancel` | (() => void) \| undefined |  | Called after Cancel clears the text and closes the editor. |
+| `placeholder` | string \| undefined |  | Hint in the empty field, such as "Write a note … Mention someone with @ ". |
+| `defaultExpanded` | boolean \| undefined | false | Starts open with the toolbar showing. By default it opens on focus and closes when empty and left. |
+| `labels` | EditorLabels \| undefined |  | Names of the built-in parts. Pass them in the page's language. |

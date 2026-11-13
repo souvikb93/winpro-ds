@@ -14,7 +14,7 @@ Figma: Brand & Icons (Iconoir)
 
 | Prop | Type | Default | Meaning |
 |---|---|---|---|
-| `name` (required) | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 55 more ... \| "map-pin" |  | Which icon to draw, in Iconoir naming: `trash`, `check`, `warning-triangle`, `close`. |
+| `name` (required) | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 62 more ... \| "underline" |  | Which icon to draw, in Iconoir naming: `trash`, `check`, `warning-triangle`, `close`. |
 | `size` | "xs" \| "sm" \| "md" \| "lg" \| undefined | md | Size token: `xs` 12, `sm` 16, `md` 20, `lg` 24. |
 | `label` | string \| undefined |  | Accessible name. Leave empty when the icon is decoration next to text; it is then hidden from screen readers. |
 | `className` | string \| undefined |  | Extra class on the svg. The colour comes from the surrounding text colour. |
@@ -52,7 +52,7 @@ Figma: Text styles
 
 | Prop | Type | Default | Meaning |
 |---|---|---|---|
-| `variant` | TextStyle \| undefined | body | Text style from the library. `h1` to `h6` are Roboto Condensed Bold; everything else is Roboto. |
+| `variant` | TextStyle \| undefined | body | Text style from the library. `h1` to `h6` are Roboto Condensed Bold; everything else is Roboto. `caption-medium` is the field-label style (13 medium), for headings that sit among form fields. |
 | `tone` | TextTone \| undefined |  | Colour token. Defaults to `primary` for headings and `body` for reading text. |
 | `as` | ElementType<any, keyof IntrinsicElements> \| undefined |  | Element to render when it should differ from the style's default, such as an `h2` styled as `h4`. |
 

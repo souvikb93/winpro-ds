@@ -20,7 +20,7 @@ Figma: Link Button
 
 Switches the display of the same content in place, such as List and Grid. Not for page navigation (TopNav). Segments share the width equally, sized to the longest label.
 
-Figma: Segmented Control
+Figma: Segmented Control (Size=Medium · Small)
 
 ```tsx
 <SegmentedControl label="View" value={v} onChange={setV} options={[{value:'list',label:'List'},{value:'grid',label:'Grid'}]} />
@@ -32,6 +32,7 @@ Figma: Segmented Control
 | `value` (required) | string |  | The selected value. One segment is always selected. |
 | `onChange` (required) | (value: string) => void |  | Called with the new value. |
 | `label` (required) | string |  | Accessible name of the group, such as "View". |
+| `size` | "small" \| "medium" \| undefined | medium | `medium` 40 high (default). `small` 32 high with caption text, for toolbars inside cards. |
 | `className` | string \| undefined |  | Extra class. |
 
 ## Chip
@@ -47,7 +48,7 @@ Figma: Chips
 | Prop | Type | Default | Meaning |
 |---|---|---|---|
 | `selected` | boolean \| undefined |  | Selected filter state, announced with `aria-pressed`. |
-| `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 56 more ... \| undefined |  | Icon before the text. |
+| `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 63 more ... \| undefined |  | Icon before the text. |
 | `onRemove` | (() => void) \| undefined |  | When set, shows a remove button with this handler. Needs `removeLabel`. |
 | `removeLabel` | string \| undefined | Remove | Accessible name of the remove button, such as "Remove Germany". |
 
@@ -65,7 +66,7 @@ Figma: Button
 |---|---|---|---|
 | `variant` | "primary" \| "secondary" \| "tertiary" \| "primary-2" \| "danger" \| "danger-secondary" \| "danger-tertiary" \| undefined | tertiary | Emphasis. `primary` = the main action of a view. `secondary` = a real alternative, and Cancel next to a primary action. `tertiary` = the least emphasis: text actions such as "Add phone number" or Import. `primary-2` = deprecated: Hydra has no orange call to action, so it renders as `primary`. Use `primary`. `danger` = the final irreversible action inside a confirmation. `danger-secondary` = the entry point that opens that confirmation. |
 | `size` | "tiny" \| "small" \| "medium" \| "large" \| "giant" \| undefined | medium | Height: `tiny` 24, `small` 32, `medium` 40 (default), `large` 48, `giant` 56. |
-| `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 56 more ... \| undefined |  | Which icon to show. Buttons are text-only by default; add an icon only when it adds meaning. Pick the side with `iconPosition`. |
+| `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 63 more ... \| undefined |  | Which icon to show. Buttons are text-only by default; add an icon only when it adds meaning. Pick the side with `iconPosition`. |
 | `iconPosition` | "left" \| "right" \| undefined | left | Which side of the label the `icon` goes on. Defaults to `left`. |
 | `loading` | boolean \| undefined |  | Shows a Loader, sets `aria-busy` and blocks clicks while keeping the label and width. |
 | `fullWidth` | boolean \| undefined |  | Stretches to the container width. |
@@ -82,7 +83,7 @@ Figma: Button, Content=Only Icons
 
 | Prop | Type | Default | Meaning |
 |---|---|---|---|
-| `icon` (required) | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 55 more ... \| "map-pin" |  | The icon to show. |
+| `icon` (required) | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 62 more ... \| "underline" |  | The icon to show. |
 | `label` (required) | string |  | Required accessible name, such as "Remove file". |
 | `variant` | "primary" \| "secondary" \| "tertiary" \| "primary-2" \| "danger" \| "danger-secondary" \| "danger-tertiary" \| undefined | tertiary | Same emphasis as Button. Defaults to `tertiary`. |
 | `size` | "tiny" \| "small" \| "medium" \| "large" \| "giant" \| undefined | medium | Square size, same scale as Button. |
@@ -230,7 +231,7 @@ Figma: Button Select
 | `menuLabel` (required) | string |  | Accessible name of the arrow button and its menu, such as "More ways to add". |
 | `variant` | "primary" \| "secondary" \| undefined | primary | Emphasis, same as Button. Hydra Button Select has Primary and Secondary. |
 | `size` | "small" \| "medium" \| "large" \| undefined | medium | Height, same scale as Button: `small` 28, `medium` 38 (default), `large` 44. |
-| `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 56 more ... \| undefined |  | Icon before the label, such as `plus` for create actions. |
+| `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 63 more ... \| undefined |  | Icon before the label, such as `plus` for create actions. |
 | `disabled` | boolean \| undefined |  | Disables both parts. |
 
 ## FieldAction
@@ -248,7 +249,7 @@ Figma: Field Action
 | Prop | Type | Default | Meaning |
 |---|---|---|---|
 | `children` (required) | ReactNode |  | What it adds or does, verb last in German UIs: "Telefonnummer hinzufügen". |
-| `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 56 more ... \| undefined | plus | Leading icon. Defaults to `plus`. |
+| `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 63 more ... \| undefined | plus | Leading icon. Defaults to `plus`. |
 
 ## CloseButton
 
@@ -264,3 +265,21 @@ Figma: Close Button
 |---|---|---|---|
 | `label` (required) | string |  | Accessible name in the page's language, such as "Schließen". |
 | `size` | "medium" \| "small" \| undefined | medium | `medium` for dialogs and drawers (32 area, 20 icon), `small` for toasts and alerts (24 area, 16 icon). |
+
+## DateNav
+
+A date between two bare chevrons that step back and forward. The chevrons have no box; their colour changes on hover.
+
+Figma: Date Nav
+
+```tsx
+<DateNav label="Mittwoch, 11. November 2026" onPrevious={prev} onNext={next} previousLabel="Vorheriger Tag" nextLabel="Nächster Tag" />
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `label` (required) | string |  | The date or range shown, such as "Mittwoch, 11. November 2026". |
+| `onPrevious` (required) | () => void |  |  |
+| `onNext` (required) | () => void |  |  |
+| `previousLabel` | string \| undefined | Previous | Accessible names of the arrows, in the page's language. |
+| `nextLabel` | string \| undefined | Next |  |

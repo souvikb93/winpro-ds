@@ -34,6 +34,9 @@ The popover has a search, the labels as badges (the current one checked) and an 
 Arrow keys move, Enter picks, Escape closes. It is positioned against the window, so table scrolling never cuts it off.
 - `InlineEdit` (Beta, v0.1): A value that people change in place, such as a table cell or a detail field. A pencil appears on hover and focus.
 Text: Enter or leaving the field saves, Escape cancels. Date: picking a day saves, Escape cancels.
+- `ActivityCard` (Beta, v0.1): The next activity as one click target with an accent stroke, such as in a Fokus panel.
+The title is the button and stretches over the card, so links in `rows` keep working on top.
+- `StatusSummary` (Beta, v0.1): A quiet bar that states what is set and whether it works, such as the time of a Termin above its availability. Read-only.
 
 ## Actions and navigation
 
@@ -57,9 +60,12 @@ Use it when one action is the usual choice and a few others belong to it, such a
 Not a button style: no padding or background, icon on the field's left edge, underline on hover.
 Place it directly under the field in a `Stack gap="2"` (8, same as label to input). For standalone actions use Button.
 - `CloseButton` (Beta, v0.1): Closes a dialog, drawer, toast or alert. Regular icon weight, rounded-square hover, focus ring only when focused.
+- `DateNav` (Beta, v0.1): A date between two bare chevrons that step back and forward. The chevrons have no box; their colour changes on hover.
 
 ## Inputs
 
+- `PersonChip` (Beta, v0.1): A person in a field or list, such as a participant: avatar (initials or picture), name and a remove button.
+Not a filter: use Chip for filters and tags. Grey fill, no stroke; the avatar sits inset on the left.
 - `Dropdown` (Beta, v0.1): Choose one value from a list. It opens below the field and supports the arrow keys. To run commands use Menu; for two to four visible choices use Radio or SegmentedControl.
 - `RadioGroup` (Beta, v0.1): A labelled set of Radio options. Use it for two to five visible choices.
 - `Stepper` (Beta, v0.1): Change a small number with plus and minus buttons, such as a quantity.
@@ -78,6 +84,9 @@ Place it directly under the field in a `Stack gap="2"` (8, same as label to inpu
 - `GlobalSearch` (Beta, v0.1): App-wide search: a header field that opens a large panel over a dimmed page, with categories on the left and
 hits on the right. Matches are highlighted. Arrow keys move through hits, Enter opens one, Escape closes.
 For a simple field with a short suggestion list use SearchField.
+- `Editor` (Beta, v0.1): Text editor for notes and messages: a field that opens into a formatting toolbar with Cancel and Save.
+Closed it is one line; focus opens it. Toolbar buttons wrap the selection in Markdown. Cmd/Ctrl+Enter saves, Escape cancels.
+Use Textarea for a plain form field without formatting.
 
 ## Feedback and overlays
 
@@ -106,8 +115,12 @@ For a simple field with a short suggestion list use SearchField.
 - `DonutChart` (Beta, v0.1): Parts of a whole, 2 to 6 segments.
 - `Gauge` (Beta, v0.1): One score against a full range, drawn as a half circle.
 - `ProgressList` (Beta, v0.1): Labelled progress bars in a list.
+- `BreakdownBar` (Beta, v0.1): One stacked bar plus rows of name, count and share. Use it for compact breakdowns in a side panel.
 - `Stat` (Beta, v0.1): One KPI: label, value and change.
 - `DataCard` (Beta, v0.1): Card for any chart, with an optional row of Stat.
+- `AvailabilityTimeline` (Beta, v0.1): Shared availability, as in a scheduling assistant: one row per person on one time axis, plus an "all participants" row.
+Free time for everyone is a green fill, the planned time in conflict a red fill, the chosen slot a green frame.
+Fills sit behind calendar entries and grid lines, so nothing under them is hidden. Entries show no titles.
 
 ## Guides
 
