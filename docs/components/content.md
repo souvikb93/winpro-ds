@@ -44,7 +44,7 @@ Figma: Avatar
 |---|---|---|---|
 | `name` (required) | string |  | Person's name. Gives the initials and the accessible name. |
 | `src` | string \| undefined |  | Picture URL. |
-| `size` | "tiny" \| "small" \| "medium" \| "large" \| "giant" \| undefined | medium | `tiny` 24, `small` 32, `medium` 40, `large` 48, `giant` 64. |
+| `size` | "tiny" \| "small" \| "medium" \| "large" \| "giant" \| undefined | medium | `tiny` 24, `small` 32, `medium` 40, `large` 48, `giant` 56. |
 | `status` | "online" \| "offline" \| "busy" \| undefined |  | Status dot. Pair it with text if the status matters. |
 | `tone` | "light" \| "solid" \| undefined | light | Initials on `light` accent tint (default, Figma Type=Letter Light) or `solid` accent (Figma Type=Letter). |
 
@@ -150,7 +150,7 @@ A rich event in a Timeline, such as an email, call or note, shown as a card next
 Rhythm: subject and meta form one heading block, the preview sits apart, the footer apart again. The marker lines up with the subject.
 Figma: Activity Item.
 
-Figma: Email Activity Item
+Figma: Activity Item
 
 ```tsx
 <ActivityItem icon="mail" title="Subject" meta={['28 Oct, 10:24', <>Anna → <PeopleList people={to} max={1} /></>]} lines={2} footer={<FileChipList files={files} onDownload={save} />} onOpen={open}>Preview</ActivityItem>

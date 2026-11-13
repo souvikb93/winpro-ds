@@ -203,7 +203,7 @@
           "type": "\"small\" | \"medium\" | undefined",
           "required": false,
           "default": "medium",
-          "description": "`medium` 40 high (default). `small` 32 high with caption text, for toolbars inside cards."
+          "description": "`medium` 46 high (default). `small` 34 high with caption text, for toolbars inside cards."
         },
         "className": {
           "type": "string | undefined",
@@ -217,7 +217,7 @@
       "description": "An interactive pill for filters and tags. Use Badge for something that only shows a status.",
       "status": "Beta",
       "since": "v0.1",
-      "figma": "Chips",
+      "figma": "Filter Tabs (Filter Chip)",
       "category": "Actions and navigation",
       "example": "<Chip selected={on} onClick={toggle}>Germany</Chip>",
       "props": {
@@ -316,7 +316,7 @@
           "type": "\"tiny\" | \"small\" | \"medium\" | \"large\" | \"giant\" | undefined",
           "required": false,
           "default": "medium",
-          "description": "Height: `tiny` 24, `small` 32, `medium` 40 (default), `large` 48, `giant` 56."
+          "description": "Height: `tiny` 24, `small` 28 (Figma Tiny), `medium` 38 (default, Figma Small), `large` 44 (Figma Medium), `giant` 56."
         },
         "icon": {
           "type": "\"filter\" | \"arrow-left\" | \"arrow-right\" | \"bell\" | \"box\" | \"calendar\" | \"check\" | \"check-circle\" | \"clock\" | \"cloud-sync\" | \"copy\" | \"download\" | \"edit\" | \"eye\" | \"eye-off\" | \"globe\" | ... 63 more ... | undefined",
@@ -994,7 +994,7 @@
           "type": "\"medium\" | \"large\" | undefined",
           "required": false,
           "default": "medium",
-          "description": "Height: `medium` 40 (default), `large` 48. The `filled` variant is always 38."
+          "description": "Height: `medium` 38 (default), `large` 48. The `filled` variant is always 38."
         },
         "variant": {
           "type": "\"outline\" | \"filled\" | undefined",
@@ -1904,7 +1904,7 @@
       "description": "Filter tabs (pill tabs): one choice from many filters for the list below, such as a history feed.\nUse SegmentedControl for 2 to 4 equal options, Chip for several filters at once, TopNav for views.",
       "status": "Beta",
       "since": "v0.1",
-      "figma": "Filter Tabs (not in Figma yet)",
+      "figma": "Filter Tabs (Filter Chip)",
       "category": "Actions and navigation",
       "example": "<FilterTabs label=\"Filter history\" value={f} onChange={setF} items={[{ id: 'all', label: 'All' }, { id: 'notes', label: 'Notes', count: 5 }]} />",
       "props": {
@@ -1996,7 +1996,7 @@
           "type": "\"tiny\" | \"small\" | \"medium\" | \"large\" | \"giant\" | undefined",
           "required": false,
           "default": "medium",
-          "description": "`tiny` 24, `small` 32, `medium` 40, `large` 48, `giant` 64."
+          "description": "`tiny` 24, `small` 32, `medium` 40, `large` 48, `giant` 56."
         },
         "status": {
           "type": "\"online\" | \"offline\" | \"busy\" | undefined",
@@ -2226,7 +2226,7 @@
       "description": "A rich event in a Timeline, such as an email, call or note, shown as a card next to an icon marker.\nRhythm: subject and meta form one heading block, the preview sits apart, the footer apart again. The marker lines up with the subject.\nFigma: Activity Item.",
       "status": "Beta",
       "since": "v0.1",
-      "figma": "Email Activity Item",
+      "figma": "Activity Item",
       "category": "Content",
       "example": "<ActivityItem icon=\"mail\" title=\"Subject\" meta={['28 Oct, 10:24', <>Anna → <PeopleList people={to} max={1} /></>]} lines={2} footer={<FileChipList files={files} onDownload={save} />} onOpen={open}>Preview</ActivityItem>",
       "props": {

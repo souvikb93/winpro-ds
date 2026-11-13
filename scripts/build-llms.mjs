@@ -2,5 +2,19 @@ import { readFileSync, writeFileSync } from 'node:fs';
 const c = JSON.parse(readFileSync('components.json', 'utf8')).components;
 const cats = {};
 for (const [n, v] of Object.entries(c)) (cats[v.category] ??= []).push(`- \`${n}\` (${v.status}, ${v.since}): ${v.description}`);
-const text = `# EuvinoPRO design system\n\n> React components and tokens from the EuvinoPRO Figma library. Import from \`@euvino/ds\`. Every value is a \`var(--eu-*)\` token.\n\nRead first: [Rules for agents](AGENTS.md). Ask: \`npm run ds -- list | describe <Name> | token <words> | check <file>\`.\n\n` + Object.entries(cats).map(([k, l]) => `## ${k}\n\n${l.join('\n')}`).join('\n\n') + `\n\n## Guides\n\n- [Tokens](docs/foundations/tokens.md)\n- [Layout](docs/foundations/layout.md)\n- [Accessibility](docs/foundations/accessibility.md)\n- [Destructive confirmation](docs/recipes/destructive-confirmation.md)\n- [Forms](docs/recipes/forms.md)\n- [Settings](docs/recipes/settings.md)\n- [Async states](docs/recipes/async-states.md)\n- [Names from other libraries](docs/names.md)\n- [Figma to code](docs/figma.md)\n`;
-if (process.argv.includes('--check')) { if (readFileSync('llms.txt', 'utf8') !== text) { console.error('llms.txt drift'); process.exit(1); } console.log('llms in sync'); } else { writeFileSync('llms.txt', text); console.log('llms.txt', text.length); }
+const text =
+  `# EuvinoPRO design system\n\n> React components and tokens from the EuvinoPRO Figma library. Import from \`@euvino/ds\`. Every value is a \`var(--eu-*)\` token.\n\nRead first: [Rules for agents](AGENTS.md). Ask: \`npm run ds -- list | describe <Name> | token <words> | check <file>\`.\n\n` +
+  Object.entries(cats)
+    .map(([k, l]) => `## ${k}\n\n${l.join('\n')}`)
+    .join('\n\n') +
+  `\n\n## Guides\n\n- [Tokens](docs/foundations/tokens.md)\n- [Layout](docs/foundations/layout.md)\n- [Accessibility](docs/foundations/accessibility.md)\n- [Destructive confirmation](docs/recipes/destructive-confirmation.md)\n- [Forms](docs/recipes/forms.md)\n- [Settings](docs/recipes/settings.md)\n- [Async states](docs/recipes/async-states.md)\n- [Names from other libraries](docs/names.md)\n- [Figma to code](docs/figma.md)\n`;
+if (process.argv.includes('--check')) {
+  if (readFileSync('llms.txt', 'utf8') !== text) {
+    console.error('llms.txt drift');
+    process.exit(1);
+  }
+  console.log('llms in sync');
+} else {
+  writeFileSync('llms.txt', text);
+  console.log('llms.txt', text.length);
+}

@@ -32,14 +32,14 @@ Figma: Segmented Control (Size=Medium · Small)
 | `value` (required) | string |  | The selected value. One segment is always selected. |
 | `onChange` (required) | (value: string) => void |  | Called with the new value. |
 | `label` (required) | string |  | Accessible name of the group, such as "View". |
-| `size` | "small" \| "medium" \| undefined | medium | `medium` 40 high (default). `small` 32 high with caption text, for toolbars inside cards. |
+| `size` | "small" \| "medium" \| undefined | medium | `medium` 46 high (default). `small` 34 high with caption text, for toolbars inside cards. |
 | `className` | string \| undefined |  | Extra class. |
 
 ## Chip
 
 An interactive pill for filters and tags. Use Badge for something that only shows a status.
 
-Figma: Chips
+Figma: Filter Tabs (Filter Chip)
 
 ```tsx
 <Chip selected={on} onClick={toggle}>Germany</Chip>
@@ -65,7 +65,7 @@ Figma: Button
 | Prop | Type | Default | Meaning |
 |---|---|---|---|
 | `variant` | "primary" \| "secondary" \| "tertiary" \| "primary-2" \| "danger" \| "danger-secondary" \| "danger-tertiary" \| undefined | tertiary | Emphasis. `primary` = the main action of a view. `secondary` = a real alternative, and Cancel next to a primary action. `tertiary` = the least emphasis: text actions such as "Add phone number" or Import. `primary-2` = deprecated: Hydra has no orange call to action, so it renders as `primary`. Use `primary`. `danger` = the final irreversible action inside a confirmation. `danger-secondary` = the entry point that opens that confirmation. |
-| `size` | "tiny" \| "small" \| "medium" \| "large" \| "giant" \| undefined | medium | Height: `tiny` 24, `small` 32, `medium` 40 (default), `large` 48, `giant` 56. |
+| `size` | "tiny" \| "small" \| "medium" \| "large" \| "giant" \| undefined | medium | Height: `tiny` 24, `small` 28 (Figma Tiny), `medium` 38 (default, Figma Small), `large` 44 (Figma Medium), `giant` 56. |
 | `icon` | "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| "eye" \| "eye-off" \| "globe" \| ... 63 more ... \| undefined |  | Which icon to show. Buttons are text-only by default; add an icon only when it adds meaning. Pick the side with `iconPosition`. |
 | `iconPosition` | "left" \| "right" \| undefined | left | Which side of the label the `icon` goes on. Defaults to `left`. |
 | `loading` | boolean \| undefined |  | Shows a Loader, sets `aria-busy` and blocks clicks while keeping the label and width. |
@@ -184,7 +184,7 @@ Figma: Steps
 Filter tabs (pill tabs): one choice from many filters for the list below, such as a history feed.
 Use SegmentedControl for 2 to 4 equal options, Chip for several filters at once, TopNav for views.
 
-Figma: Filter Tabs (not in Figma yet)
+Figma: Filter Tabs (Filter Chip)
 
 ```tsx
 <FilterTabs label="Filter history" value={f} onChange={setF} items={[{ id: 'all', label: 'All' }, { id: 'notes', label: 'Notes', count: 5 }]} />

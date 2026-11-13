@@ -5,5 +5,5 @@ React components and tokens generated from the Figma library `eoPfuJuIddL9imDtGi
 ```bash
 npm run tokens:build   # regenerate tokens from figma/export.json
 npm run ds -- list     # ask the system: list, describe, token, check
-npm run check          # tokens, types, tests, docs
+npm run check          # tokens in sync, strict types, lint, format, tests, docs in sync (CI runs the same)
 ```

@@ -9,5 +9,7 @@ const text = (t) => ({ content: [{ type: 'text', text: t }] });
 s.tool('ds_list', 'List every component', {}, async () => text(list()));
 s.tool('ds_describe', 'Import, props and example for one component', { name: z.string() }, async ({ name }) => text(describe(name)));
 s.tool('ds_token', 'Find a token by words', { words: z.string() }, async ({ words }) => text(token(words)));
-s.tool('ds_check', 'Check a file for raw values, raw controls and foreign imports', { path: z.string() }, async ({ path }) => text(check(path)));
+s.tool('ds_check', 'Check a file for raw values, raw controls and foreign imports', { path: z.string() }, async ({ path }) =>
+  text(check(path)),
+);
 await s.connect(new StdioServerTransport());

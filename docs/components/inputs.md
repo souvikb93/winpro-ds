@@ -249,7 +249,7 @@ Figma: Input
 | `help` | ReactNode |  | Help text below the field. |
 | `error` | string \| undefined |  | Error message. Sets the error state and `aria-invalid`. Say what is wrong and how to fix it. |
 | `success` | string \| undefined |  | Success message below the field. |
-| `size` | "medium" \| "large" \| undefined | medium | Height: `medium` 40 (default), `large` 48. The `filled` variant is always 38. |
+| `size` | "medium" \| "large" \| undefined | medium | Height: `medium` 38 (default), `large` 48. The `filled` variant is always 38. |
 | `variant` | "outline" \| "filled" \| undefined | outline | `outline` white field with a border (default). `filled` tinted field for a header search (Figma Input Style=Filled). |
 | `iconLeft` | "list" \| "label" \| "help" \| "filter" \| "arrow-left" \| "arrow-right" \| "bell" \| "box" \| "calendar" \| "check" \| "check-circle" \| "clock" \| "cloud-sync" \| "copy" \| "download" \| "edit" \| ... 63 more ... \| undefined |  | Icon inside the field on the left. |
 | `onClear` | (() => void) \| undefined |  | Shows a clear button while there is text. Called when it is pressed. |

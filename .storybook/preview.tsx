@@ -9,6 +9,12 @@ const preview: Preview = {
     a11y: { test: 'todo' },
     docs: { toc: true },
   },
-  decorators: [(Story) => <div style={{ fontFamily: 'var(--eu-font-body)' }}><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div style={{ fontFamily: 'var(--eu-font-body)' }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 export default preview;

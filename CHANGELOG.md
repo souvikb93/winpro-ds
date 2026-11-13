@@ -4,6 +4,16 @@
 
 ### Changed
 
+- `Icon` `more-horiz` / `more-vert`: solid dots, 4.5 of 24 (about twice the diameter of the Iconoir outline dots), so menu triggers are easy to see in the side nav, tables and cards. Figma icon updated the same way.
+- `Table` column `align="center"`, for columns of icon buttons such as row actions.
+- Code ↔ Figma parity audit (every component measured in both):
+  - code follows Figma: Button icons (Small 16, Medium 24), Alert (16 padding and gap, radius 4, title UI/Label), Empty State paddings, gaps and Small type, Avatar `giant` 56, breadcrumb chevron 16, Popover 280 wide with a border, Top Nav weights (only the selected item bold), Person Chip small padding, Segmented Control small selected weight.
+  - Figma follows the shipped product: Input and Dropdown Size=Medium (38), Combobox and Date Picker on Medium, Dropdown Option and Menu rows (8 padding, 8 gap, 40 high), Top Nav spacing, Close Button small 24, new Filter Tabs (Filter Chip).
+- Narrow screens: header actions keep their size, the breadcrumb shortens, Top Nav, Segmented Control and Filter Tabs scroll inside themselves, page titles and ActivityItem subjects wrap. No horizontal page scroll at 375px.
+- Token generator: no self-referencing or duplicate variables (498 values verified unchanged).
+- Tooling: ESLint (`typescript-eslint` strict, React Hooks, jsx-a11y), Prettier, EditorConfig and CI (`npm run check` on every push). Every lint exception carries a reason.
+- Storybook: stories for all 87 components (22 added); story renders are typed and follow the rules of hooks.
+- `Button` and `SplitButton` `size="small"` (Hydra Tiny): label is Body/Small, 14 regular, as in Figma Button Default and Button Select Size=Tiny (was bold). SplitButton chevron is 20 at every size, as in Figma.
 - `ActivityItem`: meta is a `div` (popovers may sit in it) and takes a list of facts split by a thin line (InlineList); `lines` clamps the preview; built-in rhythm (subject → meta 3xs, preview xs, footer s); the rail marker is centred on the subject row; links, buttons and popovers inside a clickable card stay clickable and on top. Figma: Activity Item rebuilt to match.
 - Links in running text (ActivityItem meta and preview) are underlined subtly, so colour is not the only cue (WCAG 1.4.1).
 - `UserMenu` compact: the accessible name comes from screen-reader text, not `aria-label`, so it matches the visible initials (WCAG 2.5.3).

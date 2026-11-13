@@ -8,19 +8,35 @@ const hydraByCss = Object.fromEntries(hydra.map((v) => [v.css, v]));
 // Names before the Hydra rename (figma/export-legacy.json) stay as deprecated aliases so old code keeps working.
 const legacy = existsSync('figma/export-legacy.json') ? JSON.parse(readFileSync('figma/export-legacy.json', 'utf8')) : { vars: [] };
 const renames = existsSync('figma/renames.json') ? JSON.parse(readFileSync('figma/renames.json', 'utf8')) : [];
-const hydraVal = (v) => (v.t === 'COLOR' ? v.v : v.t === 'NUMBER' ? String(v.v) : v.t === 'DURATION' ? v.v + 'ms' : v.t === 'OPACITY' ? String(v.v / 100) : v.v + 'px');
+const hydraVal = (v) =>
+  v.t === 'COLOR'
+    ? v.v
+    : v.t === 'NUMBER'
+      ? String(v.v)
+      : v.t === 'DURATION'
+        ? v.v + 'ms'
+        : v.t === 'OPACITY'
+          ? String(v.v / 100)
+          : v.v + 'px';
 const cssName = (v) => (v.syn ? v.syn.replace(/^var\(|\)$/g, '') : '--eu-' + v.n.replace(/[/ ]/g, '-').toLowerCase());
 const byName = {};
 for (const v of o.vars) if (!(v.n in byName) || v.c !== 'Primitives') byName[v.n] = v;
 const val = (v) => {
   const h = hydraByCss[cssName(v)];
   if (h && h.t !== 'COLOR' && h.t !== 'FLOAT') return hydraVal(h);
-  if (v.a && byName[v.a]) return `var(${cssName(byName[v.a])})`;
+  // An alias to a variable with the same CSS name would be circular (var(--x) inside --x): use the value instead.
+  if (v.a && byName[v.a] && cssName(byName[v.a]) !== cssName(v)) return `var(${cssName(byName[v.a])})`;
   if (v.t === 'COLOR') return v.v;
   if (v.t === 'FLOAT') return v.v + 'px';
   return String(v.v);
 };
-const group = (c) => o.vars.filter((v) => v.c === c && cssName(v).startsWith('--')).map((v) => `  ${cssName(v)}: ${val(v)};${v.d ? ` /* ${v.d.replace(/\*\//g, '')} */` : ''}`).join('\n');
+// Each CSS variable is written once: the last definition wins, as it did when duplicates were written.
+const lastIndex = new Map(o.vars.map((v, i) => [cssName(v), i]));
+const group = (c) =>
+  o.vars
+    .filter((v, i) => v.c === c && cssName(v).startsWith('--') && lastIndex.get(cssName(v)) === i)
+    .map((v) => `  ${cssName(v)}: ${val(v)};${v.d ? ` /* ${v.d.replace(/\*\//g, '')} */` : ''}`)
+    .join('\n');
 const current = new Set(o.vars.map(cssName));
 const legacyByName = {};
 for (const v of legacy.vars) if (!(v.n in legacyByName) || v.c !== 'Primitives') legacyByName[v.n] = v;
@@ -31,27 +47,53 @@ const legacyVal = (v) => {
   return v.t === 'COLOR' ? v.v : v.t === 'FLOAT' ? v.v + 'px' : String(v.v);
 };
 const seenLegacy = new Set();
-const legacyGroup = legacy.vars.filter((v) => !current.has(cssName(v)) && !seenLegacy.has(cssName(v)) && seenLegacy.add(cssName(v)))
-  .map((v) => `  ${cssName(v)}: ${legacyVal(v)};`).join('\n');
-const shadowCss = (s) => s.e.filter((e) => e.type === 'DROP_SHADOW' && e.visible !== false).map((e) => {
-  const c = e.color; const rgb = [c.r, c.g, c.b].map((x) => Math.round(x * 255));
-  const hex = '#' + rgb.map((x) => x.toString(16).padStart(2, '0')).join('') + Math.round(c.a * 255).toString(16).padStart(2, '0');
-  return `${e.offset.x}px ${e.offset.y}px ${e.radius}px ${e.spread || 0}px ${hex}`;
-}).join(', ');
-const slug = (n) => n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const legacyGroup = legacy.vars
+  .filter((v) => !current.has(cssName(v)) && !seenLegacy.has(cssName(v)) && seenLegacy.add(cssName(v)))
+  .map((v) => `  ${cssName(v)}: ${legacyVal(v)};`)
+  .join('\n');
+const shadowCss = (s) =>
+  s.e
+    .filter((e) => e.type === 'DROP_SHADOW' && e.visible !== false)
+    .map((e) => {
+      const c = e.color;
+      const rgb = [c.r, c.g, c.b].map((x) => Math.round(x * 255));
+      const hex =
+        '#' +
+        rgb.map((x) => x.toString(16).padStart(2, '0')).join('') +
+        Math.round(c.a * 255)
+          .toString(16)
+          .padStart(2, '0');
+      return `${e.offset.x}px ${e.offset.y}px ${e.radius}px ${e.spread || 0}px ${hex}`;
+    })
+    .join(', ');
+const slug = (n) =>
+  n
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
 const fx = o.fx.map((s) => `  --eu-${slug(s.n)}: ${shadowCss(s) || 'none'};`).join('\n');
 const weight = { Regular: 400, Medium: 500, SemiBold: 600, Bold: 700 };
-const typeName = (n) => slug(n.replace(/^Heading\//, '').replace(/^Body\//, 'body/').replace(/^UI\//, 'ui/'));
-const type = o.text.map((s) => {
-  const lh = s.lh.unit === 'PERCENT' ? +(s.lh.value / 100).toFixed(3) : s.lh.unit === 'PIXELS' ? s.lh.value + 'px' : 'normal';
-  return `.eu-type-${typeName(s.n)} { font-family: ${s.f === 'Roboto Condensed' ? 'var(--eu-font-heading)' : 'var(--eu-font-body)'}; font-size: ${+s.sz.toFixed(2)}px; font-weight: ${weight[s.st] || 400}; line-height: ${lh}; }`;
-}).join('\n');
+const typeName = (n) =>
+  slug(
+    n
+      .replace(/^Heading\//, '')
+      .replace(/^Body\//, 'body/')
+      .replace(/^UI\//, 'ui/'),
+  );
+const type = o.text
+  .map((s) => {
+    const lh = s.lh.unit === 'PERCENT' ? +(s.lh.value / 100).toFixed(3) : s.lh.unit === 'PIXELS' ? s.lh.value + 'px' : 'normal';
+    return `.eu-type-${typeName(s.n)} { font-family: ${s.f === 'Roboto Condensed' ? 'var(--eu-font-heading)' : 'var(--eu-font-body)'}; font-size: ${+s.sz.toFixed(2)}px; font-weight: ${weight[s.st] || 400}; line-height: ${lh}; }`;
+  })
+  .join('\n');
 // Text styles as variables too, so component CSS can set one property without a raw value.
-const typeVars = o.text.map((s) => {
-  const n = typeName(s.n);
-  const lh = s.lh.unit === 'PERCENT' ? +(s.lh.value / 100).toFixed(3) : s.lh.unit === 'PIXELS' ? s.lh.value + 'px' : 'normal';
-  return `  --eu-font-${n}-size: ${+s.sz.toFixed(2)}px;\n  --eu-font-${n}-weight: ${weight[s.st] || 400};\n  --eu-font-${n}-line: ${lh};`;
-}).join('\n');
+const typeVars = o.text
+  .map((s) => {
+    const n = typeName(s.n);
+    const lh = s.lh.unit === 'PERCENT' ? +(s.lh.value / 100).toFixed(3) : s.lh.unit === 'PIXELS' ? s.lh.value + 'px' : 'normal';
+    return `  --eu-font-${n}-size: ${+s.sz.toFixed(2)}px;\n  --eu-font-${n}-weight: ${weight[s.st] || 400};\n  --eu-font-${n}-line: ${lh};`;
+  })
+  .join('\n');
 const css = `/*
   GENERATED by scripts/build-tokens.mjs from figma/export.json (live Figma variables). Do not edit by hand.
   Source of truth: Figma file "EuvinoPRO Design System" (eoPfuJuIddL9imDtGiK2oX).
@@ -94,7 +136,14 @@ ${legacyGroup}
 }
 
 /* Variable modes. Put the class on an element to switch its subtree, as Figma does with a mode. */
-${hydra.filter((v) => v.modes).flatMap((v) => Object.entries(v.modes).slice(1).map(([m, x]) => `.eu-mode-${v.c.toLowerCase().replace(/\s+/g, '-')}-${m.toLowerCase().replace(/\s+/g, '-')} { ${v.css}: ${x}; }`)).join('\n')}
+${hydra
+  .filter((v) => v.modes)
+  .flatMap((v) =>
+    Object.entries(v.modes)
+      .slice(1)
+      .map(([m, x]) => `.eu-mode-${v.c.toLowerCase().replace(/\s+/g, '-')}-${m.toLowerCase().replace(/\s+/g, '-')} { ${v.css}: ${x}; }`),
+  )
+  .join('\n')}
 
 /* Text styles */
 ${type}
@@ -104,15 +153,23 @@ for (const v of o.vars) {
   let node = dtcg;
   const parts = [v.c, ...v.n.split('/')];
   parts.slice(0, -1).forEach((p) => (node = node[p] ??= {}));
-  const leaf = { $type: v.t === 'COLOR' ? 'color' : 'dimension', $value: v.a ? `{${v.a.replace(/\//g, '.')}}` : v.t === 'COLOR' ? v.v : v.v + 'px', css: cssName(v) };
+  const leaf = {
+    $type: v.t === 'COLOR' ? 'color' : 'dimension',
+    $value: v.a ? `{${v.a.replace(/\//g, '.')}}` : v.t === 'COLOR' ? v.v : v.v + 'px',
+    css: cssName(v),
+  };
   if (v.d) leaf.$description = v.d;
   node[parts.at(-1)] = leaf;
 }
 const json = JSON.stringify(dtcg, null, 2) + '\n';
 if (process.argv.includes('--check')) {
-  if (readFileSync('src/styles/tokens.css', 'utf8') !== css || readFileSync('tokens.json', 'utf8') !== json) { console.error('tokens drift: run npm run tokens:build'); process.exit(1); }
+  if (readFileSync('src/styles/tokens.css', 'utf8') !== css || readFileSync('tokens.json', 'utf8') !== json) {
+    console.error('tokens drift: run npm run tokens:build');
+    process.exit(1);
+  }
   console.log('tokens in sync');
 } else {
-  writeFileSync('src/styles/tokens.css', css); writeFileSync('tokens.json', json);
+  writeFileSync('src/styles/tokens.css', css);
+  writeFileSync('tokens.json', json);
   console.log('tokens.css', css.length, 'bytes;', o.vars.length, 'variables');
 }

@@ -1,0 +1,14 @@
+# Generated: their generators own the format, and `npm run check` compares their exact output.
+src/styles/tokens.css
+tokens.json
+components.json
+llms.txt
+docs
+src/stories
+figma
+code-connect
+*.md
+dist
+dist-storybook
+node_modules
+package-lock.json

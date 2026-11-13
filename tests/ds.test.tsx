@@ -3,7 +3,49 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import * as React from 'react';
 import { afterEach } from 'vitest';
-import { Button, Input, Toggle, ToastProvider, useToast, Pagination, Table, Dropdown, Checkbox, Alert, Steps, SideNav, Breadcrumbs, Icon, GlobalSearch, Menu, IconButton, LabelPicker, InlineEdit, Card, KeyValueList, ActivityItem, Timeline, TopNav, FilterTabs, PageHeader, SplitButton, FieldAction, CloseButton, Editor, AvailabilityTimeline, ActivityCard, DateNav, SegmentedControl, Chip, PersonChip, Combobox, DatePicker, parseDay, PeopleList, FileChipList } from '../src/ds/index';
+import {
+  Button,
+  Input,
+  Toggle,
+  ToastProvider,
+  useToast,
+  Pagination,
+  Table,
+  Dropdown,
+  Checkbox,
+  Alert,
+  Steps,
+  SideNav,
+  Breadcrumbs,
+  Icon,
+  GlobalSearch,
+  Menu,
+  IconButton,
+  LabelPicker,
+  InlineEdit,
+  Card,
+  KeyValueList,
+  ActivityItem,
+  Timeline,
+  TopNav,
+  FilterTabs,
+  PageHeader,
+  SplitButton,
+  FieldAction,
+  CloseButton,
+  Editor,
+  AvailabilityTimeline,
+  ActivityCard,
+  DateNav,
+  SegmentedControl,
+  Chip,
+  PersonChip,
+  Combobox,
+  DatePicker,
+  parseDay,
+  PeopleList,
+  FileChipList,
+} from '../src/ds/index';
 
 afterEach(cleanup);
 
@@ -29,8 +71,15 @@ describe('@euvino/ds', () => {
     expect(f).toHaveBeenCalledWith(true);
   });
   it('Toast announces', () => {
-    const T = () => { const t = useToast(); return <button onClick={() => t({ title: 'Saved', status: 'success', duration: 0 })}>go</button>; };
-    render(<ToastProvider><T /></ToastProvider>);
+    const T = () => {
+      const t = useToast();
+      return <button onClick={() => t({ title: 'Saved', status: 'success', duration: 0 })}>go</button>;
+    };
+    render(
+      <ToastProvider>
+        <T />
+      </ToastProvider>,
+    );
     fireEvent.click(screen.getByText('go'));
     expect(screen.getByRole('status').textContent).toContain('Saved');
   });
@@ -40,30 +89,67 @@ describe('@euvino/ds', () => {
   });
   it('Table selects rows', () => {
     const f = vi.fn();
-    render(<Table caption="M" rows={[{ id: 'a' }]} rowKey={(r) => r.id} selected={[]} onSelectedChange={f} columns={[{ key: 'id', header: 'Id', render: (r) => r.id }]} />);
+    render(
+      <Table
+        caption="M"
+        rows={[{ id: 'a' }]}
+        rowKey={(r) => r.id}
+        selected={[]}
+        onSelectedChange={f}
+        columns={[{ key: 'id', header: 'Id', render: (r) => r.id }]}
+      />,
+    );
     fireEvent.click(screen.getByLabelText('Select all rows'));
     expect(f).toHaveBeenCalledWith(['a']);
   });
   it('Dropdown picks by keyboard', () => {
     const f = vi.fn();
-    render(<Dropdown label="R" value="a" onChange={f} options={[{ value: 'a', label: 'A' }, { value: 'b', label: 'B' }]} />);
+    render(
+      <Dropdown
+        label="R"
+        value="a"
+        onChange={f}
+        options={[
+          { value: 'a', label: 'A' },
+          { value: 'b', label: 'B' },
+        ]}
+      />,
+    );
     const c = screen.getByRole('combobox');
-    fireEvent.keyDown(c, { key: 'ArrowDown' }); fireEvent.keyDown(c, { key: 'ArrowDown' }); fireEvent.keyDown(c, { key: 'Enter' });
+    fireEvent.keyDown(c, { key: 'ArrowDown' });
+    fireEvent.keyDown(c, { key: 'ArrowDown' });
+    fireEvent.keyDown(c, { key: 'Enter' });
     expect(f).toHaveBeenCalledWith('b');
   });
   it('Checkbox shows indeterminate; Alert error announces; Steps marks current', () => {
-    render(<><Checkbox label="C" indeterminate /><Alert status="error">x</Alert><Steps current={1} steps={[{ title: 'A' }, { title: 'B' }]} /></>);
+    render(
+      <>
+        <Checkbox label="C" indeterminate />
+        <Alert status="error">x</Alert>
+        <Steps current={1} steps={[{ title: 'A' }, { title: 'B' }]} />
+      </>,
+    );
     expect((screen.getByLabelText('C') as HTMLInputElement).indeterminate).toBe(true);
     expect(screen.getByRole('alert')).toBeTruthy();
     expect(screen.getByText('B').closest('li')?.getAttribute('aria-current')).toBe('step');
   });
   it('SideNav dark rail names counts; Breadcrumbs allow repeated labels; new icons render', () => {
     const err = vi.spyOn(console, 'error').mockImplementation(() => {});
-    const { container } = render(<>
-      <SideNav label="Main" theme="dark" collapsed items={[{ label: 'Trading Partners', icon: 'shop', count: 3, href: '#' }, { label: 'Reports', icon: 'stats-down-square', selected: true, href: '#' }]} />
-      <Breadcrumbs items={[{ label: 'Contacts', href: '#' }, { label: 'Contacts' }]} />
-      <Icon name="credit-cards" />
-    </>);
+    const { container } = render(
+      <>
+        <SideNav
+          label="Main"
+          theme="dark"
+          collapsed
+          items={[
+            { label: 'Trading Partners', icon: 'shop', count: 3, href: '#' },
+            { label: 'Reports', icon: 'stats-down-square', selected: true, href: '#' },
+          ]}
+        />
+        <Breadcrumbs items={[{ label: 'Contacts', href: '#' }, { label: 'Contacts' }]} />
+        <Icon name="credit-cards" />
+      </>,
+    );
     expect(container.querySelector('.eu-sidenav--dark')).toBeTruthy();
     expect(screen.getByRole('link', { name: 'Trading Partners, 3' })).toBeTruthy();
     expect(screen.getByRole('link', { name: 'Reports' }).getAttribute('aria-current')).toBe('page');
@@ -72,10 +158,27 @@ describe('@euvino/ds', () => {
     err.mockRestore();
   });
   it('GlobalSearch highlights matches, filters by category and opens a hit with Enter', () => {
-    const onSelect = vi.fn(); const onCategoryChange = vi.fn();
-    render(<GlobalSearch label="Search" value="schmidt" onChange={() => {}} heading="All results" category="all" onCategoryChange={onCategoryChange} onSelect={onSelect}
-      categories={[{ id: 'all', label: 'All', count: 2 }, { id: 'people', label: 'People', count: 1 }]}
-      results={[{ id: 'o1', title: 'Weinladen Schmidt GmbH', icon: 'building' }, { id: 'p1', title: 'Carsten Schmidt', person: 'Carsten Schmidt', lines: ['carsten.schmidt@weinladen.com'] }]} />);
+    const onSelect = vi.fn();
+    const onCategoryChange = vi.fn();
+    render(
+      <GlobalSearch
+        label="Search"
+        value="schmidt"
+        onChange={() => {}}
+        heading="All results"
+        category="all"
+        onCategoryChange={onCategoryChange}
+        onSelect={onSelect}
+        categories={[
+          { id: 'all', label: 'All', count: 2 },
+          { id: 'people', label: 'People', count: 1 },
+        ]}
+        results={[
+          { id: 'o1', title: 'Weinladen Schmidt GmbH', icon: 'building' },
+          { id: 'p1', title: 'Carsten Schmidt', person: 'Carsten Schmidt', lines: ['carsten.schmidt@weinladen.com'] },
+        ]}
+      />,
+    );
     const box = screen.getByRole('combobox', { name: 'Search' });
     fireEvent.focus(box);
     expect(screen.getAllByRole('option')).toHaveLength(2);
@@ -88,7 +191,15 @@ describe('@euvino/ds', () => {
     expect(screen.queryByRole('listbox')).toBeNull();
   });
   it('SideNav expandable rail opens with the toggle or [, and folds back on Escape or item choice', () => {
-    render(<SideNav label="Main" collapsed expandable items={[{ label: 'Reports', icon: 'page', href: '#' }]} labels={{ expand: 'Expand nav', collapse: 'Collapse' }} />);
+    render(
+      <SideNav
+        label="Main"
+        collapsed
+        expandable
+        items={[{ label: 'Reports', icon: 'page', href: '#' }]}
+        labels={{ expand: 'Expand nav', collapse: 'Collapse' }}
+      />,
+    );
     const toggle = screen.getByRole('button', { name: 'Expand nav' });
     fireEvent.click(toggle);
     expect(toggle.getAttribute('aria-expanded')).toBe('true');
@@ -101,8 +212,19 @@ describe('@euvino/ds', () => {
     expect(toggle.getAttribute('aria-expanded')).toBe('false');
   });
   it('SideNav More menu lists extra items, moves with arrows and returns focus on Escape', () => {
-    render(<SideNav label="Main" collapsed overflow items={[{ label: 'Contacts', icon: 'user', href: '#', selected: true }]}
-      moreItems={[{ label: 'Projects', icon: 'page', href: '#' }, { label: 'Settings', icon: 'settings', href: '#' }]} labels={{ more: 'More' }} />);
+    render(
+      <SideNav
+        label="Main"
+        collapsed
+        overflow
+        items={[{ label: 'Contacts', icon: 'user', href: '#', selected: true }]}
+        moreItems={[
+          { label: 'Projects', icon: 'page', href: '#' },
+          { label: 'Settings', icon: 'settings', href: '#' },
+        ]}
+        labels={{ more: 'More' }}
+      />,
+    );
     const more = screen.getByRole('button', { name: 'More' });
     fireEvent.click(more);
     const items = screen.getAllByRole('menuitem');
@@ -116,7 +238,16 @@ describe('@euvino/ds', () => {
   });
   it('Menu marks the selected choice; IconButton shows an indicator dot', () => {
     const onSelect = vi.fn();
-    render(<Menu label="Sort" trigger={<IconButton icon="sort" label="Sort" indicator />} items={[{ label: 'Name', selected: true, onSelect }, { label: 'Date', selected: false, onSelect }]} />);
+    render(
+      <Menu
+        label="Sort"
+        trigger={<IconButton icon="sort" label="Sort" indicator />}
+        items={[
+          { label: 'Name', selected: true, onSelect },
+          { label: 'Date', selected: false, onSelect },
+        ]}
+      />,
+    );
     const trigger = screen.getByRole('button', { name: 'Sort' });
     expect(trigger.querySelector('.eu-btn__dot')).toBeTruthy();
     fireEvent.click(trigger);
@@ -124,9 +255,22 @@ describe('@euvino/ds', () => {
     expect(items.map((i) => i.getAttribute('aria-checked'))).toEqual(['true', 'false']);
   });
   it('LabelPicker searches, picks with the keyboard and adds a new label', () => {
-    const onChange = vi.fn(); const onCreate = vi.fn();
-    const options = [{ id: 'c', label: 'Customer', status: 'success' as const }, { id: 'l', label: 'Lead', status: 'info' as const }];
-    render(<LabelPicker label="Label for Anna" value="c" options={options} onChange={onChange} onCreate={onCreate} labels={{ search: 'Search label', addNamed: (n) => `Add ${n}` }} />);
+    const onChange = vi.fn();
+    const onCreate = vi.fn();
+    const options = [
+      { id: 'c', label: 'Customer', status: 'success' as const },
+      { id: 'l', label: 'Lead', status: 'info' as const },
+    ];
+    render(
+      <LabelPicker
+        label="Label for Anna"
+        value="c"
+        options={options}
+        onChange={onChange}
+        onCreate={onCreate}
+        labels={{ search: 'Search label', addNamed: (n) => `Add ${n}` }}
+      />,
+    );
     fireEvent.click(screen.getByRole('button', { name: 'Label for Anna: Customer' }));
     const box = screen.getByRole('combobox', { name: 'Search label' });
     expect(screen.getAllByRole('option').map((o) => o.getAttribute('aria-selected'))).toEqual(['true', 'false']);
@@ -157,11 +301,26 @@ describe('@euvino/ds', () => {
     expect(onDate).toHaveBeenCalledWith('2026-11-20');
   });
   it('Card collapses; KeyValueList, ActivityItem and TopNav icons render', () => {
-    render(<>
-      <Card title="Details" collapsible toggleLabel="Show or hide Details"><KeyValueList items={[{ label: 'Website', value: 'mertes.de' }]} /></Card>
-      <Timeline label="History"><ActivityItem icon="mail" title="Subject" meta="Today" footer="Anna">Preview</ActivityItem></Timeline>
-      <TopNav label="Compose" items={[{ label: 'Notes', icon: 'edit', selected: true }, { label: 'Call', icon: 'phone' }, { label: 'Email', icon: 'mail' }]} />
-    </>);
+    render(
+      <>
+        <Card title="Details" collapsible toggleLabel="Show or hide Details">
+          <KeyValueList items={[{ label: 'Website', value: 'mertes.de' }]} />
+        </Card>
+        <Timeline label="History">
+          <ActivityItem icon="mail" title="Subject" meta="Today" footer="Anna">
+            Preview
+          </ActivityItem>
+        </Timeline>
+        <TopNav
+          label="Compose"
+          items={[
+            { label: 'Notes', icon: 'edit', selected: true },
+            { label: 'Call', icon: 'phone' },
+            { label: 'Email', icon: 'mail' },
+          ]}
+        />
+      </>,
+    );
     expect(screen.getByText('Website')).toBeTruthy();
     fireEvent.click(screen.getByRole('button', { name: 'Show or hide Details' }));
     expect(screen.queryByText('Website')).toBeNull();
@@ -170,10 +329,21 @@ describe('@euvino/ds', () => {
   });
   it('FilterTabs selects live items and shows inert ones as text; PageHeader medium has an icon', () => {
     const onChange = vi.fn();
-    render(<>
-      <PageHeader size="medium" icon="building" title="Peter Mertes" subtitle="Winery" />
-      <FilterTabs label="Filter history" value="all" onChange={onChange} items={[{ id: 'all', label: 'All' }, { id: 'notes', label: 'Notes', count: 5 }, { id: 'mail', label: 'Emails', inert: true }]} />
-    </>);
+    render(
+      <>
+        <PageHeader size="medium" icon="building" title="Peter Mertes" subtitle="Winery" />
+        <FilterTabs
+          label="Filter history"
+          value="all"
+          onChange={onChange}
+          items={[
+            { id: 'all', label: 'All' },
+            { id: 'notes', label: 'Notes', count: 5 },
+            { id: 'mail', label: 'Emails', inert: true },
+          ]}
+        />
+      </>,
+    );
     expect(screen.getByRole('button', { name: 'All' }).getAttribute('aria-pressed')).toBe('true');
     fireEvent.click(screen.getByRole('button', { name: 'Notes (5)' }));
     expect(onChange).toHaveBeenCalledWith('notes');
@@ -182,16 +352,41 @@ describe('@euvino/ds', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'Peter Mertes' }).className).toContain('eu-type-desktop-h4');
   });
   it('Timeline progress marks entries above the reading line', () => {
-    const { container } = render(<Timeline label="History" progress><ActivityItem icon="mail" title="A">a</ActivityItem><ActivityItem icon="mail" title="B">b</ActivityItem></Timeline>);
+    const { container } = render(
+      <Timeline label="History" progress>
+        <ActivityItem icon="mail" title="A">
+          a
+        </ActivityItem>
+        <ActivityItem icon="mail" title="B">
+          b
+        </ActivityItem>
+      </Timeline>,
+    );
     expect(container.querySelector('.eu-tl--progress')).toBeTruthy();
     expect(container.querySelector('.is-current')).toBeTruthy();
   });
   it('FilterTabs chip variant and clickable ActivityItem', () => {
-    const onOpen = vi.fn(); const onChange = vi.fn();
-    const { container } = render(<>
-      <FilterTabs variant="chip" label="Filter" value="all" onChange={onChange} items={[{ id: 'all', label: 'All' }, { id: 'mail', label: 'Emails', inert: true }]} />
-      <Timeline label="History"><ActivityItem icon="mail" title="Subject" onOpen={onOpen} actions={<button type="button">Reply</button>}>Preview</ActivityItem></Timeline>
-    </>);
+    const onOpen = vi.fn();
+    const onChange = vi.fn();
+    const { container } = render(
+      <>
+        <FilterTabs
+          variant="chip"
+          label="Filter"
+          value="all"
+          onChange={onChange}
+          items={[
+            { id: 'all', label: 'All' },
+            { id: 'mail', label: 'Emails', inert: true },
+          ]}
+        />
+        <Timeline label="History">
+          <ActivityItem icon="mail" title="Subject" onOpen={onOpen} actions={<button type="button">Reply</button>}>
+            Preview
+          </ActivityItem>
+        </Timeline>
+      </>,
+    );
     expect(container.querySelectorAll('.eu-chip').length).toBe(2);
     expect(screen.queryByRole('button', { name: 'Emails' })).toBeNull();
     fireEvent.click(screen.getByRole('button', { name: 'Subject' }));
@@ -200,8 +395,13 @@ describe('@euvino/ds', () => {
     expect(onOpen).toHaveBeenCalledTimes(1);
   });
   it('SplitButton runs the main action and opens the related actions from the arrow', () => {
-    const main = vi.fn(); const imp = vi.fn();
-    render(<SplitButton icon="plus" onClick={main} menuLabel="More ways to add" items={[{ label: 'Import', onSelect: imp }]}>Contact</SplitButton>);
+    const main = vi.fn();
+    const imp = vi.fn();
+    render(
+      <SplitButton icon="plus" onClick={main} menuLabel="More ways to add" items={[{ label: 'Import', onSelect: imp }]}>
+        Contact
+      </SplitButton>,
+    );
     fireEvent.click(screen.getByRole('button', { name: 'Contact' }));
     expect(main).toHaveBeenCalled();
     fireEvent.click(screen.getByRole('button', { name: 'More ways to add' }));
@@ -210,11 +410,18 @@ describe('@euvino/ds', () => {
     expect(screen.getByRole('group')).toBeTruthy();
   });
   it('FieldAction is a plain button that runs its action; CloseButton has a name', () => {
-    const add = vi.fn(); const close = vi.fn();
-    render(<><FieldAction onClick={add}>Add phone number</FieldAction><CloseButton label="Close" onClick={close} /></>);
+    const add = vi.fn();
+    const close = vi.fn();
+    render(
+      <>
+        <FieldAction onClick={add}>Add phone number</FieldAction>
+        <CloseButton label="Close" onClick={close} />
+      </>,
+    );
     fireEvent.click(screen.getByRole('button', { name: 'Add phone number' }));
     fireEvent.click(screen.getByRole('button', { name: 'Close' }));
-    expect(add).toHaveBeenCalled(); expect(close).toHaveBeenCalled();
+    expect(add).toHaveBeenCalled();
+    expect(close).toHaveBeenCalled();
     expect(screen.getByRole('button', { name: 'Add phone number' }).getAttribute('type')).toBe('button');
   });
   it('Editor opens on focus, formats the selection and saves', () => {
@@ -236,9 +443,13 @@ describe('@euvino/ds', () => {
     const onPrevious = vi.fn();
     render(
       <AvailabilityTimeline
-        title="Wed" onPrevious={onPrevious} onNext={() => {}} columns={[{ id: 'd', label: 'Wed' }]}
+        title="Wed"
+        onPrevious={onPrevious}
+        onNext={() => {}}
+        columns={[{ id: 'd', label: 'Wed' }]}
         rows={[{ id: 'a', name: 'Ann', events: { d: [{ start: 540, end: 600, status: 'busy' }] } }]}
-        free={[{ column: 'd', start: 660, end: 690 }]} selection={{ column: 'd', start: 540, end: 570, valid: false }}
+        free={[{ column: 'd', start: 660, end: 690 }]}
+        selection={{ column: 'd', start: 540, end: 570, valid: false }}
       />,
     );
     expect(screen.getByRole('img', { name: 'Ann: Busy, 09:00–10:00' })).toBeTruthy();
@@ -248,14 +459,35 @@ describe('@euvino/ds', () => {
   });
   it('ActivityCard opens from its title; small sizes render', () => {
     const onOpen = vi.fn();
-    render(<><ActivityCard title="Call" type="Termin" onOpen={onOpen} /><DateNav label="x" onPrevious={() => {}} onNext={() => {}} /><SegmentedControl size="small" label="View" value="a" onChange={() => {}} options={[{ value: 'a', label: 'A' }, { value: 'b', label: 'B' }]} /><Chip>Tag</Chip></>);
+    render(
+      <>
+        <ActivityCard title="Call" type="Termin" onOpen={onOpen} />
+        <DateNav label="x" onPrevious={() => {}} onNext={() => {}} />
+        <SegmentedControl
+          size="small"
+          label="View"
+          value="a"
+          onChange={() => {}}
+          options={[
+            { value: 'a', label: 'A' },
+            { value: 'b', label: 'B' },
+          ]}
+        />
+        <Chip>Tag</Chip>
+      </>,
+    );
     fireEvent.click(screen.getByRole('button', { name: 'Call' }));
     expect(onOpen).toHaveBeenCalled();
     expect(screen.getByRole('radiogroup', { name: 'View' }).className).toContain('eu-seg--small');
   });
   it('PersonChip shows initials or a picture and removes', () => {
     const onRemove = vi.fn();
-    render(<><PersonChip name="Max Eul" onRemove={onRemove} removeLabel="Max Eul entfernen" /><PersonChip name="Ann" photo="a.jpg" size="small" /></>);
+    render(
+      <>
+        <PersonChip name="Max Eul" onRemove={onRemove} removeLabel="Max Eul entfernen" />
+        <PersonChip name="Ann" photo="a.jpg" size="small" />
+      </>,
+    );
     expect(screen.getByText('ME')).toBeTruthy();
     expect(document.querySelectorAll('.eu-pchip__avatar img').length).toBe(1);
     fireEvent.click(screen.getByRole('button', { name: 'Max Eul entfernen' }));
@@ -266,7 +498,19 @@ describe('@euvino/ds', () => {
 describe('Combobox and typed dates', () => {
   it('accepts a typed value through parse and a picked option', () => {
     const onChange = vi.fn();
-    render(<Combobox label="Beginn" value="540" options={[{ value: '540', label: '09:00' }, { value: '555', label: '09:15' }]} format={(v) => v} parse={(t) => (t === '930' ? '570' : undefined)} onChange={onChange} />);
+    render(
+      <Combobox
+        label="Beginn"
+        value="540"
+        options={[
+          { value: '540', label: '09:00' },
+          { value: '555', label: '09:15' },
+        ]}
+        format={(v) => v}
+        parse={(t) => (t === '930' ? '570' : undefined)}
+        onChange={onChange}
+      />,
+    );
     const box = screen.getByRole('combobox', { name: 'Beginn' });
     expect((box as HTMLInputElement).value).toBe('09:00');
     fireEvent.change(box, { target: { value: '930' } });
@@ -308,7 +552,10 @@ describe('Editor toggles', () => {
     expect(markAround('<u>u</u>', 'underline', 3, 4)).toEqual([0, 3, 4, 8]);
   });
   it('shows bold as pressed inside bold text and removes it on a second press', () => {
-    function Host() { const [v, setV] = React.useState('**Hallo**'); return <Editor label="Notiz" value={v} onChange={setV} onSave={() => {}} defaultExpanded />; }
+    function Host() {
+      const [v, setV] = React.useState('**Hallo**');
+      return <Editor label="Notiz" value={v} onChange={setV} onSave={() => {}} defaultExpanded />;
+    }
     render(<Host />);
     const box = screen.getByRole('textbox', { name: 'Notiz' }) as HTMLTextAreaElement;
     box.setSelectionRange(4, 4);
@@ -331,7 +578,17 @@ describe('Editor nested marks', () => {
 
 describe('PeopleList, FileChipList and ActivityItem meta', () => {
   it('links people, keeps the current user plain and lists exactly the hidden ones', () => {
-    render(<PeopleList people={[{ name: 'Ich', current: true }, { name: 'Anna Berg', href: '#/a' }, { name: 'Ben Kohl', href: '#/b', detail: 'ben@x.de' }, { name: 'Cem Arslan', onClick: () => {} }]} moreLabel={(n) => `${n} weitere Personen`} />);
+    render(
+      <PeopleList
+        people={[
+          { name: 'Ich', current: true },
+          { name: 'Anna Berg', href: '#/a' },
+          { name: 'Ben Kohl', href: '#/b', detail: 'ben@x.de' },
+          { name: 'Cem Arslan', onClick: () => {} },
+        ]}
+        moreLabel={(n) => `${n} weitere Personen`}
+      />,
+    );
     expect(screen.queryByRole('link', { name: 'Ich' })).toBeNull();
     expect(screen.getByRole('link', { name: 'Anna Berg' }).getAttribute('href')).toBe('#/a');
     const more = screen.getByRole('button', { name: '2 weitere Personen' });
@@ -343,13 +600,26 @@ describe('PeopleList, FileChipList and ActivityItem meta', () => {
   });
   it('downloads each attachment from its own button', () => {
     const onDownload = vi.fn();
-    render(<FileChipList label="Anhänge" files={[{ name: 'a.pdf' }, { name: 'b.xlsx' }]} onDownload={onDownload} downloadLabel={(n) => `${n} herunterladen`} />);
+    render(
+      <FileChipList
+        label="Anhänge"
+        files={[{ name: 'a.pdf' }, { name: 'b.xlsx' }]}
+        onDownload={onDownload}
+        downloadLabel={(n) => `${n} herunterladen`}
+      />,
+    );
     fireEvent.click(screen.getByRole('button', { name: 'b.xlsx herunterladen' }));
     expect(onDownload).toHaveBeenCalledWith('b.xlsx');
     expect(screen.getByRole('list', { name: 'Anhänge' }).children.length).toBe(2);
   });
   it('separates meta facts and clamps the preview', () => {
-    const { container } = render(<Timeline label="Verlauf"><ActivityItem icon="mail" title="Betreff" meta={['28. Okt.', null, 'Anna']} lines={2}>Text</ActivityItem></Timeline>);
+    const { container } = render(
+      <Timeline label="Verlauf">
+        <ActivityItem icon="mail" title="Betreff" meta={['28. Okt.', null, 'Anna']} lines={2}>
+          Text
+        </ActivityItem>
+      </Timeline>,
+    );
     expect(container.querySelectorAll('.eu-inline-list__sep').length).toBe(1);
     expect(container.querySelector('.eu-activity__body.is-clamped')).toBeTruthy();
     expect(container.querySelector('p .eu-popover, p div')).toBeNull();

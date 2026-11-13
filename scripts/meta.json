@@ -44,7 +44,7 @@
   },
   "Chip": {
     "category": "Actions and navigation",
-    "figma": "Chips",
+    "figma": "Filter Tabs (Filter Chip)",
     "example": "<Chip selected={on} onClick={toggle}>Germany</Chip>"
   },
   "Input": {
@@ -341,7 +341,7 @@
   },
   "ActivityItem": {
     "category": "Content",
-    "figma": "Email Activity Item",
+    "figma": "Activity Item",
     "example": "<ActivityItem icon=\"mail\" title=\"Subject\" meta={['28 Oct, 10:24', <>Anna → <PeopleList people={to} max={1} /></>]} lines={2} footer={<FileChipList files={files} onDownload={save} />} onOpen={open}>Preview</ActivityItem>"
   },
   "KeyValueList": {
@@ -351,7 +351,7 @@
   },
   "FilterTabs": {
     "category": "Actions and navigation",
-    "figma": "Filter Tabs (not in Figma yet)",
+    "figma": "Filter Tabs (Filter Chip)",
     "example": "<FilterTabs label=\"Filter history\" value={f} onChange={setF} items={[{ id: 'all', label: 'All' }, { id: 'notes', label: 'Notes', count: 5 }]} />"
   },
   "SplitButton": {
